@@ -13,6 +13,9 @@ export const metadata = {
   description: "Stay updated with the latest news, announcements, and upcoming events at Daddy Jobe Comprehensive School.",
 };
 
+// ISR: Revalidate every 30 minutes (news updates frequently)
+export const revalidate = 1800;
+
 export default function NewsPage() {
   return (
     <>

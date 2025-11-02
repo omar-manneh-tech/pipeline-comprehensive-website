@@ -15,6 +15,9 @@ export const metadata = {
   description: "Start your journey with Daddy Jobe Comprehensive School. Learn about our admission process, requirements, and important dates for Grade 10 enrollment.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function AdmissionsPage() {
   return (
     <>

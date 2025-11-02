@@ -15,6 +15,9 @@ export const metadata = {
   description: "Explore our senior secondary academic programs: Science, Commerce, and Arts. Preparing students for WASSCE exams and university admission at Daddy Jobe Comprehensive School.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function AcademicsPage() {
   return (
     <>

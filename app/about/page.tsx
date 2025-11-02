@@ -14,6 +14,9 @@ export const metadata = {
   description: "Learn about Daddy Jobe Comprehensive School - our mission, vision, history, and commitment to academic excellence.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function AboutPage() {
   return (
     <>

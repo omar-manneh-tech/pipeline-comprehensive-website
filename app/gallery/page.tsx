@@ -12,6 +12,9 @@ export const metadata = {
   description: "Explore our photo gallery showcasing school life, events, achievements, and activities at Daddy Jobe Comprehensive School.",
 };
 
+// ISR: Revalidate every 30 minutes (gallery updates more frequently)
+export const revalidate = 1800;
+
 export default function GalleryPage() {
   return (
     <>

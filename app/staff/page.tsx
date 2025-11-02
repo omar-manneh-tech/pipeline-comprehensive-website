@@ -14,6 +14,9 @@ export const metadata = {
   description: "Meet our dedicated and experienced faculty and administrative staff at Daddy Jobe Comprehensive School.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function StaffPage() {
   return (
     <>

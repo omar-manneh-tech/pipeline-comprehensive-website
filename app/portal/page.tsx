@@ -13,6 +13,9 @@ export const metadata = {
   description: "Access the Daddy Jobe Comprehensive School portal for students, parents, and staff to manage academic information, grades, attendance, and more.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function PortalPage() {
   return (
     <>

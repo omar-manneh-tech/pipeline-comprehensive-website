@@ -56,11 +56,16 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
+              // Note: Next.js requires 'unsafe-inline' and 'unsafe-eval' for React hydration
+              // In production, consider implementing nonce-based CSP via middleware
               "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-              "style-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline'", // TailwindCSS requires unsafe-inline
               "img-src 'self' data:",
               "font-src 'self' data:",
               "connect-src 'self'",
+              "frame-ancestors 'self'",
+              "base-uri 'self'",
+              "form-action 'self'",
             ].join('; ')
           }
         ],

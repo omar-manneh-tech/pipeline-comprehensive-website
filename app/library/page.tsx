@@ -14,6 +14,9 @@ export const metadata = {
   description: "Empowering Learning Through Knowledge - Discover our modern library with thousands of books, research journals, e-books, and multimedia materials.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function LibraryPage() {
   return (
     <>

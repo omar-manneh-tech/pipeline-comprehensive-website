@@ -13,6 +13,9 @@ export const metadata = {
   description: "Get in touch with Daddy Jobe Comprehensive School. We're here to answer your questions and help you learn more about our programs.",
 };
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function ContactPage() {
   return (
     <>
