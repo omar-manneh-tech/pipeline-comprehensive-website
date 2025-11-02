@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { fadeInLeft, fadeInRight, transitions, viewportConfig, hoverScale } from "@/lib/animations/constants";
 
 export function AboutSection() {
   return (
@@ -15,8 +16,8 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={viewportConfig}
+            transition={transitions.default}
             className="space-y-6"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-navy">
@@ -34,8 +35,7 @@ export function AboutSection() {
               </p>
             </div>
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              variants={hoverScale}
             >
               <Button
                 asChild
@@ -54,8 +54,8 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={viewportConfig}
+            transition={transitions.default}
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
@@ -72,8 +72,8 @@ export function AboutSection() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                viewport={viewportConfig}
+                transition={{ ...transitions.default, delay: 0.3 }}
                 className="text-white"
               >
                 <span className="text-2xl md:text-3xl font-bold tracking-wide">

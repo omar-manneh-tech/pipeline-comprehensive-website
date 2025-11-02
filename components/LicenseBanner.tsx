@@ -5,19 +5,8 @@ import { X, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
-
-interface LicenseStatus {
-  valid: boolean;
-  expired: boolean;
-  daysRemaining: number;
-  expirationDate: string | null;
-  pilotPeriod: boolean;
-}
-
-interface LicenseCheckResponse {
-  status: LicenseStatus;
-  message: string;
-}
+import { type LicenseStatus, type LicenseCheckResponse } from "@/lib/types/license";
+import { apiClient } from "@/services/api/client";
 
 export function LicenseBanner() {
   const [isExpired, setIsExpired] = useState(false);
@@ -28,15 +17,9 @@ export function LicenseBanner() {
   useEffect(() => {
     const checkLicense = async () => {
       try {
-        const endpoint = siteConfig.license.checkEndpoint || "/api/v1/license/check";
-        const response = await fetch(endpoint);
-        
-        if (!response.ok) {
-          setIsVisible(false);
-          return;
-        }
-        
-        const data: LicenseCheckResponse = await response.json();
+        // Remove /api prefix if present, since apiClient adds it
+        const endpoint = (siteConfig.license.checkEndpoint || "/api/v1/license/check").replace(/^\/api/, "");
+        const data = await apiClient.get<LicenseCheckResponse>(endpoint);
         const status = data.status;
         
         setIsExpired(status.expired);

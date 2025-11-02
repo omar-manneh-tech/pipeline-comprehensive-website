@@ -58,7 +58,7 @@ export function ExploreSection() {
               whileHover={{ y: -8 }}
               className="group"
             >
-              <Card className="relative overflow-hidden h-full hover:shadow-2xl hover:border-gold/30 hover:border-2 transition-all cursor-pointer">
+              <Card className="relative overflow-hidden h-full hover:shadow-2xl border-2 border-gold transition-all cursor-pointer">
                 <div className="relative h-64">
                   <Image
                     src={item.image}
@@ -79,7 +79,7 @@ export function ExploreSection() {
                   <Button
                     asChild
                     variant="outline"
-                    className="group/button w-full"
+                    className="group/button w-full bg-primary hover:bg-white text-white hover:text-primary border-2 border-gold hover:border-gold transition-colors"
                   >
                     <Link href={item.href} className="flex items-center justify-center gap-2">
                       Learn More

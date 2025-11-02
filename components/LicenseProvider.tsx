@@ -3,19 +3,8 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { LicenseLock } from "./LicenseLock";
 import { siteConfig } from "@/config/site";
-
-interface LicenseStatus {
-  valid: boolean;
-  expired: boolean;
-  daysRemaining: number;
-  expirationDate: string | null;
-  pilotPeriod: boolean;
-}
-
-interface LicenseCheckResponse {
-  status: LicenseStatus;
-  message: string;
-}
+import { type LicenseStatus, type LicenseCheckResponse } from "@/lib/types/license";
+import { apiClient } from "@/services/api/client";
 
 interface LicenseContextType {
   licenseStatus: LicenseStatus | null;
@@ -39,23 +28,12 @@ export function LicenseProvider({ children }: LicenseProviderProps) {
 
   const checkLicense = async () => {
     try {
-      const endpoint = siteConfig.license.checkEndpoint || "/api/v1/license/check";
-      const response = await fetch(endpoint);
-      
-      if (!response.ok) {
-        setLicenseStatus({
-          valid: true,
-          expired: false,
-          daysRemaining: 0,
-          expirationDate: null,
-          pilotPeriod: true,
-        });
-        return;
-      }
-      
-      const data: LicenseCheckResponse = await response.json();
+      // Remove /api prefix if present, since apiClient adds it
+      const endpoint = (siteConfig.license.checkEndpoint || "/api/v1/license/check").replace(/^\/api/, "");
+      const data = await apiClient.get<LicenseCheckResponse>(endpoint);
       setLicenseStatus(data.status);
     } catch (error) {
+      // Fail gracefully with default valid status
       setLicenseStatus({
         valid: true,
         expired: false,

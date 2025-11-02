@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { Users, BookOpen, Award, GraduationCap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const tiles = [
   {
     icon: Users,
-    number: "2,500+",
+    number: 2500,
+    suffix: "+",
     title: "Students",
     description: "Enrolled students across all programs",
     color: "text-blue-600",
@@ -15,7 +17,8 @@ const tiles = [
   },
   {
     icon: GraduationCap,
-    number: "150+",
+    number: 150,
+    suffix: "+",
     title: "Teachers",
     description: "Dedicated and experienced educators",
     color: "text-purple-600",
@@ -23,7 +26,8 @@ const tiles = [
   },
   {
     icon: BookOpen,
-    number: "10,000+",
+    number: 10000,
+    suffix: "+",
     title: "Library Books",
     description: "Extensive collection of resources",
     color: "text-green-600",
@@ -31,13 +35,60 @@ const tiles = [
   },
   {
     icon: Award,
-    number: "95%",
+    number: 95,
+    suffix: "%",
     title: "Pass Rate",
     description: "Outstanding academic achievements",
     color: "text-gold",
     bgColor: "bg-yellow-50",
   },
 ];
+
+interface CountUpCardProps {
+  tile: typeof tiles[0];
+  index: number;
+}
+
+function CountUpCard({ tile, index }: CountUpCardProps) {
+  const Icon = tile.icon;
+  const { formattedCount, ref } = useCountUp({
+    end: tile.number,
+    suffix: tile.suffix,
+    duration: 2000,
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ y: -8, scale: 1.02 }}
+    >
+      <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-gold group">
+        <CardContent className="p-6 text-center">
+          <div className={`w-16 h-16 mx-auto mb-4 ${tile.bgColor} rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]`}>
+            <Icon className={`h-8 w-8 ${tile.color} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+          </div>
+          <motion.div
+            ref={ref}
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.1 }}
+            className="text-4xl font-bold text-gray-900 mb-2"
+          >
+            {formattedCount}
+          </motion.div>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            {tile.title}
+          </h3>
+          <p className="text-sm text-gray-600">
+            {tile.description}
+          </p>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
 
 export function TileGrid() {
   return (
@@ -59,40 +110,9 @@ export function TileGrid() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {tiles.map((tile, index) => {
-            const Icon = tile.icon;
-            return (
-              <motion.div
-                key={tile.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 hover:border-gold/30">
-                  <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 mx-auto mb-4 ${tile.bgColor} rounded-full flex items-center justify-center`}>
-                      <Icon className={`h-8 w-8 ${tile.color}`} />
-                    </div>
-                    <motion.div
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                      className="text-4xl font-bold text-gray-900 mb-2"
-                    >
-                      {tile.number}
-                    </motion.div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                      {tile.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      {tile.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
+          {tiles.map((tile, index) => (
+            <CountUpCard key={tile.title} tile={tile} index={index} />
+          ))}
         </div>
       </div>
     </section>

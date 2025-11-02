@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useCarousel } from "@/hooks/useCarousel";
 import { testimonials as defaultTestimonials, type Testimonial } from "@/lib/data/home";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
+import { slideInRight, transitions } from "@/lib/animations/constants";
 
 interface TestimonialCarouselProps {
   testimonials?: Testimonial[];
@@ -34,7 +35,7 @@ export function TestimonialCarousel({ testimonials = defaultTestimonials }: Test
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
+              transition={transitions.fast}
             >
               <Card className="bg-primary shadow-xl border-2 border-gold">
                 <CardContent className="p-8 md:p-12">

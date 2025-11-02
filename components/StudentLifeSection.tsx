@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { studentActivities, type Activity } from "@/lib/data/home";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
+import { fadeInUp, hoverLift, transitions, viewportConfig } from "@/lib/animations/constants";
 
 interface StudentLifeSectionProps {
   activities?: Activity[];
@@ -45,9 +46,9 @@ export function StudentLifeSection({ activities = studentActivities }: StudentLi
               key={activity.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -8 }}
+              viewport={viewportConfig}
+              transition={{ ...transitions.default, delay: index * 0.1 }}
+              variants={hoverLift}
               className="group"
             >
               <div className="relative h-[300px] rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer">

@@ -6,14 +6,9 @@ import { Lock, Key, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
-
-interface LicenseStatus {
-  valid: boolean;
-  expired: boolean;
-  daysRemaining: number;
-  expirationDate: string | null;
-  pilotPeriod: boolean;
-}
+import { type LicenseStatus, type LicenseUnlockResponse } from "@/lib/types/license";
+import { apiClient } from "@/services/api/client";
+import { validateInput, licenseUnlockSchema } from "@/lib/validation/schemas";
 
 interface LicenseLockProps {
   licenseStatus: LicenseStatus;
@@ -38,15 +33,23 @@ export function LicenseLock({ licenseStatus, onUnlock }: LicenseLockProps) {
     setLoading(true);
 
     try {
-      const response = await fetch(siteConfig.license.unlockEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ unlockCode }),
-      });
+      // Validate input
+      const validation = validateInput(licenseUnlockSchema, { unlockCode });
+      if (!validation.success || !validation.data) {
+        setError(validation.errors?.issues[0]?.message || "Invalid unlock code format.");
+        setLoading(false);
+        return;
+      }
 
-      const data = await response.json();
+      // Make API call using API client
+      // Remove /api prefix if present, since apiClient adds it
+      const endpoint = (siteConfig.license.unlockEndpoint || "/api/v1/license/unlock").replace(/^\/api/, "");
+      const data = await apiClient.post<LicenseUnlockResponse>(
+        endpoint,
+        { unlockCode: validation.data.unlockCode }
+      );
 
-      if (response.ok && data.success && data.licenseStatus?.valid) {
+      if (data.success && data.status?.valid) {
         setSuccess(true);
         setTimeout(() => {
           window.location.reload();
@@ -76,7 +79,7 @@ export function LicenseLock({ licenseStatus, onUnlock }: LicenseLockProps) {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy opacity-90" />
         
-        <Card className="relative z-10 max-w-md w-full shadow-2xl border-2 border-gold/30">
+        <Card className="relative z-10 max-w-md w-full shadow-2xl border-2 border-gold">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <Lock className="h-16 w-16 text-gold animate-pulse" />

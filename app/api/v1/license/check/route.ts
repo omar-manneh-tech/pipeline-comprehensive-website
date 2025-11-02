@@ -86,7 +86,11 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(responseData, {
       status: 200,
-      headers: rateLimitResult.headers,
+      headers: {
+        ...rateLimitResult.headers,
+        // Cache control headers for API response
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+      },
     });
   } catch (error) {
     // Secure error handling - logs server-side, returns safe message

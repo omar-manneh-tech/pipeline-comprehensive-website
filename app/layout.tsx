@@ -5,6 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { LicenseProvider } from "@/components/LicenseProvider";
 import { LicenseBanner } from "@/components/LicenseBanner";
+import { WebVitals } from "@/app/components/WebVitals";
+import { SkipLink } from "@/components/SkipLink";
 import { siteConfig } from "@/config/site";
 
 const poppins = Poppins({
@@ -13,6 +15,15 @@ const poppins = Poppins({
   display: "swap",
   weight: ["300", "400", "500", "600", "700", "800"],
 });
+
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -76,11 +87,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <body className="antialiased">
+        <WebVitals />
+        <SkipLink />
         <LicenseProvider>
           <LicenseBanner />
         </LicenseProvider>
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main id="main-content" className="min-h-screen" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

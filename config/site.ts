@@ -19,9 +19,11 @@ export const siteConfig = {
     address: process.env.NEXT_PUBLIC_CONTACT_ADDRESS || "123 Education Street, Banjul, The Gambia",
   },
   
-  api: {
-    library: process.env.NEXT_PUBLIC_LIBRARY_API_URL || "/api/library",
-  },
+      api: {
+        library: process.env.NEXT_PUBLIC_LIBRARY_API_URL || "/api/library",
+        features: process.env.NEXT_PUBLIC_FEATURES_API_URL || "/api/v1/features",
+        subscription: process.env.NEXT_PUBLIC_SUBSCRIPTION_API_URL || "/api/v1/subscription",
+      },
   
   license: {
     checkEndpoint: process.env.NEXT_PUBLIC_LICENSE_CHECK_URL || "/api/v1/license/check",

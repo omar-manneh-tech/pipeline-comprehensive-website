@@ -48,34 +48,34 @@ export function HeroSection() {
             Where excellence meets innovation in education. Join us in shaping the leaders of tomorrow.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-primary hover:bg-soft-blue text-lg px-8 py-6 rounded-full shadow-2xl hover:shadow-gold/20 transition-all border-2 border-gold/30"
-              >
-                <Link href="/academics" className="flex items-center gap-2 font-semibold">
-                  Explore Programs
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-white text-primary hover:bg-soft-blue text-lg px-8 py-6 rounded-full shadow-2xl hover:shadow-gold/20 transition-all border-2 border-gold"
+                  >
+                    <Link href="/academics" className="flex items-center gap-2 font-semibold">
+                      Explore Programs
+                      <ArrowRight className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-2 border-white/90 text-white hover:bg-white hover:text-primary hover:border-gold text-lg px-8 py-6 rounded-full backdrop-blur-md shadow-xl bg-white/10"
-              >
-                <Link href="/contact" className="flex items-center gap-2 font-semibold">
-                  Contact Us
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-lg px-8 py-6 rounded-full backdrop-blur-md shadow-xl bg-white/10"
+                  >
+                    <Link href="/contact" className="flex items-center gap-2 font-semibold">
+                      Contact Us
+                      <ArrowRight className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
+              </div>
         </motion.div>
       </div>
 

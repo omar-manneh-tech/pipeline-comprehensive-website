@@ -5,6 +5,7 @@ import { ShieldCheck, Handshake, Trophy, LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { coreValues, type CoreValue } from "@/lib/data/home";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
+import { fadeInUp, hoverLift, transitions, viewportConfig } from "@/lib/animations/constants";
 
 // Icon mapping
 const iconMap: Record<CoreValue["iconName"], LucideIcon> = {
@@ -48,17 +49,17 @@ export function CoreValuesSection({ values = coreValues }: CoreValuesSectionProp
                 key={value.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8 }}
+                viewport={viewportConfig}
+                transition={{ ...transitions.default, delay: index * 0.1 }}
+                variants={hoverLift}
               >
-                <Card className="h-full hover:shadow-2xl hover:border-gold/30 hover:border-2 transition-all cursor-pointer bg-white">
+                <Card className="h-full hover:shadow-2xl border-2 border-gold transition-all cursor-pointer bg-white group">
                   <CardContent className="p-8 text-center">
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <div className="absolute inset-0 bg-gold/20 rounded-full blur-xl" />
-                        <div className="relative bg-primary/10 p-4 rounded-full">
-                          <Icon className="h-10 w-10 text-primary" />
+                        <div className="relative bg-primary/10 p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg]">
+                          <Icon className="h-10 w-10 text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
                         </div>
                       </div>
                     </div>
