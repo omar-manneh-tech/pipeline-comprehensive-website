@@ -8,8 +8,7 @@
 
 import { useEffect } from "react";
 import { usePageViewTracking } from "@/hooks/useActivityTracker";
-import { trackClick } from "@/lib/analytics/tracker";
-import { generateSessionId } from "@/lib/analytics/tracker";
+import { trackClick, generateSessionId } from "@/lib/analytics/tracker-client";
 import { usePathname } from "next/navigation";
 
 export function ActivityTracker() {

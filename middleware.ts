@@ -6,7 +6,6 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { trackActivity, getClientInfo } from "@/lib/analytics/tracker";
 import { verifyAuth } from "@/lib/auth/middleware";
 
 export async function middleware(request: NextRequest) {
@@ -22,30 +21,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Skip tracking for API routes, static files, and admin routes (to avoid infinite loops)
-  if (
-    pathname.startsWith("/api") ||
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/admin") ||
-    pathname.match(/\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf)$/)
-  ) {
-    return NextResponse.next();
-  }
-
-  // Track page view in background (non-blocking)
-  const clientInfo = getClientInfo(request);
-  
-  // Don't await - let it run in background
-  trackActivity({
-    action: "page_view",
-    path: pathname,
-    referrer: clientInfo.referrer || undefined,
-    userAgent: clientInfo.userAgent,
-    ipAddress: clientInfo.ipAddress !== "unknown" ? clientInfo.ipAddress : undefined,
-  }).catch((error) => {
-    // Silently fail - don't break the request
-    console.error("[Middleware Tracking Error]", error);
-  });
+  // Note: Page view tracking is handled by client-side ActivityTracker component
+  // Middleware runs on Edge Runtime which doesn't support Prisma
+  // Tracking happens via API endpoint called from client-side
 
   return NextResponse.next();
 }

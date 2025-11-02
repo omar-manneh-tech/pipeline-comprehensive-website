@@ -1,7 +1,7 @@
 /**
- * User Activity Tracker
- * Centralized tracking system for all user activities
- * Tracks page views, clicks, form submissions, downloads, etc.
+ * Server-Side Activity Tracker
+ * For use in API routes, server components, and middleware only
+ * DO NOT import this in client components - use tracker-client.ts instead
  */
 
 import { prisma } from "@/lib/db/client";

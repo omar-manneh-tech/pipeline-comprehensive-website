@@ -5,8 +5,8 @@
 
 import { useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { trackActivity, trackPageView, trackClick, trackFormSubmit, generateSessionId } from "@/lib/analytics/tracker";
-import type { ActivityAction, ActivityMetadata } from "@/lib/analytics/tracker";
+import { trackActivity, trackPageView, trackClick, trackFormSubmit, generateSessionId } from "@/lib/analytics/tracker-client";
+import type { ActivityAction, ActivityMetadata } from "@/lib/analytics/tracker-client";
 
 /**
  * Hook to automatically track page views
