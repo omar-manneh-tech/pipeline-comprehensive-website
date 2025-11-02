@@ -1,0 +1,153 @@
+"use client";
+
+import Link from "next/link";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+const footerLinks = {
+  quickLinks: [
+    { label: "About Us", href: "/about" },
+    { label: "Academics", href: "/academics" },
+    { label: "Staff", href: "/staff" },
+    { label: "Library", href: "/library" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Contact", href: "/contact" },
+  ],
+  programs: [
+    { label: "Primary Education", href: "/academics/primary" },
+    { label: "Junior Secondary", href: "/academics/junior" },
+    { label: "Senior Secondary", href: "/academics/senior" },
+    { label: "Vocational Training", href: "/academics/vocational" },
+  ],
+};
+
+export function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-navy text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Column */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="h-8 w-8 text-gold" />
+              <span className="text-xl font-bold">{siteConfig.name}</span>
+            </div>
+            <p className="text-gray-300 text-sm">{siteConfig.description}</p>
+            <div className="flex gap-4">
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-gold transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                href={siteConfig.social.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-gold transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-gold transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href={siteConfig.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-gold transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {footerLinks.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-gold transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Programs */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Programs</h3>
+            <ul className="space-y-2">
+              {footerLinks.programs.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-gold transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li className="flex items-start gap-2">
+                <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                <span>{siteConfig.links.address}</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-5 w-5 text-gold flex-shrink-0" />
+                <a
+                  href={`mailto:${siteConfig.links.email}`}
+                  className="hover:text-gold transition-colors"
+                >
+                  {siteConfig.links.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-5 w-5 text-gold flex-shrink-0" />
+                <a
+                  href={`tel:${siteConfig.links.phone}`}
+                  className="hover:text-gold transition-colors"
+                >
+                  {siteConfig.links.phone}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+          <p>
+            © {currentYear} {siteConfig.name}. All rights reserved. | Powered by{" "}
+            <span className="text-gold">Sumano Tech Solutions</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
