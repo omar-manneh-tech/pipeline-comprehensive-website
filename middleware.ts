@@ -7,11 +7,22 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { trackActivity, getClientInfo } from "@/lib/analytics/tracker";
+import { verifyAuth } from "@/lib/auth/middleware";
 
 export async function middleware(request: NextRequest) {
-  // Skip tracking for API routes, static files, and admin routes (to avoid infinite loops)
   const pathname = request.nextUrl.pathname;
 
+  // Protect admin routes (except login)
+  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
+    const auth = verifyAuth(request);
+    if (!auth.authenticated) {
+      const loginUrl = new URL("/admin/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // Skip tracking for API routes, static files, and admin routes (to avoid infinite loops)
   if (
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||

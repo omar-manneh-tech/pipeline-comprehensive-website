@@ -1,14 +1,14 @@
 /**
  * Admin Activities Dashboard
  * Displays user activities and allows CSV export
- * 
- * TODO: Add authentication middleware
+ * Protected by authentication middleware
  */
 
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, RefreshCw, Filter, Calendar, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Download, RefreshCw, Filter, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
@@ -39,6 +39,7 @@ interface ActivitiesResponse {
 }
 
 export default function AdminActivitiesPage() {
+  const router = useRouter();
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
@@ -56,6 +57,14 @@ export default function AdminActivitiesPage() {
     startDate: "",
     endDate: "",
   });
+
+  // Check authentication on mount
+  useEffect(() => {
+    const token = localStorage.getItem("admin_token");
+    if (!token) {
+      router.push("/admin/login?redirect=/admin/activities");
+    }
+  }, [router]);
 
   // Fetch activities
   const fetchActivities = async () => {
@@ -79,8 +88,14 @@ export default function AdminActivitiesPage() {
         setActivities(response.data);
         setPagination(response.pagination);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("[Admin Activities Error]", error);
+      // Handle 401 Unauthorized
+      if (error instanceof Error && "status" in error && (error as { status: number }).status === 401) {
+        localStorage.removeItem("admin_token");
+        localStorage.removeItem("admin_user");
+        router.push("/admin/login?redirect=/admin/activities");
+      }
     } finally {
       setLoading(false);
     }
@@ -90,13 +105,32 @@ export default function AdminActivitiesPage() {
   const exportCSV = async () => {
     setExporting(true);
     try {
+      const token = localStorage.getItem("admin_token");
+      if (!token) {
+        router.push("/admin/login?redirect=/admin/activities");
+        return;
+      }
+
       const params = new URLSearchParams();
       if (filters.action) params.append("action", filters.action);
       if (filters.path) params.append("path", filters.path);
       if (filters.startDate) params.append("startDate", filters.startDate);
       if (filters.endDate) params.append("endDate", filters.endDate);
 
-      const response = await fetch(`/api/admin/activities/export/csv?${params.toString()}`);
+      const response = await fetch(`/api/admin/activities/export/csv?${params.toString()}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 401) {
+        // Token expired or invalid
+        localStorage.removeItem("admin_token");
+        localStorage.removeItem("admin_user");
+        router.push("/admin/login?redirect=/admin/activities");
+        return;
+      }
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -112,6 +146,13 @@ export default function AdminActivitiesPage() {
     } finally {
       setExporting(false);
     }
+  };
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("admin_token");
+    localStorage.removeItem("admin_user");
+    router.push("/admin/login");
   };
 
   useEffect(() => {
@@ -136,10 +177,20 @@ export default function AdminActivitiesPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-10">
       <div className="container mx-auto px-4">
-        <SectionHeader
-          title="User Activities Dashboard"
-          description="View and export all user activities on the website"
-        />
+        <div className="flex justify-between items-center mb-6">
+          <SectionHeader
+            title="User Activities Dashboard"
+            description="View and export all user activities on the website"
+          />
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </Button>
+        </div>
 
         {/* Filters */}
         <Card className="mb-6">

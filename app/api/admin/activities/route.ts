@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/client";
 import { z } from "zod";
 import { rateLimit, getClientIdentifier } from "@/lib/security/rateLimit";
+import { requireAdmin } from "@/lib/auth/middleware";
 
 // Query parameter validation
 const querySchema = z.object({
@@ -42,11 +43,18 @@ const adminRateLimit = {
 
 export async function GET(request: NextRequest) {
   try {
-    // TODO: Add authentication check here
-    // const isAuthenticated = await checkAdminAuth(request);
-    // if (!isAuthenticated) {
-    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    // }
+    // Require admin authentication
+    try {
+      requireAdmin(request);
+    } catch (authError) {
+      return NextResponse.json(
+        {
+          error: "Unauthorized",
+          message: "Authentication required. Please log in to access admin features.",
+        },
+        { status: 401 }
+      );
+    }
 
     // Rate limiting
     const clientId = getClientIdentifier(request);

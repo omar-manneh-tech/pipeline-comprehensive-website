@@ -14,6 +14,21 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
+  /**
+   * Get authentication token from localStorage
+   */
+  private getAuthToken(): string | null {
+    if (typeof window === "undefined") return null;
+    return localStorage.getItem("admin_token");
+  }
+
+  /**
+   * Check if endpoint requires authentication
+   */
+  private requiresAuth(endpoint: string): boolean {
+    return endpoint.includes("/admin/") || endpoint.includes("/auth/");
+  }
+
   private async request<T>(
     endpoint: string,
     options: RequestOptions = {}
@@ -27,14 +42,25 @@ class ApiClient {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
+    // Prepare headers
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...(fetchOptions.headers as Record<string, string> || {}),
+    };
+
+    // Add auth token if needed
+    if (this.requiresAuth(endpoint)) {
+      const token = this.getAuthToken();
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+    }
+
     try {
       const response = await fetch(url, {
         ...fetchOptions,
         signal: controller.signal,
-        headers: {
-          "Content-Type": "application/json",
-          ...fetchOptions.headers,
-        },
+        headers,
       });
 
       clearTimeout(timeoutId);
