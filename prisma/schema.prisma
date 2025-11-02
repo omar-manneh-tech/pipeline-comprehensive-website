@@ -1,0 +1,82 @@
+// Prisma Schema for Daddy Jobe Comprehensive School Website
+// This schema includes models for user activity tracking, contact submissions, and more
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // Using SQLite for development (no server setup required)
+  // For production, change to "postgresql" or "mysql"
+  // provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Activity Tracking Model
+// Tracks all user interactions on the website
+model UserActivity {
+  id        String   @id @default(cuid())
+  userId    String?  // Optional: for authenticated users
+  sessionId String   // Track user sessions
+  action    String   // Type of action: 'page_view', 'click', 'form_submit', 'download', etc.
+  path      String   // URL path where action occurred
+  referrer  String?  // HTTP referrer
+  userAgent String?  // User agent string
+  ipAddress String?  // IP address (may be null in production due to proxies)
+  metadata  Json?    // Additional action-specific data
+  timestamp DateTime @default(now())
+  
+  // Indexes for performance
+  @@index([timestamp])
+  @@index([action])
+  @@index([path])
+  @@index([sessionId])
+  @@index([userId])
+  @@map("user_activities")
+}
+
+// Contact Form Submissions
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  
+  @@map("contact_submissions")
+}
+
+// Admin Users Model (for authentication)
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // Hashed password
+  name      String
+  role      String   @default("admin") // 'admin', 'super_admin'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("admins")
+}
+
+// Session Tracking (for analytics)
+model UserSession {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  userId    String?
+  ipAddress String?
+  userAgent String?
+  referrer  String?
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  duration  Int?      // Duration in seconds
+  
+  @@index([sessionId])
+  @@index([startedAt])
+  @@map("user_sessions")
+}
+

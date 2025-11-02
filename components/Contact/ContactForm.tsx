@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
 import { transitions, viewportConfig } from "@/lib/animations/constants";
 import { apiClient } from "@/services/api/client";
+import { useFormTracking } from "@/hooks/useActivityTracker";
 import { z } from "zod";
 
 // Form validation schema (client-side)
@@ -37,6 +38,7 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export function ContactForm() {
+  const { trackFormSubmit } = useFormTracking();
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -86,6 +88,13 @@ export function ContactForm() {
 
       // Success
       setSubmitStatus("success");
+      
+      // Track form submission
+      trackFormSubmit("contact_form", {
+        subject: formData.subject,
+        hasPhone: !!formData.phone,
+      });
+      
       setFormData({
         name: "",
         email: "",

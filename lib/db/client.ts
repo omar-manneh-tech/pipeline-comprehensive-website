@@ -32,60 +32,33 @@
  * ```
  */
 
-// Type definition for Prisma Client (will be available after prisma generate)
-// Using 'any' type to prevent TypeScript errors before Prisma is installed
-type PrismaClientType = any;
+// Type definition for Prisma Client
+import { PrismaClient } from "@prisma/client";
 
 // Global singleton pattern for Prisma Client
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientType | undefined;
+  prisma: PrismaClient | undefined;
 };
 
 /**
  * Prisma Client instance
  * 
- * Note: This will throw an error until:
- * 1. Prisma is installed: npm install @prisma/client prisma
- * 2. Prisma schema is created and client is generated: npx prisma generate
+ * This creates a singleton instance of Prisma Client.
+ * In development, we reuse the instance across hot reloads.
+ * In production, we create a new instance.
  */
-let prisma: PrismaClientType;
+const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["query", "error", "warn"]
+        : ["error"],
+  });
 
-try {
-  // Attempt to import and create Prisma Client
-  // This will fail if Prisma is not set up yet
-  // Using dynamic require to avoid TypeScript errors before Prisma is installed
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const PrismaClientModule = require("@prisma/client");
-  const { PrismaClient } = PrismaClientModule;
-  
-  if (PrismaClient) {
-    prisma = globalForPrisma.prisma ?? new PrismaClient();
-
-    // Prevent multiple instances in development (Next.js hot reload)
-    if (process.env.NODE_ENV !== "production") {
-      globalForPrisma.prisma = prisma;
-    }
-  } else {
-    throw new Error("PrismaClient not found");
-  }
-} catch (error) {
-  // Prisma not set up yet - provide helpful error
-  console.warn(
-    "⚠️  Prisma Client not found. Please install and set up Prisma:\n" +
-    "   1. npm install @prisma/client prisma\n" +
-    "   2. npx prisma init\n" +
-    "   3. Create your schema in prisma/schema.prisma\n" +
-    "   4. npx prisma generate"
-  );
-
-  // Create a mock client for type safety during development
-  // This prevents runtime errors but operations will fail if Prisma is not set up
-  prisma = {
-    $connect: async () => {
-      console.warn("⚠️  Prisma is not set up. Database operations will fail.");
-    },
-    $disconnect: async () => {},
-  } as unknown as PrismaClientType;
+// Prevent multiple instances in development (Next.js hot reload)
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
 }
 
 export { prisma };

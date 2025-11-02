@@ -7,6 +7,7 @@ import { LicenseProvider } from "@/components/LicenseProvider";
 import { LicenseBanner } from "@/components/LicenseBanner";
 import { WebVitals } from "@/app/components/WebVitals";
 import { SkipLink } from "@/components/SkipLink";
+import { ActivityTracker } from "@/components/ActivityTracker";
 import { siteConfig } from "@/config/site";
 
 const poppins = Poppins({
@@ -121,6 +122,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <WebVitals />
+        <ActivityTracker />
         <SkipLink />
         <LicenseProvider>
           <LicenseBanner />
