@@ -3,9 +3,12 @@
  * GET /api/v1/license/check
  * 
  * Returns the current license status
+ * Protected with rate limiting and secure error handling
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, getClientIdentifier, rateLimitConfigs } from "@/lib/security/rateLimit";
+import { createErrorResponse } from "@/lib/security/errors";
 
 // License utility functions (simplified for now)
 function getLicenseExpirationDate(): Date | null {
@@ -34,6 +37,28 @@ function getDaysRemaining(): number {
 
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting
+    const clientId = getClientIdentifier(request);
+    const rateLimitResult = rateLimit(clientId, rateLimitConfigs.license);
+    
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        {
+          error: "Too many requests",
+          message: rateLimitConfigs.license.message,
+          retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
+        },
+        {
+          status: 429,
+          headers: {
+            ...rateLimitResult.headers,
+            "Retry-After": Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
+    // Get license status
     const expired = isLicenseExpired();
     const daysRemaining = getDaysRemaining();
     const expirationDate = getLicenseExpirationDate();
@@ -50,7 +75,7 @@ export async function GET(request: NextRequest) {
       unlockCode: isValid && unlockCode ? "***" : null,
     };
 
-    const response = {
+    const responseData = {
       status,
       message: status.expired
         ? "License has expired. Please renew to continue using all features."
@@ -59,9 +84,17 @@ export async function GET(request: NextRequest) {
         : "License is valid.",
     };
 
-    return NextResponse.json(response, { status: 200 });
+    return NextResponse.json(responseData, {
+      status: 200,
+      headers: rateLimitResult.headers,
+    });
   } catch (error) {
-    console.error("License check error:", error);
+    // Secure error handling - logs server-side, returns safe message
+    const errorResponse = createErrorResponse(
+      error,
+      "Unable to check license status. Please try again later."
+    );
+
     return NextResponse.json(
       {
         status: {
@@ -71,9 +104,9 @@ export async function GET(request: NextRequest) {
           expirationDate: null,
           pilotPeriod: true,
         },
-        message: "Unable to check license status. Please try again later.",
+        message: errorResponse.message,
       },
-      { status: 200 }
+      { status: errorResponse.statusCode }
     );
   }
 }
