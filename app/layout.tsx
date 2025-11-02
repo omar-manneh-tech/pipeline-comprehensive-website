@@ -84,9 +84,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // JSON-LD Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}${siteConfig.logo}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.links.address,
+      addressCountry: "GM",
+      addressLocality: "Banjul",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: siteConfig.links.phone,
+      email: siteConfig.links.email,
+      contactType: "General Inquiries",
+    },
+    sameAs: [
+      siteConfig.social.facebook,
+      siteConfig.social.twitter,
+      siteConfig.social.instagram,
+      siteConfig.social.linkedin,
+    ].filter(Boolean),
+  };
+
   return (
     <html lang="en" className={poppins.variable}>
       <body className="antialiased">
+        {/* JSON-LD Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <WebVitals />
         <SkipLink />
         <LicenseProvider>
