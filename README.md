@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Source
+
+This project was originally developed by [omar-manneh-tech](https://github.com/omar-manneh-tech/school-websites).
+
+**Original Repository:** [https://github.com/omar-manneh-tech/school-websites](https://github.com/omar-manneh-tech/school-websites)
+
 ## Getting Started
 
 First, run the development server:
