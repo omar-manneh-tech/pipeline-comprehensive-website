@@ -6,43 +6,43 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useCountUp } from "@/hooks/useCountUp";
 
 const tiles = [
-  {
-    icon: Users,
-    number: 2500,
-    suffix: "+",
-    title: "Students",
-    description: "Enrolled students across all programs",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-  },
-  {
-    icon: GraduationCap,
-    number: 150,
-    suffix: "+",
-    title: "Teachers",
-    description: "Dedicated and experienced educators",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-  },
-  {
-    icon: BookOpen,
-    number: 10000,
-    suffix: "+",
-    title: "Library Books",
-    description: "Extensive collection of resources",
-    color: "text-green-600",
-    bgColor: "bg-green-50",
-  },
-  {
-    icon: Award,
-    number: 95,
-    suffix: "%",
-    title: "Pass Rate",
-    description: "Outstanding academic achievements",
-    color: "text-gold",
-    bgColor: "bg-yellow-50",
-  },
-];
+      {
+        icon: Users,
+        number: 2500,
+        suffix: "+",
+        title: "Students",
+        description: "Enrolled students across all programs",
+        color: "text-white",
+        bgColor: "bg-gradient-to-br from-blue-500 to-blue-700",
+      },
+      {
+        icon: GraduationCap,
+        number: 150,
+        suffix: "+",
+        title: "Teachers",
+        description: "Dedicated and experienced educators",
+        color: "text-white",
+        bgColor: "bg-gradient-to-br from-purple-500 to-purple-700",
+      },
+      {
+        icon: BookOpen,
+        number: 10000,
+        suffix: "+",
+        title: "Library Books",
+        description: "Extensive collection of resources",
+        color: "text-white",
+        bgColor: "bg-gradient-to-br from-green-500 to-green-700",
+      },
+      {
+        icon: Award,
+        number: 95,
+        suffix: "%",
+        title: "Pass Rate",
+        description: "Outstanding academic achievements",
+        color: "text-white",
+        bgColor: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+      },
+    ];
 
 interface CountUpCardProps {
   tile: typeof tiles[0];
@@ -65,11 +65,11 @@ function CountUpCard({ tile, index }: CountUpCardProps) {
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -8, scale: 1.02 }}
     >
-      <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-gold group">
-        <CardContent className="p-6 text-center">
-          <div className={`w-16 h-16 mx-auto mb-4 ${tile.bgColor} rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]`}>
-            <Icon className={`h-8 w-8 ${tile.color} transition-transform duration-500 group-hover:rotate-[360deg]`} />
-          </div>
+          <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-gold group">
+            <CardContent className="p-6 text-center">
+              <div className={`w-16 h-16 mx-auto mb-4 ${tile.bgColor} rounded-full shadow-lg flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                <Icon className={`h-8 w-8 ${tile.color} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+              </div>
           <motion.div
             ref={ref}
             initial={{ scale: 1 }}

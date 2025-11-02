@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
 import { siteConfig } from "@/config/site";
-import { fadeInUp, transitions, viewportConfig } from "@/lib/animations/constants";
+import { transitions, viewportConfig } from "@/lib/animations/constants";
 
 export function ContactAdmissions() {
   return (
@@ -37,14 +37,18 @@ export function ContactAdmissions() {
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                    <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-2 rounded-lg shadow-lg flex-shrink-0">
+                      <MapPin className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900">Address</p>
                       <p className="text-gray-600 text-sm">{siteConfig.links.address}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-gold flex-shrink-0" />
+                    <div className="bg-gradient-to-br from-green-500 to-green-700 p-2 rounded-lg shadow-lg flex-shrink-0">
+                      <Phone className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900">Phone</p>
                       <a
@@ -56,7 +60,9 @@ export function ContactAdmissions() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-gold flex-shrink-0" />
+                    <div className="bg-gradient-to-br from-purple-500 to-purple-700 p-2 rounded-lg shadow-lg flex-shrink-0">
+                      <Mail className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900">Email</p>
                       <a
@@ -68,7 +74,9 @@ export function ContactAdmissions() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-gold flex-shrink-0 mt-1" />
+                    <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 p-2 rounded-lg shadow-lg flex-shrink-0">
+                      <Clock className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-semibold text-gray-900">Office Hours</p>
                       <p className="text-gray-600 text-sm">

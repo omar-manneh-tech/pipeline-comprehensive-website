@@ -19,6 +19,8 @@ const achievements = [
     suffix: "%",
     title: "WASSCE Pass Rate",
     description: "Consistently high pass rate in West African Senior Secondary Certification Examination",
+    iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    iconColor: "text-white",
   },
   {
     icon: GraduationCap,
@@ -26,6 +28,8 @@ const achievements = [
     suffix: "%",
     title: "University Admission",
     description: "Graduates successfully gain admission to universities including University of The Gambia",
+    iconBg: "bg-gradient-to-br from-blue-500 to-blue-700",
+    iconColor: "text-white",
   },
   {
     icon: Users,
@@ -33,6 +37,8 @@ const achievements = [
     suffix: "+",
     title: "Active Students",
     description: "Serving a diverse student body across Science, Commerce, and Arts programs",
+    iconBg: "bg-gradient-to-br from-green-500 to-green-700",
+    iconColor: "text-white",
   },
   {
     icon: Star,
@@ -40,6 +46,8 @@ const achievements = [
     suffix: "+",
     title: "Qualified Teachers",
     description: "Dedicated and experienced educators committed to student success",
+    iconBg: "bg-gradient-to-br from-purple-500 to-purple-700",
+    iconColor: "text-white",
   },
 ];
 
@@ -66,8 +74,8 @@ function AchievementCard({ achievement, index }: AchievementCardProps) {
       <Card className="h-full border-2 border-gold hover:shadow-lg transition-all text-center group">
         <CardContent className="p-6">
           <div className="flex justify-center mb-4">
-            <div className="bg-primary/10 p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg]">
-              <Icon className="h-8 w-8 text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
+            <div className={`${achievement.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+              <Icon className={`h-8 w-8 ${achievement.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
             </div>
           </div>
           <motion.div

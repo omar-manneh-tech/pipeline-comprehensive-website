@@ -19,6 +19,8 @@ const contactMethods = [
     content: siteConfig.links.address,
     action: "Get Directions",
     href: `https://maps.google.com/?q=${encodeURIComponent(siteConfig.links.address)}`,
+    iconBg: "bg-gradient-to-br from-blue-500 to-blue-700",
+    iconColor: "text-white",
   },
   {
     icon: Phone,
@@ -26,6 +28,8 @@ const contactMethods = [
     content: siteConfig.links.phone,
     action: "Call Now",
     href: `tel:${siteConfig.links.phone}`,
+    iconBg: "bg-gradient-to-br from-green-500 to-green-700",
+    iconColor: "text-white",
   },
   {
     icon: Mail,
@@ -33,6 +37,8 @@ const contactMethods = [
     content: siteConfig.links.email,
     action: "Send Email",
     href: `mailto:${siteConfig.links.email}`,
+    iconBg: "bg-gradient-to-br from-purple-500 to-purple-700",
+    iconColor: "text-white",
   },
   {
     icon: Clock,
@@ -40,6 +46,8 @@ const contactMethods = [
     content: "Monday - Friday: 8:00 AM - 4:00 PM\nSaturday: 9:00 AM - 1:00 PM\nSunday: Closed",
     action: null,
     href: null,
+    iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    iconColor: "text-white",
   },
 ];
 
@@ -63,11 +71,11 @@ export function ContactInfo() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all">
+                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-4">
-                      <div className="bg-primary/10 p-4 rounded-full">
-                        <Icon className="h-8 w-8 text-primary" />
+                      <div className={`${method.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                        <Icon className={`h-8 w-8 ${method.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-navy mb-3">

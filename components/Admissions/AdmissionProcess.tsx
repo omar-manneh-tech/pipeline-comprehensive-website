@@ -17,24 +17,32 @@ const processSteps = [
     icon: FileText,
     title: "Submit Application",
     description: "Complete and submit your admission application form along with required documents.",
+    iconBg: "bg-gradient-to-br from-blue-500 to-blue-700",
+    iconColor: "text-white",
   },
   {
     step: 2,
     icon: Calendar,
     title: "Attend Interview",
     description: "Participate in an interview and assessment to evaluate your readiness for our program.",
+    iconBg: "bg-gradient-to-br from-purple-500 to-purple-700",
+    iconColor: "text-white",
   },
   {
     step: 3,
     icon: GraduationCap,
     title: "Receive Admission",
     description: "Successful candidates will receive an admission letter with enrollment instructions.",
+    iconBg: "bg-gradient-to-br from-green-500 to-green-700",
+    iconColor: "text-white",
   },
   {
     step: 4,
     icon: CheckCircle,
     title: "Complete Enrollment",
     description: "Complete the enrollment process, pay fees, and prepare for your first day of classes.",
+    iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    iconColor: "text-white",
   },
 ];
 
@@ -59,13 +67,13 @@ export function AdmissionProcess() {
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 className="relative"
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all">
+                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-4">
                       <div className="relative">
                         <div className="absolute inset-0 bg-gold/20 rounded-full blur-xl" />
-                        <div className="relative bg-primary/10 p-4 rounded-full">
-                          <Icon className="h-8 w-8 text-primary" />
+                        <div className={`relative ${step.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                          <Icon className={`h-8 w-8 ${step.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
                         </div>
                       </div>
                     </div>

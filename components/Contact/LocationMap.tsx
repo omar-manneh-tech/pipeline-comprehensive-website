@@ -36,8 +36,8 @@ export function LocationMap() {
             <Card className="border-2 border-gold">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="bg-primary/10 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-primary" />
+                  <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-3 rounded-lg shadow-lg">
+                    <MapPin className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-navy mb-4">

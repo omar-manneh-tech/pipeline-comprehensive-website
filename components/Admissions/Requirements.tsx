@@ -63,7 +63,9 @@ export function Requirements() {
                       transition={{ ...transitions.default, delay: index * 0.05 }}
                       className="flex items-start gap-3"
                     >
-                      <CheckCircle className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                      <div className="bg-[#1B2B5C] rounded-full p-0.5 flex-shrink-0 mt-0.5">
+                        <CheckCircle className="h-5 w-5 text-white" />
+                      </div>
                       <span className="text-gray-700">{req}</span>
                     </motion.li>
                   ))}
@@ -92,7 +94,9 @@ export function Requirements() {
                       transition={{ ...transitions.default, delay: index * 0.05 }}
                       className="flex items-start gap-3"
                     >
-                      <CheckCircle className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                      <div className="bg-[#1B2B5C] rounded-full p-0.5 flex-shrink-0 mt-0.5">
+                        <CheckCircle className="h-5 w-5 text-white" />
+                      </div>
                       <span className="text-gray-700">{doc}</span>
                     </motion.li>
                   ))}

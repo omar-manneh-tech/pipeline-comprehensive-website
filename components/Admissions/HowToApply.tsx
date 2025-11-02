@@ -19,24 +19,32 @@ const applicationSteps = [
     title: "Download Application Form",
     description: "Download the admission application form from our website or collect it from the school office.",
     icon: Download,
+    iconBg: "bg-gradient-to-br from-blue-500 to-blue-700",
+    iconColor: "text-white",
   },
   {
     step: 2,
     title: "Complete the Form",
     description: "Fill out all required sections of the application form accurately and completely.",
     icon: Mail,
+    iconBg: "bg-gradient-to-br from-purple-500 to-purple-700",
+    iconColor: "text-white",
   },
   {
     step: 3,
     title: "Gather Documents",
     description: "Collect all required documents as listed in the admission requirements section.",
     icon: Download,
+    iconBg: "bg-gradient-to-br from-green-500 to-green-700",
+    iconColor: "text-white",
   },
   {
     step: 4,
     title: "Submit Application",
     description: "Submit your completed application form and documents to the school administration office.",
     icon: Mail,
+    iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600",
+    iconColor: "text-white",
   },
 ];
 
@@ -60,11 +68,11 @@ export function HowToApply() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold">
+                <Card className="h-full border-2 border-gold group">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
-                      <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
-                        <Icon className="h-6 w-6 text-primary" />
+                      <div className={`${step.iconBg} p-3 rounded-lg shadow-lg flex-shrink-0 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                        <Icon className={`h-6 w-6 ${step.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">

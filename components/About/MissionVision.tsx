@@ -17,18 +17,24 @@ const missionVision = [
     title: "Our Mission",
     description:
       "To provide quality senior secondary education that empowers students with knowledge, skills, and values necessary for academic excellence, personal growth, and responsible citizenship. We are committed to creating a nurturing learning environment that fosters discipline, integrity, and excellence in every student.",
+    iconBg: "bg-blue-500",
+    iconColor: "text-white",
   },
   {
     icon: Eye,
     title: "Our Vision",
     description:
       "To be the premier senior secondary institution in The Gambia, recognized for producing well-rounded graduates who excel in higher education, contribute meaningfully to society, and uphold the highest standards of excellence, integrity, and service.",
+    iconBg: "bg-purple-500",
+    iconColor: "text-white",
   },
   {
     icon: Award,
     title: "Our Commitment",
     description:
       "We are committed to maintaining the highest standards of education, providing modern facilities, qualified teachers, and a supportive community that enables every student to achieve their full potential and succeed in their academic and personal endeavors.",
+    iconBg: "bg-gold",
+    iconColor: "text-white",
   },
 ];
 
@@ -55,8 +61,8 @@ export function MissionVision() {
                 <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
                   <CardContent className="p-6">
                     <div className="flex justify-center mb-4">
-                      <div className="bg-primary/10 p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg]">
-                        <Icon className="h-8 w-8 text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
+                      <div className={`${item.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                        <Icon className={`h-8 w-8 ${item.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
                       </div>
                     </div>
                     <h3 className="text-2xl font-bold text-navy mb-4 text-center">

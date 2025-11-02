@@ -149,7 +149,7 @@ export function Navbar() {
               variant="outline"
               className="hidden md:flex"
             >
-              <Link href={siteConfig.links.portal} target="_blank">
+              <Link href="/portal">
                 Portal Login
               </Link>
             </Button>
@@ -209,7 +209,7 @@ export function Navbar() {
               ))}
               <div className="pt-2 border-t">
                 <Button asChild variant="outline" className="w-full">
-                  <Link href={siteConfig.links.portal} target="_blank">
+                  <Link href="/portal">
                     Portal Login
                   </Link>
                 </Button>

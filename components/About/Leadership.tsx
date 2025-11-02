@@ -17,18 +17,24 @@ const leadershipInfo = [
     title: "Administrative Leadership",
     description:
       "Our administrative team is dedicated to ensuring smooth operations and creating an environment conducive to learning and growth.",
+    iconBg: "bg-gradient-to-br from-indigo-500 to-indigo-700",
+    iconColor: "text-white",
   },
   {
     icon: BookOpen,
     title: "Academic Excellence",
     description:
       "Led by experienced educators, our academic programs are designed to challenge students while providing the support they need to succeed.",
+    iconBg: "bg-gradient-to-br from-red-500 to-red-700",
+    iconColor: "text-white",
   },
   {
     icon: Users,
     title: "Student Support",
     description:
       "Our guidance and counseling department works closely with students to help them navigate their academic journey and prepare for their future.",
+    iconBg: "bg-gradient-to-br from-teal-500 to-teal-700",
+    iconColor: "text-white",
   },
 ];
 
@@ -55,8 +61,8 @@ export function Leadership() {
                 <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-4">
-                      <div className="bg-primary/10 p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg]">
-                        <Icon className="h-8 w-8 text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
+                      <div className={`${item.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                        <Icon className={`h-8 w-8 ${item.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-navy mb-3">

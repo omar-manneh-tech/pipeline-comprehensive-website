@@ -53,16 +53,22 @@ export function CoreValuesSection({ values = coreValues }: CoreValuesSectionProp
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 variants={hoverLift}
               >
-                <Card className="h-full hover:shadow-2xl border-2 border-gold transition-all cursor-pointer bg-white group">
-                  <CardContent className="p-8 text-center">
-                    <div className="flex justify-center mb-6">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gold/20 rounded-full blur-xl" />
-                        <div className="relative bg-primary/10 p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg]">
-                          <Icon className="h-10 w-10 text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
+                    <Card className="h-full hover:shadow-2xl border-2 border-gold transition-all cursor-pointer bg-white group">
+                      <CardContent className="p-8 text-center">
+                        <div className="flex justify-center mb-6">
+                          <div className="relative">
+                            <div className="absolute inset-0 bg-gold/20 rounded-full blur-xl" />
+                            <div className={`relative ${
+                              value.iconName === "ShieldCheck" 
+                                ? "bg-gradient-to-br from-blue-500 to-blue-700" 
+                                : value.iconName === "Handshake"
+                                ? "bg-gradient-to-br from-green-500 to-green-700"
+                                : "bg-gradient-to-br from-yellow-400 to-yellow-600"
+                            } p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
+                              <Icon className="h-10 w-10 text-white transition-transform duration-500 group-hover:rotate-[360deg]" />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
                     <h3 className="text-2xl font-bold text-navy mb-4">
                       {value.title}
                     </h3>

@@ -62,12 +62,12 @@ export function ImportantDates() {
               viewport={viewportConfig}
               transition={{ ...transitions.default, delay: index * 0.1 }}
             >
-              <Card className="h-full border-2 border-gold hover:shadow-lg transition-all">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
-                      <Calendar className="h-6 w-6 text-primary" />
-                    </div>
+                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 p-3 rounded-lg shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Calendar className="h-6 w-6 text-white transition-transform duration-500 group-hover:rotate-[360deg]" />
+                      </div>
                     <div className="flex-1">
                       <div className="text-sm font-semibold text-gold mb-1">
                         {item.date}
