@@ -2,59 +2,42 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { studentActivities, type Activity } from "@/lib/data/home";
+import { SectionHeader } from "@/components/Shared/SectionHeader";
 
-const activities = [
-  {
-    title: "Sports & Athletics",
-    description: "Competitive sports and physical excellence",
-    image: "/images/gallery/sports_day.jpg",
-  },
-  {
-    title: "Science Fair",
-    description: "Innovation and scientific discovery",
-    image: "/images/gallery/science_fair.jpg",
-  },
-  {
-    title: "Cultural Celebrations",
-    description: "Embracing diversity and tradition",
-    image: "/images/gallery/cultural_day.jpg",
-  },
-  {
-    title: "Debate & Leadership",
-    description: "Critical thinking and public speaking",
-    image: "/images/gallery/graduation_day.jpg",
-  },
-];
+interface StudentLifeSectionProps {
+  activities?: Activity[];
+}
 
-export function StudentLifeSection() {
+const studentLifeDescription = (
+  <>
+    <p>
+      Education at Daddy Jobe extends far beyond the classroom walls.
+    </p>
+    <p>
+      Our students thrive in a vibrant community filled with opportunities to lead, create, and serve. From lively sports competitions to thought-provoking debates, from science fairs to cultural celebrations — Daddy Jobe students learn the value of teamwork, integrity, and resilience.
+    </p>
+    <p>
+      Through clubs and societies, they discover new passions. Through service projects, they learn empathy. And through every experience, they grow into confident, responsible young adults ready to shape the future.
+    </p>
+    <p className="font-medium text-navy">
+      The school&apos;s inclusive environment ensures that every learner — regardless of background or interest — finds a place to belong, contribute, and excel.
+    </p>
+  </>
+);
+
+export function StudentLifeSection({ activities = studentActivities }: StudentLifeSectionProps) {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
-            Life at Daddy Jobe
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Education at Daddy Jobe extends far beyond the classroom walls.
-            </p>
-            <p>
-              Our students thrive in a vibrant community filled with opportunities to lead, create, and serve. From lively sports competitions to thought-provoking debates, from science fairs to cultural celebrations — Daddy Jobe students learn the value of teamwork, integrity, and resilience.
-            </p>
-            <p>
-              Through clubs and societies, they discover new passions. Through service projects, they learn empathy. And through every experience, they grow into confident, responsible young adults ready to shape the future.
-            </p>
-            <p className="font-medium text-navy">
-              The school&apos;s inclusive environment ensures that every learner — regardless of background or interest — finds a place to belong, contribute, and excel.
-            </p>
-          </div>
-        </motion.div>
+        <SectionHeader
+          title="Life at Daddy Jobe"
+          description={
+            <div className="max-w-4xl mx-auto space-y-4 text-gray-700 leading-relaxed">
+              {studentLifeDescription}
+            </div>
+          }
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {activities.map((activity, index) => (

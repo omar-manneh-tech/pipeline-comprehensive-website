@@ -2,72 +2,32 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCarousel } from "@/hooks/useCarousel";
+import { schoolEvents, type Event } from "@/lib/data/home";
+import { SectionHeader } from "@/components/Shared/SectionHeader";
 
-const events = [
-  {
-    title: "Science Fair 2024",
-    description: "Celebrating innovation and creativity in science and technology",
-    image: "/images/gallery/science_fair.jpg",
-  },
-  {
-    title: "Graduation Ceremony",
-    description: "Honoring our outstanding graduates and their achievements",
-    image: "/images/gallery/graduation_day.jpg",
-  },
-  {
-    title: "Sports Day Champions",
-    description: "Celebrating teamwork, sportsmanship, and excellence in athletics",
-    image: "/images/gallery/sports_day.jpg",
-  },
-  {
-    title: "Cultural Festival",
-    description: "Showcasing the rich diversity and talent of our student community",
-    image: "/images/gallery/cultural_day.jpg",
-  },
-];
+interface CarouselSectionProps {
+  events?: Event[];
+}
 
-export function CarouselSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % events.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + events.length) % events.length);
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % events.length);
-  };
+export function CarouselSection({ events = schoolEvents }: CarouselSectionProps) {
+  const { currentIndex, goToSlide, goToPrevious, goToNext } = useCarousel({
+    items: events,
+    autoPlay: true,
+    interval: 5000,
+  });
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            School Events & Achievements
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Stay updated with our latest events and accomplishments
-          </p>
-        </motion.div>
+        <SectionHeader
+          title="School Events & Achievements"
+          description="Stay updated with our latest events and accomplishments"
+          titleClassName="text-gray-900"
+          descriptionClassName="text-gray-600"
+        />
 
         <div className="relative max-w-5xl mx-auto">
           <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-2xl">

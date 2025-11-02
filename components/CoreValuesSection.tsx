@@ -1,56 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Handshake, Trophy } from "lucide-react";
+import { ShieldCheck, Handshake, Trophy, LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { coreValues, type CoreValue } from "@/lib/data/home";
+import { SectionHeader } from "@/components/Shared/SectionHeader";
 
-const coreValues = [
-  {
-    title: "Discipline",
-    icon: ShieldCheck,
-    description:
-      "Discipline is the foundation of success. We instill focus, respect, and a strong sense of responsibility — values that prepare students for life's challenges inside and outside the classroom.",
-  },
-  {
-    title: "Integrity",
-    icon: Handshake,
-    description:
-      "Integrity is our compass. Every student learns the importance of honesty, fairness, and doing what's right — even when no one is watching.",
-  },
-  {
-    title: "Excellence",
-    icon: Trophy,
-    description:
-      "Excellence drives everything we do. From academics to character development, we inspire our students to reach their full potential through dedication and a love for learning.",
-  },
-];
+// Icon mapping
+const iconMap: Record<CoreValue["iconName"], LucideIcon> = {
+  ShieldCheck,
+  Handshake,
+  Trophy,
+};
 
-export function CoreValuesSection() {
+interface CoreValuesSectionProps {
+  values?: CoreValue[];
+}
+
+const coreValuesDescription = (
+  <>
+    At Daddy Jobe Comprehensive School, we believe education goes beyond books and classrooms.
+    <br />
+    <span className="font-medium">
+      Our students are guided by three timeless pillars that shape not only their academic journey, but their character and future.
+    </span>
+  </>
+);
+
+export function CoreValuesSection({ values = coreValues }: CoreValuesSectionProps) {
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-            Our Core Values
-          </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            At Daddy Jobe Comprehensive School, we believe education goes beyond books and classrooms.
-            <br />
-            <span className="font-medium">
-              Our students are guided by three timeless pillars that shape not only their academic journey, but their character and future.
-            </span>
-          </p>
-        </motion.div>
+        <SectionHeader
+          title="Our Core Values"
+          description={
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              {coreValuesDescription}
+            </p>
+          }
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {coreValues.map((value, index) => {
-            const Icon = value.icon;
+          {values.map((value, index) => {
+            const Icon = iconMap[value.iconName];
             return (
               <motion.div
                 key={value.title}

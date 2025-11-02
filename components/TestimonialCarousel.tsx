@@ -1,71 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCarousel } from "@/hooks/useCarousel";
+import { testimonials as defaultTestimonials, type Testimonial } from "@/lib/data/home";
+import { SectionHeader } from "@/components/Shared/SectionHeader";
 
-const testimonials = [
-  {
-    name: "Sarah Johnson",
-    role: "Parent",
-    image: "/images/misc/placeholder_profile.jpg",
-    text: "Daddy Jobe Comprehensive School has provided an exceptional learning environment for my child. The teachers are dedicated, and the curriculum is comprehensive.",
-  },
-  {
-    name: "Michael Chen",
-    role: "Alumni",
-    image: "/images/misc/placeholder_profile.jpg",
-    text: "The foundation I received here prepared me for success in university and beyond. I'm grateful for the excellent education and support.",
-  },
-  {
-    name: "Dr. Emily Rodriguez",
-    role: "Parent & Educator",
-    image: "/images/misc/placeholder_profile.jpg",
-    text: "As an educator myself, I can see the quality of instruction and care at Daddy Jobe. It's a place where students truly thrive.",
-  },
-  {
-    name: "David Thompson",
-    role: "Student",
-    image: "/images/misc/placeholder_profile.jpg",
-    text: "I love coming to school every day! The teachers make learning fun, and I've made so many friends. This school is amazing!",
-  },
-  {
-    name: "Amina Diallo",
-    role: "Parent",
-    image: "/images/misc/placeholder_profile.jpg",
-    text: "The supportive community and excellent academic programs make this the best choice for our children's education.",
-  },
-];
+interface TestimonialCarouselProps {
+  testimonials?: Testimonial[];
+}
 
-export function TestimonialCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+export function TestimonialCarousel({ testimonials = defaultTestimonials }: TestimonialCarouselProps) {
+  const { currentIndex, goToSlide } = useCarousel({
+    items: testimonials,
+    autoPlay: true,
+    interval: 6000,
+  });
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 text-gray-900 mb-0">
       <div className="container mx-auto px-4 max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-navy">
-            What People Say About Us
-          </h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-            Hear from students, parents, and educators about their experience at Daddy Jobe
-          </p>
-        </motion.div>
+        <SectionHeader
+          title="What People Say About Us"
+          description="Hear from students, parents, and educators about their experience at Daddy Jobe"
+        />
 
         <div className="max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
@@ -113,7 +73,7 @@ export function TestimonialCarousel() {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => goToSlide(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-gold w-8"
