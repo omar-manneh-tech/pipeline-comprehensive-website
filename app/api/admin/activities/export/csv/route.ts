@@ -43,15 +43,15 @@ const exportRateLimit = {
 };
 
 interface ActivityRow {
-  id?: string;
-  timestamp?: Date | string;
-  action?: string;
-  path?: string;
-  sessionId?: string;
-  userId?: string;
-  referrer?: string;
-  ipAddress?: string;
-  userAgent?: string;
+  id: string;
+  timestamp: Date | string;
+  action: string;
+  path: string;
+  sessionId: string;
+  userId: string | null;
+  referrer: string | null;
+  ipAddress: string | null;
+  userAgent: string | null;
   metadata?: unknown;
 }
 
