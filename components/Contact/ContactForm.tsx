@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
 import { transitions, viewportConfig } from "@/lib/animations/constants";
+import { apiClient } from "@/services/api/client";
 import { z } from "zod";
 
 // Form validation schema (client-side)
@@ -77,27 +78,11 @@ export function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      // Call API endpoint with proper error handling
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        // Handle API validation errors
-        if (data.errors) {
-          setErrors(data.errors);
-          setSubmitStatus("error");
-        } else {
-          setSubmitStatus("error");
-        }
-        return;
-      }
+      // Call API endpoint using centralized API client
+      const data = await apiClient.post<{ success: boolean; message: string; errors?: Record<string, string> }>(
+        "/contact",
+        formData
+      );
 
       // Success
       setSubmitStatus("success");
@@ -109,10 +94,27 @@ export function ContactForm() {
         message: "",
       });
       setErrors({});
-    } catch (error) {
-      // Network or other errors
-      console.error("Contact form submission error:", error);
-      setSubmitStatus("error");
+    } catch (error: unknown) {
+      // Handle API errors
+      if (error instanceof Error) {
+        try {
+          // Try to parse error message as JSON (from improved API client)
+          const errorData = JSON.parse(error.message) as { errors?: Record<string, string>; error?: string; message?: string };
+          if (errorData.errors) {
+            // Validation errors from server
+            setErrors(errorData.errors);
+            setSubmitStatus("error");
+          } else {
+            // Other API errors
+            setSubmitStatus("error");
+          }
+        } catch {
+          // Not a JSON error, handle as general error
+          setSubmitStatus("error");
+        }
+      } else {
+        setSubmitStatus("error");
+      }
     } finally {
       setIsSubmitting(false);
     }

@@ -4,6 +4,7 @@
  */
 
 import { siteConfig } from "@/config/site";
+import { apiClient } from "@/services/api/client";
 
 /**
  * Feature Definitions
@@ -98,17 +99,8 @@ export function useFeatureCheck() {
   
   const checkFeature = async (feature: Feature): Promise<boolean> => {
     try {
-      const response = await fetch(`${siteConfig.api.features || "/api/v1/features"}/check`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feature }),
-      });
-
-      if (!response.ok) {
-        return false;
-      }
-
-      const data = await response.json();
+      const endpoint = `${siteConfig.api.features || "/api/v1/features"}/check`.replace(/^\/api/, "");
+      const data = await apiClient.post<{ enabled: boolean }>(endpoint, { feature });
       return data.enabled === true;
     } catch {
       // Fail gracefully - default to false
