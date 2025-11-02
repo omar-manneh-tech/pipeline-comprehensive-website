@@ -51,7 +51,32 @@ export default function AdminLoginPage() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (!contentType || !contentType.includes("application/json")) {
+        // If not JSON, it's likely an error page (404, 500, etc.)
+        const text = await response.text();
+        console.error("[Login Error] Non-JSON response:", text.substring(0, 200));
+        if (response.status === 404) {
+          setErrorMessage("Login endpoint not found. Please check if the API is properly configured.");
+        } else {
+          setErrorMessage("Server error. Please check if the API endpoint is available.");
+        }
+        setSubmitStatus("error");
+        return;
+      }
+
+      // Parse JSON response
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error("[Login Error] JSON parse error:", parseError);
+        setErrorMessage("Invalid response from server. Please try again.");
+        setSubmitStatus("error");
+        return;
+      }
 
       if (!response.ok) {
         if (data.errors) {
@@ -68,12 +93,28 @@ export default function AdminLoginPage() {
         localStorage.setItem("admin_token", data.token);
         localStorage.setItem("admin_user", JSON.stringify(data.user));
 
-        // Redirect to intended page
-        router.push(redirect);
+        // Set success status
+        setSubmitStatus("success");
+        
+        // Use window.location for hard redirect to ensure middleware doesn't interfere
+        // router.push sometimes doesn't work properly with middleware
+        window.location.href = redirect;
+      } else {
+        // If no token in response, something went wrong
+        setErrorMessage("Login failed. No token received from server.");
+        setSubmitStatus("error");
       }
     } catch (error) {
       console.error("[Login Error]", error);
-      setErrorMessage("An error occurred. Please try again.");
+      if (error instanceof Error) {
+        if (error.message.includes("JSON")) {
+          setErrorMessage("Server error. The login endpoint may not be available.");
+        } else {
+          setErrorMessage("Network error. Please check your connection and try again.");
+        }
+      } else {
+        setErrorMessage("An error occurred. Please try again.");
+      }
       setSubmitStatus("error");
     } finally {
       setLoading(false);

@@ -12,12 +12,24 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Protect admin routes (except login)
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
+  // Note: We only protect API routes here, not page routes
+  // Page routes are protected by client-side checks because:
+  // 1. Middleware runs on Edge Runtime (no localStorage access)
+  // 2. Tokens are stored in localStorage (client-side only)
+  // 3. API routes can read Authorization header, pages cannot
+  
+  // Only protect API routes in middleware
+  // Page routes are protected client-side in the page component itself
+  if (pathname.startsWith("/api/admin") && !pathname.startsWith("/api/auth")) {
     const auth = verifyAuth(request);
     if (!auth.authenticated) {
-      const loginUrl = new URL("/admin/login", request.url);
-      loginUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.json(
+        {
+          error: "Unauthorized",
+          message: "Authentication required. Please log in to access admin features.",
+        },
+        { status: 401 }
+      );
     }
   }
 

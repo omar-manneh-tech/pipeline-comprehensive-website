@@ -75,15 +75,37 @@ export async function GET(request: NextRequest) {
 
     // Parse query parameters
     const { searchParams } = new URL(request.url);
-    const queryParams = {
-      page: searchParams.get("page"),
-      limit: searchParams.get("limit"),
-      action: searchParams.get("action"),
-      path: searchParams.get("path"),
-      startDate: searchParams.get("startDate"),
-      endDate: searchParams.get("endDate"),
-      sessionId: searchParams.get("sessionId"),
+    const queryParams: Record<string, unknown> = {
+      page: searchParams.get("page") || "1",
+      limit: searchParams.get("limit") || "50",
     };
+    
+    // Only add optional parameters if they exist and are not empty
+    // searchParams.get() returns null if not found, but Zod expects undefined for optional fields
+    const action = searchParams.get("action");
+    if (action && action.trim().length > 0) {
+      queryParams.action = action;
+    }
+    
+    const path = searchParams.get("path");
+    if (path && path.trim().length > 0) {
+      queryParams.path = path;
+    }
+    
+    const startDate = searchParams.get("startDate");
+    if (startDate && startDate.trim().length > 0) {
+      queryParams.startDate = startDate;
+    }
+    
+    const endDate = searchParams.get("endDate");
+    if (endDate && endDate.trim().length > 0) {
+      queryParams.endDate = endDate;
+    }
+    
+    const sessionId = searchParams.get("sessionId");
+    if (sessionId && sessionId.trim().length > 0) {
+      queryParams.sessionId = sessionId;
+    }
 
     const validationResult = querySchema.safeParse(queryParams);
 
@@ -110,11 +132,12 @@ export async function GET(request: NextRequest) {
         sessionId?: string;
       } = {};
 
+      // Only add filters if they are provided
       if (query.action) {
         where.action = query.action;
       }
 
-      if (query.path) {
+      if (query.path && query.path.length > 0) {
         where.path = { contains: query.path };
       }
 
@@ -128,7 +151,7 @@ export async function GET(request: NextRequest) {
         }
       }
 
-      if (query.sessionId) {
+      if (query.sessionId && query.sessionId.length > 0) {
         where.sessionId = query.sessionId;
       }
 

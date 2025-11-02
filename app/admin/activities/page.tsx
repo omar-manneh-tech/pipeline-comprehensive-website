@@ -63,7 +63,21 @@ export default function AdminActivitiesPage() {
     const token = localStorage.getItem("admin_token");
     if (!token) {
       router.push("/admin/login?redirect=/admin/activities");
+      return;
     }
+    // If token exists, fetch activities on mount
+    fetchActivities();
+    
+    // Also check when window gains focus (in case token was cleared in another tab)
+    const handleFocus = () => {
+      const currentToken = localStorage.getItem("admin_token");
+      if (!currentToken) {
+        router.push("/admin/login?redirect=/admin/activities");
+      }
+    };
+    
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
   }, [router]);
 
   // Fetch activities
@@ -155,8 +169,12 @@ export default function AdminActivitiesPage() {
     router.push("/admin/login");
   };
 
+  // Fetch activities when pagination page changes
   useEffect(() => {
-    fetchActivities();
+    const token = localStorage.getItem("admin_token");
+    if (token) {
+      fetchActivities();
+    }
   }, [pagination.page]);
 
   const formatDate = (dateString: string) => {

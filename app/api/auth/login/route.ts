@@ -20,9 +20,14 @@ const loginSchema = z.object({
 });
 
 // Rate limiting for login endpoint (prevent brute force)
+// More lenient in development for easier testing
 const loginRateLimit = {
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  maxRequests: 5, // 5 login attempts per 15 minutes
+  windowMs: process.env.NODE_ENV === "development" 
+    ? 5 * 60 * 1000  // 5 minutes in development
+    : 15 * 60 * 1000, // 15 minutes in production
+  maxRequests: process.env.NODE_ENV === "development"
+    ? 20  // 20 attempts per 5 minutes in development
+    : 5,   // 5 attempts per 15 minutes in production
   message: "Too many login attempts. Please try again later.",
 };
 

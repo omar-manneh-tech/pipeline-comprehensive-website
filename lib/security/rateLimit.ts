@@ -80,6 +80,20 @@ class RateLimiter {
     clearInterval(this.cleanupInterval);
     this.store = {};
   }
+
+  /**
+   * Clear rate limit for a specific key (useful for testing)
+   */
+  clear(key: string): void {
+    delete this.store[key];
+  }
+
+  /**
+   * Clear all rate limits (useful for testing/reset)
+   */
+  clearAll(): void {
+    this.store = {};
+  }
 }
 
 // Singleton instance
@@ -113,16 +127,41 @@ export function rateLimit(
 }
 
 /**
+ * Clear rate limit for a specific identifier (useful for testing)
+ */
+export function clearRateLimit(identifier: string): void {
+  rateLimiter.clear(identifier);
+}
+
+/**
+ * Clear all rate limits (useful for testing/reset)
+ */
+export function clearAllRateLimits(): void {
+  rateLimiter.clearAll();
+}
+
+/**
  * Get client identifier from request
  */
 export function getClientIdentifier(request: Request): string {
   // Try to get IP from headers (common in production)
   const forwardedFor = request.headers.get("x-forwarded-for");
   const realIp = request.headers.get("x-real-ip");
+  const userAgent = request.headers.get("user-agent") || "";
   
-  // For development, use a default identifier
+  // For development, combine IP with user agent for better uniqueness
   // In production, you'd extract the real IP
-  const ip = forwardedFor?.split(",")[0] || realIp || "unknown";
+  const ip = forwardedFor?.split(",")[0]?.trim() || realIp || "unknown";
+  
+  // In development, use IP + user agent hash for better uniqueness
+  // This prevents all requests from being grouped under "unknown"
+  if (process.env.NODE_ENV === "development" && ip === "unknown") {
+    // Create a simple hash from user agent for uniqueness
+    const hash = userAgent.split("").reduce((acc, char) => {
+      return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+    }, 0);
+    return `dev-${Math.abs(hash)}`;
+  }
   
   return ip;
 }
