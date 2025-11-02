@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,10 +22,9 @@ const navLinks = [
     label: "Academics",
     href: "/academics",
     submenu: [
-      { label: "Primary Education", href: "/academics/primary" },
-      { label: "Junior Secondary", href: "/academics/junior" },
-      { label: "Senior Secondary", href: "/academics/senior" },
-      { label: "Vocational Training", href: "/academics/vocational" },
+      { label: "Science Program", href: "/academics/science" },
+      { label: "Commerce Program", href: "/academics/commerce" },
+      { label: "Arts Program", href: "/academics/arts" },
     ],
   },
   {
@@ -40,14 +40,30 @@ const navLinks = [
     href: "/gallery",
   },
   {
+    label: "Admissions",
+    href: "/admissions",
+  },
+  {
+    label: "News & Events",
+    href: "/news",
+  },
+  {
     label: "Contact",
     href: "/contact",
   },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm shadow-sm">
@@ -85,7 +101,11 @@ export function Navbar() {
               <div key={link.href} className="relative group">
                 <Link
                   href={link.href}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors relative"
+                  className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+                    isActive(link.href)
+                      ? "text-primary after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary"
+                      : "text-gray-700 hover:text-primary"
+                  }`}
                   onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
                   onMouseLeave={() => setOpenSubmenu(null)}
                 >
@@ -162,7 +182,11 @@ export function Navbar() {
                 <div key={link.href}>
                   <Link
                     href={link.href}
-                    className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-accent hover:text-accent-foreground rounded-md transition-colors"
+                    className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      isActive(link.href)
+                        ? "text-primary bg-primary/10 border-l-2 border-primary"
+                        : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}

@@ -32,6 +32,9 @@ const imagesToGenerate = [
   { path: 'about/students_in_class.jpg', width: 1200, height: 800, color: colors.about, label: 'STUDENTS IN CLASS' },
   { path: 'about/morning_assembly.jpg', width: 1200, height: 800, color: colors.about, label: 'MORNING ASSEMBLY' },
   
+  // Library images
+  { path: 'library/library-interior.jpg', width: 1200, height: 800, color: colors.about, label: 'LIBRARY INTERIOR' },
+  
   // Academics images
   { path: 'academics/science_lab.jpg', width: 1200, height: 800, color: colors.academics, label: 'SCIENCE LAB' },
   { path: 'academics/commerce_class.jpg', width: 1200, height: 800, color: colors.academics, label: 'COMMERCE CLASS' },

@@ -9,16 +9,18 @@ const footerLinks = {
   quickLinks: [
     { label: "About Us", href: "/about" },
     { label: "Academics", href: "/academics" },
+    { label: "Admissions", href: "/admissions" },
     { label: "Staff", href: "/staff" },
     { label: "Library", href: "/library" },
+    { label: "News & Events", href: "/news" },
     { label: "Gallery", href: "/gallery" },
     { label: "Contact", href: "/contact" },
   ],
   programs: [
-    { label: "Primary Education", href: "/academics/primary" },
-    { label: "Junior Secondary", href: "/academics/junior" },
-    { label: "Senior Secondary", href: "/academics/senior" },
-    { label: "Vocational Training", href: "/academics/vocational" },
+    { label: "Science Program", href: "/academics/science" },
+    { label: "Commerce Program", href: "/academics/commerce" },
+    { label: "Arts Program", href: "/academics/arts" },
+    { label: "WASSCE Preparation", href: "/academics" },
   ],
 };
 

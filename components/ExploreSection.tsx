@@ -16,7 +16,7 @@ const exploreItems = [
   },
   {
     title: "Academics",
-    description: "Explore our comprehensive curriculum and academic programs designed for success.",
+    description: "Explore our senior secondary programs: Science, Commerce, and Arts. Prepare for WASSCE exams and university admission.",
     image: "/images/academics/science_lab.jpg",
     href: "/academics",
   },
@@ -24,7 +24,7 @@ const exploreItems = [
     title: "Admissions",
     description: "Start your journey with us. Discover our admission process and requirements.",
     image: "/images/hero/admission-banner.jpg",
-    href: "/contact",
+    href: "/admissions",
   },
 ];
 

@@ -31,7 +31,10 @@ export function AboutSection() {
                 Since its establishment, the school has built a reputation for nurturing young minds through a balanced curriculum that emphasizes both intellectual growth and moral uprightness.
               </p>
               <p>
-                Every year, students from across the country choose Daddy Jobe as their preferred path after completing Grade Nine — not only for its academic track record, but also for its culture of discipline, mentorship, and lifelong learning.
+                Every year, students from across the country choose Daddy Jobe as their preferred path after completing Grade Nine. Our three-year senior secondary program (Grade 10 to Grade 12) prepares students for the West African Senior Secondary Certification Examination (WASSCE), opening pathways to higher education including the University of The Gambia and other institutions.
+              </p>
+              <p>
+                Students can choose from three specialized programs: <strong>Science</strong>, <strong>Commerce</strong>, or <strong>Arts</strong>, each designed to align with their career aspirations and academic interests.
               </p>
             </div>
             <motion.div
