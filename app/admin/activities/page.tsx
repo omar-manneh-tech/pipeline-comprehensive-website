@@ -77,8 +77,8 @@ export default function AdminActivitiesPage() {
     };
     
     window.addEventListener("focus", handleFocus);
-    return () => window.removeEventListener("focus", handleFocus);
-  }, [router]);
+      return () => window.removeEventListener("focus", handleFocus);
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch activities
   const fetchActivities = async () => {
@@ -175,6 +175,7 @@ export default function AdminActivitiesPage() {
     if (token) {
       fetchActivities();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagination.page]);
 
   const formatDate = (dateString: string) => {

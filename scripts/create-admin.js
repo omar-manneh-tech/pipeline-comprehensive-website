@@ -13,6 +13,7 @@
  *   ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=SecurePass123! ADMIN_NAME="Admin Name" node scripts/create-admin.js
  */
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const bcrypt = require('bcryptjs');
 const { PrismaClient } = require('@prisma/client');
 

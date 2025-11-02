@@ -7,6 +7,15 @@
 
 import { useEffect } from "react";
 
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
 declare global {
   interface Window {
     reportWebVitals?: (metric: unknown) => void;
@@ -51,11 +60,12 @@ export function WebVitals() {
     try {
       new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
-          const fid = (entry as any).processingStart - entry.startTime;
+          const performanceEntry = entry as PerformanceEventTiming;
+          const fid = performanceEntry.processingStart - entry.startTime;
           trackMetric("FID", fid, entry.startTime.toString());
         });
       }).observe({ entryTypes: ["first-input"] });
-    } catch (e) {
+    } catch {
       // Performance Observer not supported
     }
 
@@ -63,14 +73,15 @@ export function WebVitals() {
     let clsValue = 0;
     try {
       new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry: any) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+        list.getEntries().forEach((entry) => {
+          const layoutShiftEntry = entry as LayoutShift;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
             trackMetric("CLS", clsValue, entry.startTime.toString());
           }
         });
       }).observe({ entryTypes: ["layout-shift"] });
-    } catch (e) {
+    } catch {
       // Performance Observer not supported
     }
   }, []);

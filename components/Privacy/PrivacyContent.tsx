@@ -170,7 +170,7 @@ export function PrivacyContent() {
             <CardContent className="p-6">
               <h3 className="text-xl font-bold mb-4">Changes to This Policy</h3>
               <p>
-                We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date. We encourage you to review this policy periodically.
+                We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the &quot;Last updated&quot; date. We encourage you to review this policy periodically.
               </p>
             </CardContent>
           </Card>

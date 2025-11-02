@@ -37,7 +37,7 @@ export function HeroBanner() {
             Contact Us
           </h1>
           <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-2xl mx-auto font-light drop-shadow-md">
-            We're here to help. Get in touch with us today.
+            We&apos;re here to help. Get in touch with us today.
           </p>
         </motion.div>
       </div>

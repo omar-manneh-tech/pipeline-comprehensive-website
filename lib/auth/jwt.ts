@@ -18,10 +18,9 @@ export interface JWTPayload {
  * Generate a JWT token
  */
 export function generateToken(payload: JWTPayload): string {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: JWT_EXPIRES_IN,
-  } as any);
+    expiresIn: JWT_EXPIRES_IN as string | number,
+  });
 }
 
 /**
@@ -31,7 +30,7 @@ export function verifyToken(token: string): JWTPayload | null {
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
     return decoded;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

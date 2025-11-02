@@ -42,10 +42,23 @@ const exportRateLimit = {
   message: "Too many export requests. Please slow down.",
 };
 
+interface ActivityRow {
+  id?: string;
+  timestamp?: Date | string;
+  action?: string;
+  path?: string;
+  sessionId?: string;
+  userId?: string;
+  referrer?: string;
+  ipAddress?: string;
+  userAgent?: string;
+  metadata?: unknown;
+}
+
 /**
  * Convert activities to CSV format
  */
-function convertToCSV(activities: unknown[]): string {
+function convertToCSV(activities: ActivityRow[]): string {
   if (!activities || activities.length === 0) {
     return "id,timestamp,action,path,sessionId,userId,referrer,ipAddress,metadata\n";
   }
@@ -65,7 +78,7 @@ function convertToCSV(activities: unknown[]): string {
   ];
 
   // CSV rows
-  const rows = activities.map((activity: any) => {
+  const rows = activities.map((activity: ActivityRow) => {
     const row = [
       activity.id || "",
       activity.timestamp ? new Date(activity.timestamp).toISOString() : "",

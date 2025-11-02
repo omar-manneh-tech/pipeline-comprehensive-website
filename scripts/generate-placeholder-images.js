@@ -3,6 +3,7 @@
  * Creates all required placeholder images for the website
  */
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');

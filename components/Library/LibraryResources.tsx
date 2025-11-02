@@ -55,14 +55,17 @@ const resources = [
   },
 ];
 
-function ResourceCard({ resource, Icon, index }: { resource: typeof resources[0]; Icon: React.ComponentType<{ className?: string }>; index: number }) {
+function ResourceCard({ resource, Icon }: { resource: typeof resources[0]; Icon: React.ComponentType<{ className?: string }> }) {
   const hasNumber = resource.number !== null;
-  const countUpResult = hasNumber
-    ? useCountUp({ end: resource.number!, duration: 2000, suffix: resource.suffix })
-    : null;
+  // Always call hook to maintain hook order, but only use result when hasNumber is true
+  const countUpResult = useCountUp(
+    hasNumber 
+      ? { end: resource.number!, duration: 2000, suffix: resource.suffix }
+      : { end: 0, duration: 0, suffix: "" }
+  );
 
   return (
-    <div ref={hasNumber && countUpResult ? countUpResult.ref : undefined}>
+    <div ref={hasNumber ? countUpResult.ref : undefined}>
       <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
         <CardContent className="p-6 text-center">
           <div className="flex justify-center mb-4">
@@ -105,7 +108,7 @@ export function LibraryResources() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <ResourceCard resource={resource} Icon={Icon} index={index} />
+                <ResourceCard resource={resource} Icon={Icon} />
               </motion.div>
             );
           })}

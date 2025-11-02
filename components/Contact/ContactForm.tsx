@@ -81,7 +81,7 @@ export function ContactForm() {
 
     try {
       // Call API endpoint using centralized API client
-      const data = await apiClient.post<{ success: boolean; message: string; errors?: Record<string, string> }>(
+      await apiClient.post<{ success: boolean; message: string; errors?: Record<string, string> }>(
         "/contact",
         formData
       );
@@ -300,7 +300,7 @@ export function ContactForm() {
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 bg-green-50 border-2 border-green-500 rounded-lg text-green-800 text-sm"
                     >
-                      ✓ Thank you! Your message has been sent successfully. We'll get back to you soon.
+                      ✓ Thank you! Your message has been sent successfully. We&apos;ll get back to you soon.
                     </motion.div>
                   )}
 
