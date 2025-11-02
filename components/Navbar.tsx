@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, GraduationCap, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
@@ -53,16 +54,29 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
+              className="relative h-10 w-10 flex-shrink-0 rounded-full overflow-hidden"
             >
-              <GraduationCap className="h-8 w-8 text-primary" />
+              <Image
+                src={siteConfig.logo}
+                alt={`${siteConfig.name} Logo`}
+                fill
+                className="object-cover"
+                sizes="40px"
+                priority
+              />
             </motion.div>
-            <span className="text-xl font-bold text-navy">
-              {siteConfig.shortName}
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl md:text-2xl font-bold text-navy">
+                {siteConfig.shortName}
+              </span>
+              <span className="text-xs md:text-sm text-gray-600 font-medium">
+                Comprehensive School
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

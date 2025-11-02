@@ -50,8 +50,8 @@ export function TestimonialCarousel() {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-navy to-primary text-white">
-      <div className="container mx-auto px-4">
+    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 text-gray-900 mb-0">
+      <div className="container mx-auto px-4 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,10 +59,10 @@ export function TestimonialCarousel() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-navy">
             What People Say About Us
           </h2>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
             Hear from students, parents, and educators about their experience at Daddy Jobe
           </p>
         </motion.div>
@@ -76,7 +76,7 @@ export function TestimonialCarousel() {
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card className="bg-primary shadow-xl border-2 border-gold">
                 <CardContent className="p-8 md:p-12">
                   <div className="flex flex-col md:flex-row gap-6 items-center">
                     <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-gold flex-shrink-0">
@@ -90,7 +90,7 @@ export function TestimonialCarousel() {
                     </div>
                     <div className="flex-1 text-center md:text-left">
                       <Quote className="h-8 w-8 text-gold mb-4 mx-auto md:mx-0" />
-                      <p className="text-lg md:text-xl text-white/95 mb-6 italic">
+                      <p className="text-lg md:text-xl text-white mb-6 italic">
                         &ldquo;{testimonials[currentIndex].text}&rdquo;
                       </p>
                       <div>
@@ -117,7 +117,7 @@ export function TestimonialCarousel() {
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-gold w-8"
-                    : "bg-white/30 hover:bg-white/50"
+                    : "bg-gray-300 hover:bg-gray-400"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

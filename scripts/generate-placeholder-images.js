@@ -50,6 +50,7 @@ const imagesToGenerate = [
   
   // Misc images
   { path: 'misc/placeholder_profile.jpg', width: 400, height: 400, color: colors.misc, label: 'PROFILE' },
+  { path: 'misc/logo.png', width: 200, height: 200, color: { r: 27, g: 43, b: 92 }, label: 'DJ' }, // Brand Navy #1B2B5C
 ];
 
 async function generateImage(config) {
@@ -63,24 +64,42 @@ async function generateImage(config) {
   }
   
   // Create SVG with text label
-  const svg = `
-    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="rgb(${color.r},${color.g},${color.b})"/>
-      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="${Math.min(width, height) / 10}" 
-            fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="bold">
-        ${label}
-      </text>
-      <text x="50%" y="55%" font-family="Arial, sans-serif" font-size="${Math.min(width, height) / 20}" 
-            fill="rgba(255,255,255,0.8)" text-anchor="middle" dominant-baseline="middle">
-        ${width}x${height}
-      </text>
-    </svg>
-  `;
+  // For logo, make it round and centered
+  const isLogo = imagePath.includes('logo.png');
+  const svg = isLogo 
+    ? `
+      <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50%" cy="50%" r="50%" fill="rgb(${color.r},${color.g},${color.b})"/>
+        <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="${Math.min(width, height) / 2.5}" 
+              fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="bold">
+          ${label}
+        </text>
+      </svg>
+    `
+    : `
+      <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="rgb(${color.r},${color.g},${color.b})"/>
+        <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="${Math.min(width, height) / 10}" 
+              fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="bold">
+          ${label}
+        </text>
+        <text x="50%" y="55%" font-family="Arial, sans-serif" font-size="${Math.min(width, height) / 20}" 
+              fill="rgba(255,255,255,0.8)" text-anchor="middle" dominant-baseline="middle">
+          ${width}x${height}
+        </text>
+      </svg>
+    `;
   
   try {
-    await sharp(Buffer.from(svg))
-      .jpeg({ quality: 85 })
-      .toFile(fullPath);
+    const isPng = imagePath.endsWith('.png');
+    const image = sharp(Buffer.from(svg));
+    
+    if (isPng) {
+      await image.png({ quality: 90 }).toFile(fullPath);
+    } else {
+      await image.jpeg({ quality: 85 }).toFile(fullPath);
+    }
+    
     console.log(`✅ Created: ${imagePath}`);
   } catch (error) {
     console.error(`❌ Error creating ${imagePath}:`, error.message);

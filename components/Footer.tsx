@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 const footerLinks = {
@@ -30,9 +31,24 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <GraduationCap className="h-8 w-8 text-gold" />
-              <span className="text-xl font-bold">{siteConfig.name}</span>
+            <div className="flex items-center gap-3">
+              <div className="relative h-12 w-12 flex-shrink-0 rounded-full overflow-hidden">
+                <Image
+                  src={siteConfig.logo}
+                  alt={`${siteConfig.name} Logo`}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-xl font-bold text-white">
+                  {siteConfig.shortName}
+                </span>
+                <span className="text-xs text-gray-300 font-medium">
+                  Comprehensive School
+                </span>
+              </div>
             </div>
             <p className="text-gray-300 text-sm">{siteConfig.description}</p>
             <div className="flex gap-4">

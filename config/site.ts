@@ -10,7 +10,8 @@ export const siteConfig = {
   description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || "Empowering Future Leaders - A Modern Educational Institution",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   ogImage: "/images/hero/hero-main.jpg",
-  
+  logo: process.env.NEXT_PUBLIC_LOGO_URL || "/images/misc/logo.png",
+
   links: {
     portal: process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.daddyjobe.edu.gm",
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@daddyjobe.edu.gm",
