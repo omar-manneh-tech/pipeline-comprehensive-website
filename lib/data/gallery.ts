@@ -58,7 +58,7 @@ export const galleryPhotos: GalleryPhoto[] = [
     id: "6",
     title: "Laboratory Learning",
     description: "Hands-on learning in our state-of-the-art science laboratory",
-    image: "/images/academics/science_lab.jpg",
+    image: "/images/academics/science_lab.jpeg",
     category: "academics",
   },
   {

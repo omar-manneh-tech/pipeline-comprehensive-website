@@ -38,7 +38,7 @@ export const latestNews: NewsArticle[] = [
     id: "2",
     title: "New Science Laboratory Opens",
     excerpt: "We're excited to announce the opening of our state-of-the-art science laboratory, equipped with modern facilities to enhance practical learning for Science program students.",
-    image: "/images/academics/science_lab.jpg",
+    image: "/images/academics/science_lab.jpeg",
     category: "Academics",
     date: "January 10, 2025",
     author: "Academic Department",

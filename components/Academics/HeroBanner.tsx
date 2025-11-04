@@ -15,7 +15,7 @@ export function HeroBanner() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-primary/80 to-navy/70 z-10" />
         <Image
-          src="/images/academics/science_lab.jpg"
+          src="/images/academics/science_lab.jpeg"
           alt="Academics - Excellence in Education"
           fill
           priority

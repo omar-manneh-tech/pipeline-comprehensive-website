@@ -17,7 +17,7 @@ const exploreItems = [
   {
     title: "Academics",
     description: "Explore our senior secondary programs: Science, Commerce, and Arts. Prepare for WASSCE exams and university admission.",
-    image: "/images/academics/science_lab.jpg",
+    image: "/images/academics/science_lab.jpeg",
     href: "/academics",
   },
   {

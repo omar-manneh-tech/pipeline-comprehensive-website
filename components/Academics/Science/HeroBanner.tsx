@@ -15,7 +15,7 @@ export function HeroBanner() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-blue-600/70 z-10" />
         <Image
-          src="/images/academics/science_lab.jpg"
+          src="/images/academics/science_lab.jpeg"
           alt="Science Program - Excellence in Science Education"
           fill
           priority
