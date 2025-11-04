@@ -62,7 +62,7 @@ export function AboutSection() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/about/school_building.jpg"
+              src="/images/about/school_building.png"
               alt="Daddy Jobe Comprehensive School - Founded in Excellence"
               fill
               className="object-cover"

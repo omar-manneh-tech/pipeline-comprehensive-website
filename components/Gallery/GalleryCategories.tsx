@@ -5,13 +5,9 @@
 
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Camera, GraduationCap, Trophy, Users, BookOpen, Palette } from "lucide-react";
-import { SectionHeader } from "@/components/Shared/SectionHeader";
-import { transitions } from "@/lib/animations/constants";
-
-export type GalleryCategory = "all" | "events" | "sports" | "academics" | "culture" | "graduation";
+import type { GalleryCategory } from "@/lib/data/gallery";
 
 const categories = [
   {
