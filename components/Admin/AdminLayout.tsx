@@ -41,8 +41,8 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
-    label: "Page Content",
-    href: "/admin/pages/home",
+    label: "Pages",
+    href: "/admin/pages",
     icon: Home,
   },
   {
