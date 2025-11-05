@@ -124,7 +124,7 @@ export default function MediaLibraryPage() {
     if (!confirm("Are you sure you want to delete this media asset?")) return;
 
     try {
-      const response = await apiClient.delete(`/admin/media/${id}`);
+      const response = await apiClient.delete<{ success: boolean; message?: string }>(`/admin/media/${id}`);
       if (response.success) {
         await fetchAssets();
       }
@@ -147,7 +147,7 @@ export default function MediaLibraryPage() {
     if (!editingAsset) return;
 
     try {
-      const response = await apiClient.put(`/admin/media/${editingAsset.id}`, editForm);
+      const response = await apiClient.put<{ success: boolean; data?: MediaAsset }>(`/admin/media/${editingAsset.id}`, editForm);
       if (response.success) {
         await fetchAssets();
         setEditingAsset(null);
