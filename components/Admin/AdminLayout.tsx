@@ -19,6 +19,11 @@ import {
   Menu,
   X,
   Settings,
+  Folder,
+  Navigation,
+  Link as LinkIcon,
+  ToggleLeft,
+  Home,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -32,6 +37,26 @@ const navItems = [
     label: "Dashboard",
     href: "/admin/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    label: "Page Content",
+    href: "/admin/pages/home",
+    icon: Home,
+  },
+  {
+    label: "Media Library",
+    href: "/admin/media",
+    icon: Folder,
+  },
+  {
+    label: "Navigation",
+    href: "/admin/navigation",
+    icon: Navigation,
+  },
+  {
+    label: "Footer",
+    href: "/admin/footer",
+    icon: LinkIcon,
   },
   {
     label: "Blog Posts",
@@ -52,6 +77,11 @@ const navItems = [
     label: "News & Events",
     href: "/admin/news",
     icon: Newspaper,
+  },
+  {
+    label: "Feature Flags",
+    href: "/admin/flags",
+    icon: ToggleLeft,
   },
   {
     label: "User Activities",
