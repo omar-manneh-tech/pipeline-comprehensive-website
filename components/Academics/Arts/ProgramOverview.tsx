@@ -82,7 +82,7 @@ export function ProgramOverview() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/academics/science_lab.jpeg"
+              src="/images/academics/arts_studio.png"
               alt="Arts Program at Daddy Jobe"
               fill
               className="object-cover"
