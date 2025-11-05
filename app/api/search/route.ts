@@ -185,13 +185,16 @@ function search(query: string): Array<{
   return scoredResults
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
-    .map(({ score, keywords, ...item }) => ({
-      id: item.id,
-      title: item.title,
-      description: item.description,
-      url: item.url,
-      type: item.type,
-    }));
+    .map((item) => {
+      const { score, keywords, ...rest } = item;
+      return {
+        id: rest.id,
+        title: rest.title,
+        description: rest.description,
+        url: rest.url,
+        type: rest.type,
+      };
+    });
 }
 
 export async function POST(request: NextRequest) {
