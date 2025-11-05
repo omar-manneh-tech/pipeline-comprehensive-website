@@ -23,15 +23,6 @@ const updatePageContentSchema = pageContentSchema.partial().extend({
   section: z.string().min(1).optional(),
 });
 
-const reorderSchema = z.object({
-  items: z.array(
-    z.object({
-      id: z.string(),
-      order: z.number().int(),
-    })
-  ),
-});
-
 /**
  * GET /api/admin/pages/content
  * List page content with filtering
@@ -161,58 +152,12 @@ export async function POST(request: NextRequest) {
 }
 
 /**
- * PUT /api/admin/pages/content/reorder
- * Reorder page content sections
+ * PUT /api/admin/pages/content
+ * Update page content section (by id or page+section)
  */
 export async function PUT(request: NextRequest) {
   try {
     const user = requireAdmin(request);
-    const url = new URL(request.url);
-    const isReorder = url.pathname.endsWith("/reorder");
-
-    if (isReorder) {
-      // Handle reordering
-      const body = await request.json();
-      const { items } = reorderSchema.parse(body);
-
-      // Get existing content to log before state
-      const existingItems = await prisma.pageContent.findMany({
-        where: {
-          id: { in: items.map((item) => item.id) },
-        },
-      });
-
-      // Update all items in a transaction
-      await prisma.$transaction(
-        items.map((item) =>
-          prisma.pageContent.update({
-            where: { id: item.id },
-            data: { order: item.order },
-          })
-        )
-      );
-
-      // Audit log
-      await createAuditLog(
-        {
-          adminId: user.userId,
-          action: "reorder",
-          resource: "PageContent",
-          before: JSON.stringify(existingItems.map((i) => ({ id: i.id, order: i.order }))),
-          after: JSON.stringify(items),
-          ipAddress: getClientIp(request),
-          userAgent: getUserAgent(request),
-        },
-        request
-      );
-
-      return NextResponse.json({
-        success: true,
-        message: "Page content order updated successfully",
-      });
-    }
-
-    // Handle regular update
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const page = searchParams.get("page");
