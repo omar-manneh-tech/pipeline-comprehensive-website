@@ -93,7 +93,7 @@ export function CampusOverview() {
                 Through clubs and societies, they discover new passions. Through service projects, they learn empathy. And through every experience, they grow into confident, responsible young adults ready to shape the future.
               </p>
               <p className="font-medium text-navy">
-                The school's inclusive environment ensures that every learner — regardless of background or interest — finds a place to belong, contribute, and excel.
+                The school&apos;s inclusive environment ensures that every learner — regardless of background or interest — finds a place to belong, contribute, and excel.
               </p>
             </div>
           </motion.div>
