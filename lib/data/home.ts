@@ -35,22 +35,22 @@ export const schoolEvents: Event[] = [
   {
     title: "Science Fair 2024",
     description: "Celebrating innovation and creativity in science and technology",
-    image: "/images/gallery/science_fair.jpg",
+    image: "/images/gallery/science_fair_day.png",
   },
   {
     title: "Graduation Ceremony",
     description: "Honoring our outstanding graduates and their achievements",
-    image: "/images/gallery/graduation_day.jpg",
+    image: "/images/gallery/graduation_day.png",
   },
   {
     title: "Sports Day Champions",
     description: "Celebrating teamwork, sportsmanship, and excellence in athletics",
-    image: "/images/gallery/sports_day.jpg",
+    image: "/images/gallery/sport_day.png",
   },
   {
     title: "Cultural Festival",
     description: "Showcasing the rich diversity and talent of our student community",
-    image: "/images/gallery/cultural_day.jpg",
+    image: "/images/gallery/cultural_day.png",
   },
 ];
 
@@ -97,22 +97,22 @@ export const studentActivities: Activity[] = [
   {
     title: "Sports & Athletics",
     description: "Competitive sports and physical excellence",
-    image: "/images/gallery/sports_day.jpg",
+    image: "/images/gallery/sport_day.png",
   },
   {
     title: "Science Fair",
     description: "Innovation and scientific discovery",
-    image: "/images/gallery/science_fair.jpg",
+    image: "/images/gallery/science_fair_day.png",
   },
   {
     title: "Cultural Celebrations",
     description: "Embracing diversity and tradition",
-    image: "/images/gallery/cultural_day.jpg",
+    image: "/images/gallery/cultural_day.png",
   },
   {
-    title: "Debate & Leadership",
-    description: "Critical thinking and public speaking",
-    image: "/images/gallery/graduation_day.jpg",
+    title: "Graduation Day",
+    description: "Celebrating achievements and milestones",
+    image: "/images/gallery/graduation_day.png",
   },
 ];
 

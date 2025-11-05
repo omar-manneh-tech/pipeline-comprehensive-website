@@ -78,20 +78,20 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3" aria-label="Daddy Jobe Comprehensive School Homepage">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
-              className="relative h-10 w-10 flex-shrink-0 rounded-full overflow-hidden"
+              className="relative h-16 w-16 flex-shrink-0 rounded-full overflow-hidden bg-white border-2 border-gold shadow-lg p-2"
             >
               <Image
                 src={siteConfig.logo}
                 alt={`${siteConfig.name} Logo`}
                 fill
-                className="object-cover"
-                sizes="40px"
+                className="object-contain"
+                sizes="64px"
                 priority
               />
             </motion.div>
