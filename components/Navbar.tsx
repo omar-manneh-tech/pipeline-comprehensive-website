@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -11,7 +11,28 @@ import { siteConfig } from "@/config/site";
 import { SearchButton } from "@/components/Search/SearchButton";
 import { SearchModal } from "@/components/Search/SearchModal";
 
-const navLinks = [
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  order: number;
+  visible: boolean;
+  parentId?: string;
+  icon?: string;
+  target: string;
+  children?: NavItem[];
+}
+
+interface NavLink {
+  label: string;
+  href: string;
+  submenu?: Array<{ label: string; href: string }>;
+  target?: string;
+  visible?: boolean;
+}
+
+// Fallback navigation links (used if API fails)
+const fallbackNavLinks: NavLink[] = [
   {
     label: "Home",
     href: "/",
@@ -31,7 +52,7 @@ const navLinks = [
   },
   {
     label: "Campus Life",
-    href: "/campus-life", // Main campus life page
+    href: "/campus-life",
     submenu: [
       { label: "Campus Life Overview", href: "/campus-life" },
       { label: "Staff", href: "/staff" },
@@ -56,6 +77,55 @@ export function Navbar() {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState<NavLink[]>(fallbackNavLinks);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch navigation from CMS API
+    const fetchNavigation = async () => {
+      try {
+        const response = await fetch("/api/site/nav");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data) {
+            // Transform API data to component format
+            const topLevelItems = data.data.filter((item: NavItem) => !item.parentId);
+            const transformedLinks: NavLink[] = topLevelItems
+              .sort((a: NavItem, b: NavItem) => a.order - b.order)
+              .filter((item: NavItem) => item.visible !== false)
+              .map((item: NavItem) => {
+                const children = data.data
+                  .filter((child: NavItem) => child.parentId === item.id && child.visible !== false)
+                  .sort((a: NavItem, b: NavItem) => a.order - b.order)
+                  .map((child: NavItem) => ({
+                    label: child.label,
+                    href: child.href,
+                  }));
+
+                return {
+                  label: item.label,
+                  href: item.href,
+                  submenu: children.length > 0 ? children : undefined,
+                  target: item.target,
+                  visible: item.visible,
+                };
+              });
+
+            if (transformedLinks.length > 0) {
+              setNavLinks(transformedLinks);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("[Navbar] Failed to fetch navigation:", error);
+        // Keep fallback navigation
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNavigation();
+  }, []);
 
   const isActive = (href: string, submenu?: Array<{ href: string }>) => {
     if (href === "/") {
@@ -79,8 +149,8 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
-              {/* Logo */}
-              <Link href="/" className="flex items-center gap-3" aria-label="Daddy Jobe Comprehensive School Homepage">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3" aria-label="Daddy Jobe Comprehensive School Homepage">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
@@ -106,163 +176,160 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <div key={link.href} className="relative group">
-                <Link
-                  href={link.href}
-                  className={`px-4 py-2 text-sm font-medium transition-colors relative ${
-                    isActive(link.href, link.submenu)
-                      ? "text-primary after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary"
-                      : "text-gray-700 hover:text-primary"
-                  }`}
-                  onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
-                  onMouseLeave={() => setOpenSubmenu(null)}
-                >
-                  {link.label}
-                  {link.submenu && (
-                    <ChevronDown className="inline-block ml-1 h-4 w-4" />
-                  )}
-                </Link>
-
-                {/* Submenu */}
-                <AnimatePresence>
-                  {link.submenu && openSubmenu === link.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 mt-1 w-56 bg-white rounded-md shadow-lg border py-2"
-                      onMouseEnter={() => setOpenSubmenu(link.label)}
+          {!loading && (
+            <div className="hidden md:flex items-center gap-1">
+              {navLinks
+                .map((link) => (
+                  <div key={link.href} className="relative group">
+                    <Link
+                      href={link.href}
+                      target={link.target || "_self"}
+                      className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+                        isActive(link.href, link.submenu)
+                          ? "text-primary after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary"
+                          : "text-gray-700 hover:text-primary"
+                      }`}
+                      onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
                       onMouseLeave={() => setOpenSubmenu(null)}
                     >
-                      {link.submenu.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent hover:text-accent-foreground transition-colors"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
+                      {link.label}
+                      {link.submenu && (
+                        <ChevronDown className="inline-block ml-1 h-4 w-4" />
+                      )}
+                    </Link>
 
-          {/* Search, Portal Button & Mobile Menu */}
+                    {/* Desktop Dropdown */}
+                    {link.submenu && (
+                      <AnimatePresence>
+                        {openSubmenu === link.label && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                            onMouseEnter={() => setOpenSubmenu(link.label)}
+                            onMouseLeave={() => setOpenSubmenu(null)}
+                          >
+                            {link.submenu.map((subItem) => (
+                              <Link
+                                key={subItem.href}
+                                href={subItem.href}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors"
+                              >
+                                {subItem.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    )}
+                  </div>
+                ))}
+            </div>
+          )}
+
+          {/* Search & Mobile Menu Button */}
           <div className="flex items-center gap-2">
             <SearchButton onClick={() => setSearchOpen(true)} />
-            
-            <Button
-              asChild
-              variant="outline"
-              className="hidden md:flex"
-            >
-              <Link href="/portal">
-                Portal Login
-              </Link>
-            </Button>
-
             <Button
               variant="ghost"
               size="icon"
               className="md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t py-4 space-y-2"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden border-t"
             >
-              {navLinks.map((link) => (
-                <div key={link.href}>
-                  {link.submenu ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setMobileSubmenuOpen(
-                            mobileSubmenuOpen === link.label ? null : link.label
-                          );
-                        }}
-                        className={`w-full flex items-center justify-between px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                          isActive(link.href, link.submenu)
-                            ? "text-primary bg-primary/10 border-l-2 border-primary"
-                            : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
-                        }`}
-                      >
-                        {link.label}
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform ${
-                            mobileSubmenuOpen === link.label ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      {mobileSubmenuOpen === link.label && (
-                        <div className="pl-6 mt-1 space-y-1">
-                          {link.submenu.map((item) => (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              className={`block px-4 py-2 text-sm rounded-md transition-colors ${
-                                pathname.startsWith(item.href)
-                                  ? "text-primary bg-primary/10 border-l-2 border-primary"
-                                  : "text-gray-600 hover:bg-accent hover:text-accent-foreground"
-                              }`}
-                              onClick={() => setMobileMenuOpen(false)}
+              <div className="py-4 space-y-2">
+                {!loading &&
+                  navLinks
+                    .map((link) => (
+                      <div key={link.href}>
+                        <div className="flex items-center justify-between">
+                          <Link
+                            href={link.href}
+                            target={link.target || "_self"}
+                            className={`block px-4 py-2 text-sm font-medium ${
+                              isActive(link.href, link.submenu)
+                                ? "text-primary"
+                                : "text-gray-700"
+                            }`}
+                            onClick={() => {
+                              if (!link.submenu) {
+                                setMobileMenuOpen(false);
+                              }
+                            }}
+                          >
+                            {link.label}
+                          </Link>
+                          {link.submenu && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8"
+                              onClick={() =>
+                                setMobileSubmenuOpen(
+                                  mobileSubmenuOpen === link.label ? null : link.label
+                                )
+                              }
                             >
-                              {item.label}
-                            </Link>
-                          ))}
+                              <ChevronDown
+                                className={`h-4 w-4 transition-transform ${
+                                  mobileSubmenuOpen === link.label ? "rotate-180" : ""
+                                }`}
+                              />
+                            </Button>
+                          )}
                         </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                        isActive(link.href, link.submenu)
-                          ? "text-primary bg-primary/10 border-l-2 border-primary"
-                          : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
-              <div className="pt-2 border-t">
-                <Button asChild variant="outline" className="w-full">
-                  <Link href="/portal">
-                    Portal Login
-                  </Link>
-                </Button>
+                        {link.submenu && (
+                          <AnimatePresence>
+                            {mobileSubmenuOpen === link.label && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-8 py-2 space-y-1">
+                                  {link.submenu.map((subItem) => (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className="block px-4 py-2 text-sm text-gray-600 hover:text-primary transition-colors"
+                                      onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                      {subItem.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        )}
+                      </div>
+                    ))}
               </div>
             </motion.div>
           )}
-          </AnimatePresence>
+        </AnimatePresence>
       </div>
-      
+
       {/* Search Modal */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 }
-

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -7,17 +8,74 @@ import { Button } from "@/components/ui/button";
 import { useCarousel } from "@/hooks/useCarousel";
 import { schoolEvents, type Event } from "@/lib/data/home";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
+import { useFeatureFlags } from "@/hooks/useFeatureFlags";
 
 interface CarouselSectionProps {
   events?: Event[];
 }
 
-export function CarouselSection({ events = schoolEvents }: CarouselSectionProps) {
+interface CMSEvent {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  date?: string;
+  location?: string;
+}
+
+export function CarouselSection({ events: propEvents = schoolEvents }: CarouselSectionProps) {
+  const [events, setEvents] = useState<Event[]>(propEvents);
+  const { isEnabled } = useFeatureFlags();
+  const [loading, setLoading] = useState(true);
+
+  // Check if events carousel is enabled via feature flag
+  const eventsEnabled = isEnabled("events_carousel");
+
+  useEffect(() => {
+    // Fetch events from CMS API (if available)
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/site/news?type=event&limit=5");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data && data.data.length > 0) {
+            // Transform CMS data to component format
+            const transformed: Event[] = data.data.map((e: CMSEvent) => ({
+              id: e.id,
+              title: e.title,
+              description: e.description,
+              image: e.image || "/images/events/default.jpg",
+              date: e.date,
+              location: e.location,
+            }));
+            setEvents(transformed);
+          }
+        }
+      } catch (error) {
+        console.error("[CarouselSection] Failed to fetch events:", error);
+        // Keep default events
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  // Don't render if feature flag is disabled
+  if (!eventsEnabled) {
+    return null;
+  }
+
   const { currentIndex, goToSlide, goToPrevious, goToNext } = useCarousel({
     items: events,
     autoPlay: true,
     interval: 5000,
   });
+
+  if (loading && events.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-20 bg-white">
@@ -33,7 +91,7 @@ export function CarouselSection({ events = schoolEvents }: CarouselSectionProps)
           <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-2xl">
             {events.map((event, index) => (
               <motion.div
-                key={index}
+                key={(event as any).id || index}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: index === currentIndex ? 1 : 0,
@@ -65,26 +123,26 @@ export function CarouselSection({ events = schoolEvents }: CarouselSectionProps)
 
           {/* Navigation Buttons */}
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 text-white backdrop-blur-sm"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white"
             onClick={goToPrevious}
-            aria-label="Previous slide"
+            aria-label="Previous event"
           >
             <ChevronLeft className="h-6 w-6" />
           </Button>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 text-white backdrop-blur-sm"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white"
             onClick={goToNext}
-            aria-label="Next slide"
+            aria-label="Next event"
           >
             <ChevronRight className="h-6 w-6" />
           </Button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-4">
             {events.map((_, index) => (
               <button
                 key={index}
@@ -94,7 +152,7 @@ export function CarouselSection({ events = schoolEvents }: CarouselSectionProps)
                     ? "bg-primary w-8"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Go to event ${index + 1}`}
               />
             ))}
           </div>
@@ -103,4 +161,3 @@ export function CarouselSection({ events = schoolEvents }: CarouselSectionProps)
     </section>
   );
 }
-

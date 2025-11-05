@@ -17,15 +17,9 @@ export async function GET(request: NextRequest) {
       select: { key: true, enabled: true },
     });
 
-    // Convert to key-value object for easier lookup
-    const flagsMap: Record<string, boolean> = {};
-    flags.forEach((flag) => {
-      flagsMap[flag.key] = flag.enabled;
-    });
-
     return NextResponse.json({
       success: true,
-      data: flagsMap,
+      data: flags,
     });
   } catch (error) {
     console.error("[Public Feature Flags API Error]", error);

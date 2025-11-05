@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Quote } from "lucide-react";
@@ -13,12 +14,59 @@ interface TestimonialCarouselProps {
   testimonials?: Testimonial[];
 }
 
-export function TestimonialCarousel({ testimonials = defaultTestimonials }: TestimonialCarouselProps) {
+interface CMSTestimonial {
+  id: string;
+  name: string;
+  role: string;
+  text: string;
+  image?: string;
+  featured: boolean;
+  order: number;
+}
+
+export function TestimonialCarousel({ testimonials: propTestimonials }: TestimonialCarouselProps) {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(propTestimonials || defaultTestimonials);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch testimonials from CMS API
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch("/api/site/testimonials");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data && data.data.length > 0) {
+            // Transform CMS data to component format
+            const transformed: Testimonial[] = data.data.map((t: CMSTestimonial) => ({
+              id: t.id,
+              name: t.name,
+              role: t.role,
+              text: t.text,
+              image: t.image || "/images/testimonials/default.jpg",
+            }));
+            setTestimonials(transformed);
+          }
+        }
+      } catch (error) {
+        console.error("[TestimonialCarousel] Failed to fetch testimonials:", error);
+        // Keep default testimonials
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   const { currentIndex, goToSlide } = useCarousel({
     items: testimonials,
     autoPlay: true,
     interval: 6000,
   });
+
+  if (loading || testimonials.length === 0) {
+    return null; // Don't render if loading or no testimonials
+  }
 
   return (
     <section className="py-20 bg-white text-gray-900 mb-0">
@@ -89,4 +137,3 @@ export function TestimonialCarousel({ testimonials = defaultTestimonials }: Test
     </section>
   );
 }
-

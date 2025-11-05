@@ -6,6 +6,7 @@ import { LibraryHomeSection } from "@/components/LibraryHomeSection";
 import dynamic from "next/dynamic";
 import { TileGrid } from "@/components/TileGrid";
 import { ExploreSection } from "@/components/ExploreSection";
+import { HomePageSections } from "@/components/HomePageSections";
 
 /**
  * Lazy loaded components for better performance
@@ -64,7 +65,7 @@ function TestimonialSkeleton() {
 
 export default function Home() {
   return (
-    <>
+    <HomePageSections>
       <HeroSection />
       <AboutSection />
       <CoreValuesSection />
@@ -74,6 +75,6 @@ export default function Home() {
       <CarouselSection />
       <ExploreSection />
       <TestimonialCarousel />
-    </>
+    </HomePageSections>
   );
 }

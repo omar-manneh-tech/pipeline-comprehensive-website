@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,7 +8,21 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "luc
 import { siteConfig } from "@/config/site";
 import { FooterSearch } from "@/components/Search/FooterSearch";
 
-const footerLinks = {
+interface FooterSection {
+  id: string;
+  title: string;
+  type: string;
+  links: FooterLink[];
+}
+
+interface FooterLink {
+  id: string;
+  label: string;
+  href: string;
+}
+
+// Fallback footer links (used if API fails)
+const fallbackFooterLinks = {
   quickLinks: [
     { label: "About Us", href: "/about" },
     { label: "Academics", href: "/academics" },
@@ -29,6 +44,38 @@ const footerLinks = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [footerSections, setFooterSections] = useState<FooterSection[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch footer from CMS API
+    const fetchFooter = async () => {
+      try {
+        const response = await fetch("/api/site/footer");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data) {
+            setFooterSections(data.data);
+          }
+        }
+      } catch (error) {
+        console.error("[Footer] Failed to fetch footer:", error);
+        // Keep fallback footer
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFooter();
+  }, []);
+
+  // Get sections by type
+  const getSectionByType = (type: string) => {
+    return footerSections.find((section) => section.type === type);
+  };
+
+  const quickLinksSection = getSectionByType("quick_links");
+  const programsSection = getSectionByType("programs");
 
   return (
     <footer className="bg-navy text-white">
@@ -103,35 +150,61 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-lg mb-4">
+              {quickLinksSection?.title || "Quick Links"}
+            </h3>
             <ul className="space-y-2">
-              {footerLinks.quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-gold transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {!loading && quickLinksSection
+                ? quickLinksSection.links.map((link) => (
+                    <li key={link.id}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-300 hover:text-gold transition-colors text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))
+                : fallbackFooterLinks.quickLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-300 hover:text-gold transition-colors text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
             </ul>
           </div>
 
           {/* Programs */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Programs</h3>
+            <h3 className="font-semibold text-lg mb-4">
+              {programsSection?.title || "Programs"}
+            </h3>
             <ul className="space-y-2">
-              {footerLinks.programs.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-gold transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {!loading && programsSection
+                ? programsSection.links.map((link) => (
+                    <li key={link.id}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-300 hover:text-gold transition-colors text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))
+                : fallbackFooterLinks.programs.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-300 hover:text-gold transition-colors text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
             </ul>
           </div>
 
@@ -181,4 +254,3 @@ export function Footer() {
     </footer>
   );
 }
-
