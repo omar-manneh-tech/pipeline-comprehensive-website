@@ -10,6 +10,7 @@ const footerLinks = {
     { label: "About Us", href: "/about" },
     { label: "Academics", href: "/academics" },
     { label: "Admissions", href: "/admissions" },
+    { label: "Campus Life", href: "/campus-life" },
     { label: "Staff", href: "/staff" },
     { label: "Library", href: "/library" },
     { label: "News & Events", href: "/news" },
