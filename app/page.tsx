@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { CoreValuesSection } from "@/components/CoreValuesSection";
 import { StudentLifeSection } from "@/components/StudentLifeSection";
+import { LibraryHomeSection } from "@/components/LibraryHomeSection";
 import dynamic from "next/dynamic";
 import { TileGrid } from "@/components/TileGrid";
 import { ExploreSection } from "@/components/ExploreSection";
@@ -31,7 +32,7 @@ export const revalidate = 3600; // Revalidate every hour
  */
 function CarouselSectionSkeleton() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="h-10 w-64 bg-gray-300 rounded mx-auto mb-4 animate-pulse" />
@@ -47,7 +48,7 @@ function CarouselSectionSkeleton() {
 
 function TestimonialSkeleton() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 mb-0">
+    <section className="py-20 bg-white mb-0">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
           <div className="h-10 w-80 bg-gray-300 rounded mx-auto mb-4 animate-pulse" />
@@ -68,6 +69,7 @@ export default function Home() {
       <AboutSection />
       <CoreValuesSection />
       <StudentLifeSection />
+      <LibraryHomeSection />
       <TileGrid />
       <CarouselSection />
       <ExploreSection />

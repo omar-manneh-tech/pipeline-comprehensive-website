@@ -30,7 +30,7 @@ const coreValuesDescription = (
 
 export function CoreValuesSection({ values = coreValues }: CoreValuesSectionProps) {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Our Core Values"

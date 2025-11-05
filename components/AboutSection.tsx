@@ -9,9 +9,10 @@ import { fadeInLeft, fadeInRight, transitions, viewportConfig, hoverScale } from
 
 export function AboutSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-br from-[#0000CD]/10 via-[#0000CD]/15 to-[#0000CD]/10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Text Content - Left */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -85,6 +86,7 @@ export function AboutSection() {
               </motion.div>
             </div>
           </motion.div>
+        </div>
         </div>
       </div>
     </section>
