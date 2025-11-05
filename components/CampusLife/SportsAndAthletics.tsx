@@ -71,7 +71,7 @@ export function SportsAndAthletics() {
                 Students participate in various sports including football, basketball, volleyball, athletics, and track events. We have modern sports facilities including a football field, basketball court, and athletics track.
               </p>
               <p>
-                Our annual sports day brings together students, teachers, and parents to celebrate athletic excellence, teamwork, and sportsmanship. It's a day of competition, camaraderie, and celebration.
+                Our annual sports day brings together students, teachers, and parents to celebrate athletic excellence, teamwork, and sportsmanship. It&apos;s a day of competition, camaraderie, and celebration.
               </p>
             </div>
           </motion.div>
