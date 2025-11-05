@@ -28,24 +28,19 @@ const navLinks = [
     ],
   },
   {
-    label: "Staff",
-    href: "/staff",
-  },
-  {
-    label: "Library",
-    href: "/library",
-  },
-  {
-    label: "Gallery",
-    href: "/gallery",
+    label: "Campus Life",
+    href: "/campus-life", // Main campus life page
+    submenu: [
+      { label: "Campus Life Overview", href: "/campus-life" },
+      { label: "Staff", href: "/staff" },
+      { label: "Library", href: "/library" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "News & Events", href: "/news" },
+    ],
   },
   {
     label: "Admissions",
     href: "/admissions",
-  },
-  {
-    label: "News & Events",
-    href: "/news",
   },
   {
     label: "Contact",
@@ -57,12 +52,24 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
 
-  const isActive = (href: string) => {
+  const isActive = (href: string, submenu?: Array<{ href: string }>) => {
     if (href === "/") {
       return pathname === "/";
     }
-    return pathname.startsWith(href);
+    
+    // Check if current path matches the main href
+    if (pathname.startsWith(href)) {
+      return true;
+    }
+    
+    // Check if current path matches any submenu item
+    if (submenu) {
+      return submenu.some((item) => pathname.startsWith(item.href));
+    }
+    
+    return false;
   };
 
   return (
@@ -102,7 +109,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={`px-4 py-2 text-sm font-medium transition-colors relative ${
-                    isActive(link.href)
+                    isActive(link.href, link.submenu)
                       ? "text-primary after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary"
                       : "text-gray-700 hover:text-primary"
                   }`}
@@ -180,30 +187,59 @@ export function Navbar() {
             >
               {navLinks.map((link) => (
                 <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                      isActive(link.href)
-                        ? "text-primary bg-primary/10 border-l-2 border-primary"
-                        : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                  {link.submenu && (
-                    <div className="pl-6 mt-1 space-y-1">
-                      {link.submenu.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block px-4 py-2 text-sm text-gray-600 hover:bg-accent hover:text-accent-foreground rounded-md transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
+                  {link.submenu ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMobileSubmenuOpen(
+                            mobileSubmenuOpen === link.label ? null : link.label
+                          );
+                        }}
+                        className={`w-full flex items-center justify-between px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                          isActive(link.href, link.submenu)
+                            ? "text-primary bg-primary/10 border-l-2 border-primary"
+                            : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
+                        }`}
+                      >
+                        {link.label}
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${
+                            mobileSubmenuOpen === link.label ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      {mobileSubmenuOpen === link.label && (
+                        <div className="pl-6 mt-1 space-y-1">
+                          {link.submenu.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              className={`block px-4 py-2 text-sm rounded-md transition-colors ${
+                                pathname.startsWith(item.href)
+                                  ? "text-primary bg-primary/10 border-l-2 border-primary"
+                                  : "text-gray-600 hover:bg-accent hover:text-accent-foreground"
+                              }`}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={`block px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                        isActive(link.href, link.submenu)
+                          ? "text-primary bg-primary/10 border-l-2 border-primary"
+                          : "text-gray-700 hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
                   )}
                 </div>
               ))}
