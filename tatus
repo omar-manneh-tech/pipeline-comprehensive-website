@@ -1,0 +1,24 @@
+app/campus-life/loading.tsx
+app/campus-life/page.tsx
+app/page.tsx
+components/AboutSection.tsx
+components/CampusLife/CampusFacilities.tsx
+components/CampusLife/CampusOverview.tsx
+components/CampusLife/ClubsAndSocieties.tsx
+components/CampusLife/HeroBanner.tsx
+components/CampusLife/SportsAndAthletics.tsx
+components/CampusLife/StudentActivities.tsx
+components/CarouselSection.tsx
+components/CoreValuesSection.tsx
+components/ExploreSection.tsx
+components/Footer.tsx
+components/LibraryHomeSection.tsx
+components/Navbar.tsx
+components/StudentLifeSection.tsx
+components/TestimonialCarousel.tsx
+components/TileGrid.tsx
+[33mf765660[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge feature/campus-life-page into master - includes LibraryHomeSection and home page styling changes
+[33m23fe62c[m[33m ([m[1;31morigin/feature/campus-life-page[m[33m, [m[1;32mfeature/campus-life-page[m[33m)[m feat: Restore LibraryHomeSection and home page styling changes
+[33mab79123[m fix: Escape remaining apostrophe in CampusOverview component
+[33m9a5d8b8[m fix: Escape apostrophes in Campus Life components to fix linting errors
+[33m5a3f557[m feat: Add Campus Life page with comprehensive sections

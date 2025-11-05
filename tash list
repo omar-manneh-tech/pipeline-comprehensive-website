@@ -1,0 +1,13 @@
+* [33mab79123[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/campus-life-page[m[33m, [m[1;31morigin/feature/campus-life-page[m[33m)[m fix: Escape remaining apostrophe in CampusOverview component
+* [33m9a5d8b8[m fix: Escape apostrophes in Campus Life components to fix linting errors
+* [33m5a3f557[m feat: Add Campus Life page with comprehensive sections
+[31m|[m *[34m-[m[34m.[m   [33m1c66a18[m[33m ([m[1;35mrefs/stash[m[33m)[m On feature/campus-life-page: Temporary stash for author rewrite
+[31m|[m [32m|[m[33m\[m [34m\[m  
+[31m|[m [32m|[m [33m|[m * [33mbaf0c92[m untracked files on feature/campus-life-page: e20a9f2 fix: Escape remaining apostrophe in CampusOverview component
+[31m|[m [32m|[m * [33mcde06bf[m index on feature/campus-life-page: e20a9f2 fix: Escape remaining apostrophe in CampusOverview component
+[31m|[m [32m|[m[32m/[m  
+[31m|[m * [33me20a9f2[m fix: Escape remaining apostrophe in CampusOverview component
+[31m|[m * [33m38d27d0[m fix: Escape apostrophes in Campus Life components to fix linting errors
+[31m|[m * [33mf2e62a5[m feat: Add Campus Life page with comprehensive sections
+[31m|[m[31m/[m  
+* [33mca49cad[m[33m ([m[1;31msumanoteam/master[m[33m, [m[1;31msumanoteam/HEAD[m[33m, [m[1;31mbenissula/master[m[33m, [m[1;32mmaster[m[33m)[m docs: Add attribution to original source (omar-manneh-tech)
