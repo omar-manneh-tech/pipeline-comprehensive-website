@@ -21,7 +21,7 @@ export function TestimonialCarousel({ testimonials = defaultTestimonials }: Test
   });
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 text-gray-900 mb-0">
+    <section className="py-20 bg-white text-gray-900 mb-0">
       <div className="container mx-auto px-4 max-w-7xl">
         <SectionHeader
           title="What People Say About Us"

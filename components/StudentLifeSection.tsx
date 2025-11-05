@@ -29,7 +29,7 @@ const studentLifeDescription = (
 
 export function StudentLifeSection({ activities = studentActivities }: StudentLifeSectionProps) {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-br from-[#1B2B5C]/8 via-[#0000CD]/15 to-[#1B2B5C]/8">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Life at Daddy Jobe"

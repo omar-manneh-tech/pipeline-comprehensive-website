@@ -41,7 +41,7 @@ const campusHighlights = [
     icon: Award,
     title: "Excellence in All",
     description:
-      "We celebrate achievements in academics, sports, arts, and leadership, recognizing every student's unique contributions.",
+      "We celebrate achievements in academics, sports, arts, and leadership, recognizing every student&apos;s unique contributions.",
     iconBg: "bg-gold",
     iconColor: "text-white",
   },
