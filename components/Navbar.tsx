@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { SearchButton } from "@/components/Search/SearchButton";
+import { SearchModal } from "@/components/Search/SearchModal";
 
 const navLinks = [
   {
@@ -53,6 +55,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const isActive = (href: string, submenu?: Array<{ href: string }>) => {
     if (href === "/") {
@@ -149,8 +152,10 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Portal Button & Mobile Menu */}
-          <div className="flex items-center gap-4">
+          {/* Search, Portal Button & Mobile Menu */}
+          <div className="flex items-center gap-2">
+            <SearchButton onClick={() => setSearchOpen(true)} />
+            
             <Button
               asChild
               variant="outline"
@@ -252,8 +257,11 @@ export function Navbar() {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+          </AnimatePresence>
       </div>
+      
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { FooterSearch } from "@/components/Search/FooterSearch";
 
 const footerLinks = {
   quickLinks: [
@@ -31,7 +32,7 @@ export function Footer() {
   return (
     <footer className="bg-navy text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -126,6 +127,11 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Search Section */}
+          <div>
+            <FooterSearch />
           </div>
 
           {/* Contact Info */}
