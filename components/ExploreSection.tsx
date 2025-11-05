@@ -11,19 +11,19 @@ const exploreItems = [
   {
     title: "About Us",
     description: "Learn about our mission, vision, and rich history of educational excellence.",
-    image: "/images/about/school_building.jpg",
+    image: "/images/about/school_building.png",
     href: "/about",
   },
   {
     title: "Academics",
     description: "Explore our senior secondary programs: Science, Commerce, and Arts. Prepare for WASSCE exams and university admission.",
-    image: "/images/academics/science_lab.jpg",
+    image: "/images/academics/science_lab.png",
     href: "/academics",
   },
   {
     title: "Admissions",
     description: "Start your journey with us. Discover our admission process and requirements.",
-    image: "/images/hero/admission-banner.jpg",
+    image: "/images/hero/admission.png",
     href: "/admissions",
   },
 ];

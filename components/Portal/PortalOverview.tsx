@@ -82,7 +82,7 @@ export function PortalOverview() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/academics/science_lab.jpg"
+              src="/images/academics/science_lab.png"
               alt="School Portal at Daddy Jobe"
               fill
               className="object-cover"

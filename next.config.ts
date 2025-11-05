@@ -16,11 +16,13 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     qualities: [75, 90], // Include quality 90
+    // In development, disable caching for immediate updates
+    minimumCacheTTL: process.env.NODE_ENV === 'development' ? 0 : 60,
   },
 
   // Security Headers
   async headers() {
-    return [
+    const headers = [
       {
         source: '/:path*',
         headers: [
@@ -71,6 +73,21 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+
+    // In development, add cache headers for images to allow immediate updates
+    if (process.env.NODE_ENV === 'development') {
+      headers.push({
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      });
+    }
+
+    return headers;
   },
 
   // Performance Optimizations

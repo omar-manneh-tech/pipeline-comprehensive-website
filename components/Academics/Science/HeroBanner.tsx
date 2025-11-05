@@ -10,12 +10,12 @@ import Image from "next/image";
 
 export function HeroBanner() {
   return (
-    <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 via-blue-500/80 to-blue-600/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-primary/65 to-navy/60 z-10" />
         <Image
-          src="/images/academics/science_lab.jpg"
+          src="/images/academics/science_lab.png"
           alt="Science Program - Excellence in Science Education"
           fill
           priority

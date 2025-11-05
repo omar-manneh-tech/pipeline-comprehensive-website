@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
@@ -34,25 +35,30 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative h-12 w-12 flex-shrink-0 rounded-full overflow-hidden">
+            <Link href="/" className="flex items-center gap-3 group">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                className="relative h-20 w-20 flex-shrink-0 rounded-full overflow-hidden bg-white border-2 border-gold shadow-lg p-2"
+              >
                 <Image
                   src={siteConfig.logo}
                   alt={`${siteConfig.name} Logo`}
                   fill
-                  className="object-cover"
-                  sizes="48px"
+                  className="object-contain"
+                  sizes="80px"
+                  priority
                 />
-              </div>
+              </motion.div>
               <div className="flex flex-col leading-tight">
-                <span className="text-xl font-bold text-white">
+                <span className="text-xl font-bold text-white group-hover:text-gold transition-colors">
                   {siteConfig.shortName}
                 </span>
                 <span className="text-xs text-gray-300 font-medium">
                   Comprehensive School
                 </span>
               </div>
-            </div>
+            </Link>
             <p className="text-gray-300 text-sm">{siteConfig.description}</p>
             <div className="flex gap-4">
               <a
