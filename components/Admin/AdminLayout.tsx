@@ -24,6 +24,8 @@ import {
   Link as LinkIcon,
   ToggleLeft,
   Home,
+  TrendingUp,
+  SearchIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -82,6 +84,21 @@ const navItems = [
     label: "Feature Flags",
     href: "/admin/flags",
     icon: ToggleLeft,
+  },
+  {
+    label: "Testimonials",
+    href: "/admin/testimonials",
+    icon: Users,
+  },
+  {
+    label: "Statistics",
+    href: "/admin/statistics",
+    icon: TrendingUp,
+  },
+  {
+    label: "SEO Management",
+    href: "/admin/seo",
+    icon: SearchIcon,
   },
   {
     label: "User Activities",
