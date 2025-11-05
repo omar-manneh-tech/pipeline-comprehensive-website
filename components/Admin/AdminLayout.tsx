@@ -106,6 +106,11 @@ const navItems = [
     icon: Activity,
   },
   {
+    label: "Backup & Restore",
+    href: "/admin/backup",
+    icon: Settings,
+  },
+  {
     label: "Settings",
     href: "/admin/settings",
     icon: Settings,
