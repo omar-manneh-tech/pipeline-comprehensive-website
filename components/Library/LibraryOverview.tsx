@@ -27,7 +27,7 @@ export function LibraryOverview() {
             className="relative h-[500px] md:h-[600px] rounded-lg overflow-hidden shadow-2xl order-1 md:order-1"
           >
             <Image
-              src="/images/library/library-interior.jpg"
+              src="/images/library/library-interior.webp"
               alt="Daddy Jobe Comprehensive School Library - Modern Learning Space"
               fill
               className="object-cover"
