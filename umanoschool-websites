@@ -1,0 +1,65 @@
+ BACKEND_DOC_TEMP.txt                               | Bin [31m0[m -> [32m4072[m bytes
+ app/layout.tsx                                     |   2 [32m+[m
+ components/About/HeroBanner.tsx                    |   6 [32m+[m[31m-[m
+ components/About/SchoolHistory.tsx                 |   2 [32m+[m[31m-[m
+ components/AboutSection.tsx                        |   2 [32m+[m[31m-[m
+ components/Academics/AcademicFacilities.tsx        |   8 [32m+[m[31m--[m
+ components/Academics/AcademicsOverview.tsx         |   2 [32m+[m[31m-[m
+ components/Academics/Arts/ArtsFacilities.tsx       |   8 [32m+[m[31m--[m
+ components/Academics/Arts/HeroBanner.tsx           |   6 [32m+[m[31m-[m
+ components/Academics/Arts/ProgramOverview.tsx      |   2 [32m+[m[31m-[m
+ .../Academics/Commerce/CommerceFacilities.tsx      |   8 [32m+[m[31m--[m
+ components/Academics/Commerce/HeroBanner.tsx       |   6 [32m+[m[31m-[m
+ components/Academics/Commerce/ProgramOverview.tsx  |   2 [32m+[m[31m-[m
+ components/Academics/HeroBanner.tsx                |   6 [32m+[m[31m-[m
+ components/Academics/Science/HeroBanner.tsx        |   6 [32m+[m[31m-[m
+ components/Academics/Science/ProgramOverview.tsx   |   2 [32m+[m[31m-[m
+ components/Academics/Science/ScienceFacilities.tsx |   8 [32m+[m[31m--[m
+ components/Admissions/HeroBanner.tsx               |   6 [32m+[m[31m-[m
+ components/Contact/HeroBanner.tsx                  |   6 [32m+[m[31m-[m
+ components/ErrorHandler.tsx                        |  80 [32m+++++++++++++++++++++[m
+ components/ExploreSection.tsx                      |   6 [32m+[m[31m-[m
+ components/Footer.tsx                              |  20 [32m++++[m[31m--[m
+ components/Gallery/GalleryCategories.tsx           |   6 [32m+[m[31m-[m
+ components/Gallery/HeroBanner.tsx                  |   6 [32m+[m[31m-[m
+ components/HeroSection.tsx                         |   4 [32m+[m[31m-[m
+ components/Library/HeroBanner.tsx                  |   6 [32m+[m[31m-[m
+ components/Library/LibraryOverview.tsx             |   2 [32m+[m[31m-[m
+ components/Navbar.tsx                              |   8 [32m+[m[31m--[m
+ components/News/HeroBanner.tsx                     |   6 [32m+[m[31m-[m
+ components/Portal/HeroBanner.tsx                   |   6 [32m+[m[31m-[m
+ components/Portal/PortalOverview.tsx               |   2 [32m+[m[31m-[m
+ components/Staff/HeroBanner.tsx                    |   6 [32m+[m[31m-[m
+ lib/data/academics.ts                              |   6 [32m+[m[31m-[m
+ lib/data/gallery.ts                                |  24 [32m+++[m[31m----[m
+ lib/data/home.ts                                   |  20 [32m+++[m[31m---[m
+ lib/data/news.ts                                   |  12 [32m++[m[31m--[m
+ next.config.ts                                     |  19 [32m++++[m[31m-[m
+ prisma/dev.db                                      | Bin [31m118784[m -> [32m323584[m bytes
+ public/images/about/morning_assembly.png           | Bin [31m0[m -> [32m2028264[m bytes
+ public/images/about/school_building.png            | Bin [31m0[m -> [32m2400466[m bytes
+ public/images/about/students_in_class.jpg          | Bin [31m24049[m -> [32m88090[m bytes
+ public/images/academics/arts_studio.jpg            | Bin [31m18684[m -> [32m0[m bytes
+ public/images/academics/arts_studio.png            | Bin [31m0[m -> [32m2119659[m bytes
+ public/images/academics/commerce_class.jpg         | Bin [31m23897[m -> [32m0[m bytes
+ public/images/academics/commerce_class.png         | Bin [31m0[m -> [32m2253333[m bytes
+ public/images/academics/ict_lab.jpeg               | Bin [31m0[m -> [32m79529[m bytes
+ public/images/academics/science_lab.jpg            | Bin [31m18639[m -> [32m0[m bytes
+ public/images/academics/science_lab.png            | Bin [31m0[m -> [32m2172821[m bytes
+ public/images/gallery/cultural_day.png             | Bin [31m0[m -> [32m2327508[m bytes
+ public/images/gallery/gallery.png                  | Bin [31m0[m -> [32m205335[m bytes
+ public/images/gallery/graduation_day.png           | Bin [31m0[m -> [32m2061150[m bytes
+ public/images/gallery/news.png                     | Bin [31m0[m -> [32m44249[m bytes
+ public/images/gallery/science_fair_day.png         | Bin [31m0[m -> [32m2210995[m bytes
+ public/images/gallery/sport_day.png                | Bin [31m0[m -> [32m2430103[m bytes
+ public/images/hero/about_banner.png                | Bin [31m0[m -> [32m2433260[m bytes
+ public/images/hero/admission.png                   | Bin [31m0[m -> [32m2132681[m bytes
+ public/images/hero/contact.png                     | Bin [31m0[m -> [32m1877716[m bytes
+ public/images/hero/hero-main.jpg                   | Bin [31m30101[m -> [32m0[m bytes
+ public/images/hero/hero-main.png                   | Bin [31m0[m -> [32m2375058[m bytes
+ public/images/hero/library.png                     | Bin [31m0[m -> [32m2183668[m bytes
+ public/images/hero/staff.png                       | Bin [31m0[m -> [32m2437981[m bytes
+ public/images/library/library-interior.webp        | Bin [31m0[m -> [32m20328[m bytes
+ public/images/misc/logo.png                        | Bin [31m1878[m -> [32m55382[m bytes
+ public/images/misc/logo1.png                       | Bin [31m0[m -> [32m1878[m bytes
+ 64 files changed, 214 insertions(+), 113 deletions(-)
