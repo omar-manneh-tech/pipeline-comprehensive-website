@@ -163,9 +163,6 @@ export async function DELETE(
 
     const item = await prisma.navigationItem.findUnique({
       where: { id },
-      include: {
-        // Check for children (if we add relation later)
-      },
     });
 
     if (!item) {

@@ -173,11 +173,11 @@ export function BlogEditor({ postId }: BlogEditorProps) {
         published: publish,
       };
 
-      let response;
+      let response: { success: boolean; message?: string; data?: any };
       if (isNew) {
-        response = await apiClient.post("/admin/blog", payload);
+        response = await apiClient.post<{ success: boolean; message?: string; data?: any }>("/admin/blog", payload);
       } else {
-        response = await apiClient.put(`/admin/blog/${postId}`, payload);
+        response = await apiClient.put<{ success: boolean; message?: string; data?: any }>(`/admin/blog/${postId}`, payload);
       }
 
       if (response.success) {

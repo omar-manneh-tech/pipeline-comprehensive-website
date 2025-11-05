@@ -61,10 +61,10 @@ export default function AdminDashboardPage() {
       // In the future, we can create a dedicated /api/admin/dashboard/stats endpoint
       
       const [blogRes, staffRes, galleryRes, newsRes] = await Promise.allSettled([
-        apiClient.get("/admin/blog"),
-        apiClient.get("/admin/staff"),
-        apiClient.get("/admin/gallery"),
-        apiClient.get("/admin/news"),
+        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/blog"),
+        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/staff"),
+        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/gallery"),
+        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/news"),
       ]);
 
       const blogData = blogRes.status === "fulfilled" ? blogRes.value : { data: [], pagination: { total: 0 } };

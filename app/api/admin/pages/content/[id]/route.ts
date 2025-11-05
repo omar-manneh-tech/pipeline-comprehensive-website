@@ -10,7 +10,7 @@ import { requireAdmin } from "@/lib/auth/middleware";
 import { createAuditLog, getClientIp, getUserAgent } from "@/lib/audit/logger";
 
 const updatePageContentSchema = z.object({
-  content: z.union([z.string(), z.record(z.any())]).optional(),
+  content: z.union([z.string(), z.record(z.string(), z.any())]).optional(),
   order: z.number().int().optional(),
   visible: z.boolean().optional(),
   published: z.boolean().optional(),

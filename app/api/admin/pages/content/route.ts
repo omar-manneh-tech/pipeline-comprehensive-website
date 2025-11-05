@@ -12,7 +12,7 @@ import { createAuditLog, getClientIp, getUserAgent } from "@/lib/audit/logger";
 const pageContentSchema = z.object({
   page: z.string().min(1),
   section: z.string().min(1),
-  content: z.union([z.string(), z.record(z.any())]), // JSON string or object
+  content: z.union([z.string(), z.record(z.string(), z.any())]), // JSON string or object
   order: z.number().int().default(0),
   visible: z.boolean().default(true),
   published: z.boolean().default(true),
