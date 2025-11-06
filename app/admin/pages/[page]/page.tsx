@@ -528,11 +528,13 @@ export default function GenericPageManagement() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
-                    {formData.image && typeof formData.image === "string" && (
-                      <div className="mb-4">
-                        <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
-                          <Image
-                            src={formData.image}
+                    {(() => {
+                      const imageUrl = typeof formData.image === "string" ? formData.image : null;
+                      return imageUrl ? (
+                        <div className="mb-4">
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
+                            <Image
+                              src={imageUrl}
                             alt="Hero banner"
                             fill
                             className="object-cover"
@@ -540,7 +542,8 @@ export default function GenericPageManagement() {
                           />
                         </div>
                       </div>
-                    )}
+                      ) : null;
+                    })()}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer">
                         <input
@@ -559,12 +562,12 @@ export default function GenericPageManagement() {
                           ) : (
                             <>
                               <Upload className="h-4 w-4 mr-2" />
-                              {formData.image ? "Change Image" : "Upload Image"}
+                              {typeof formData.image === "string" && formData.image ? "Change Image" : "Upload Image"}
                             </>
                           )}
                         </Button>
                       </label>
-                      {formData.image && (
+                      {typeof formData.image === "string" && formData.image && (
                         <Button
                           type="button"
                           variant="outline"
@@ -586,7 +589,7 @@ export default function GenericPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
