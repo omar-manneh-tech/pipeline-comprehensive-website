@@ -509,7 +509,7 @@ export default function GenericPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Hero title"
                     />
@@ -519,7 +519,7 @@ export default function GenericPageManagement() {
                       Description <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      value={formData.description || ""}
+                      value={(typeof formData.description === "string" ? formData.description : "") || ""}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Hero description"
                       rows={3}
@@ -528,7 +528,7 @@ export default function GenericPageManagement() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
-                    {formData.image && (
+                    {formData.image && typeof formData.image === "string" && (
                       <div className="mb-4">
                         <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
                           <Image

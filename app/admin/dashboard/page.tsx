@@ -85,8 +85,8 @@ export default function AdminDashboardPage() {
       // Get upcoming events (events with eventDate in the future)
       const now = new Date();
       const upcomingEvents = newsEvents.filter(
-        (n: { type: string; eventDate?: string }) =>
-          n.type === "event" && n.eventDate && new Date(n.eventDate) > now
+        (n: Record<string, unknown>) =>
+          n.type === "event" && typeof n.eventDate === "string" && n.eventDate && new Date(n.eventDate) > now
       );
 
       setStats({
