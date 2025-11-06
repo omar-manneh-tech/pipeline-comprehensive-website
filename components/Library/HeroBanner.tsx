@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export function HeroBanner() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-primary/65 to-navy/60 z-10" />
@@ -33,10 +33,10 @@ export function HeroBanner() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
             Library
           </h1>
-          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-2xl mx-auto font-light drop-shadow-md">
+          <p className="text-lg md:text-xl text-white/95 mb-4 max-w-2xl mx-auto font-light drop-shadow-md">
             Empowering Learning Through Knowledge
           </p>
         </motion.div>
