@@ -62,16 +62,19 @@ export function CarouselSection({ events: propEvents = schoolEvents }: CarouselS
     fetchEvents();
   }, []);
 
+  // Always call hooks before conditional returns
+  const carousel = useCarousel({
+    items: events,
+    autoPlay: true,
+    interval: 5000,
+  });
+
   // Don't render if feature flag is disabled
   if (!eventsEnabled) {
     return null;
   }
 
-  const { currentIndex, goToSlide, goToPrevious, goToNext } = useCarousel({
-    items: events,
-    autoPlay: true,
-    interval: 5000,
-  });
+  const { currentIndex, goToSlide, goToPrevious, goToNext } = carousel;
 
   if (loading && events.length === 0) {
     return null;
@@ -91,7 +94,7 @@ export function CarouselSection({ events: propEvents = schoolEvents }: CarouselS
           <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-2xl">
             {events.map((event, index) => (
               <motion.div
-                key={(event as any).id || index}
+                key={('id' in event ? event.id : undefined) || index}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: index === currentIndex ? 1 : 0,

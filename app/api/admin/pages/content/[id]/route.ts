@@ -81,7 +81,7 @@ export async function PUT(
     }
 
     // Convert content to JSON string if it's an object
-    const updateData: any = { ...validatedData };
+    const updateData: Record<string, unknown> = { ...validatedData };
     if (validatedData.content !== undefined) {
       updateData.content =
         typeof validatedData.content === "string"

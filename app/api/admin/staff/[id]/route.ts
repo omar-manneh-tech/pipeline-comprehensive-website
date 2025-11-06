@@ -82,7 +82,7 @@ export async function PUT(
       );
     }
 
-    const updateData: any = { ...validatedData };
+    const updateData: Record<string, unknown> = { ...validatedData };
     if (validatedData.qualifications) {
       updateData.qualifications =
         typeof validatedData.qualifications === "string"

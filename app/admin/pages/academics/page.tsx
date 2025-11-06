@@ -45,7 +45,7 @@ interface PageContent {
   id: string;
   page: string;
   section: string;
-  content: any;
+  content: Record<string, unknown>;
   order: number;
   visible: boolean;
   published: boolean;
@@ -58,7 +58,7 @@ interface AcademicsPageSection {
   key: string;
   label: string;
   description: string;
-  defaultContent: any;
+  defaultContent: Record<string, unknown>;
 }
 
 const ACADEMICS_SECTIONS: AcademicsPageSection[] = [
@@ -267,7 +267,7 @@ export default function AcademicsPageManagement() {
     section: AcademicsPageSection;
     content: PageContent | null;
   } | null>(null);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
   const [uploading, setUploading] = useState(false);
 
   const sensors = useSensors(
@@ -357,7 +357,7 @@ export default function AcademicsPageManagement() {
       );
 
       if (response.success) {
-        setFormData((prev: any) => ({ ...prev, [field]: response.data.url }));
+        setFormData((prev: Record<string, unknown>) => ({ ...prev, [field]: response.data.url }));
       }
     } catch (error) {
       console.error("[Upload Error]", error);

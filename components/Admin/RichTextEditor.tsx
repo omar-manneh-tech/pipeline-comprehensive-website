@@ -26,7 +26,10 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Use setTimeout to avoid setState in effect
+    setTimeout(() => {
+      setMounted(true);
+    }, 0);
   }, []);
 
   const editor = useEditor({

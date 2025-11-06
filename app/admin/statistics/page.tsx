@@ -342,7 +342,7 @@ export default function StatisticsManagementPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-navy mb-2">Statistics Management</h1>
-          <p className="text-gray-600">Manage statistics for the "At a Glance" section</p>
+          <p className="text-gray-600">Manage statistics for the &quot;At a Glance&quot; section</p>
         </div>
         <Button onClick={handleAdd}>
           <Plus className="h-4 w-4 mr-2" />

@@ -82,7 +82,7 @@ export async function PUT(
       );
     }
 
-    const updateData: any = { ...validatedData };
+    const updateData: Record<string, unknown> = { ...validatedData };
     if (validatedData.tags) {
       updateData.tags = JSON.stringify(validatedData.tags);
     }

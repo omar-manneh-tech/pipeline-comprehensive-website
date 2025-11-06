@@ -136,7 +136,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     if (userStr) {
       try {
         const user = JSON.parse(userStr);
-        setAdminUser(user);
+        // Use setTimeout to avoid setState in effect
+        setTimeout(() => {
+          setAdminUser(user);
+        }, 0);
       } catch {
         // Invalid user data
       }

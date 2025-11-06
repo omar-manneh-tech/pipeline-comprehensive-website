@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
     const published = searchParams.get("published");
     const visible = searchParams.get("visible");
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
     if (page) where.page = page;
     if (section) where.section = section;
     if (published !== null) where.published = published === "true";
@@ -198,7 +198,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Convert content to JSON string if it's an object
-    const updateData: any = { ...validatedData };
+    const updateData: Record<string, unknown> = { ...validatedData };
     if (validatedData.content !== undefined) {
       updateData.content =
         typeof validatedData.content === "string"

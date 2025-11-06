@@ -30,7 +30,7 @@ async function main() {
   console.log(`✅ Using admin: ${admin.name} (${admin.email})`);
 
   let created = 0;
-  let updated = 0;
+  const updated = 0; // eslint-disable-line @typescript-eslint/no-unused-vars
   let skipped = 0;
 
   for (const post of blogPosts) {

@@ -45,7 +45,7 @@ interface PageContent {
   id: string;
   page: string;
   section: string;
-  content: any;
+  content: Record<string, unknown>;
   order: number;
   visible: boolean;
   published: boolean;
@@ -58,7 +58,7 @@ interface AdmissionsPageSection {
   key: string;
   label: string;
   description: string;
-  defaultContent: any;
+  defaultContent: Record<string, unknown>;
 }
 
 const ADMISSIONS_SECTIONS: AdmissionsPageSection[] = [
@@ -233,7 +233,7 @@ export default function AdmissionsPageManagement() {
     section: AdmissionsPageSection;
     content: PageContent | null;
   } | null>(null);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
   const [uploading, setUploading] = useState(false);
 
   const sensors = useSensors(
@@ -323,7 +323,7 @@ export default function AdmissionsPageManagement() {
       );
 
       if (response.success) {
-        setFormData((prev: any) => ({ ...prev, [field]: response.data.url }));
+        setFormData((prev: Record<string, unknown>) => ({ ...prev, [field]: response.data.url }));
       }
     } catch (error) {
       console.error("[Upload Error]", error);

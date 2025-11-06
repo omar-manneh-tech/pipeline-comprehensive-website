@@ -57,13 +57,13 @@ interface NavigationItem {
 
 function SortableNavItem({
   item,
-  children,
+  childItems,
   onEdit,
   onDelete,
   onToggleVisibility,
 }: {
   item: NavigationItem;
-  children?: NavigationItem[];
+  childItems?: NavigationItem[];
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
   onToggleVisibility: (id: string, visible: boolean) => void;
@@ -141,12 +141,13 @@ function SortableNavItem({
               </div>
             </div>
           </div>
-          {children && children.length > 0 && (
+          {childItems && childItems.length > 0 && (
             <div className="mt-4 ml-8 border-l-2 border-gray-200 pl-4 space-y-2">
-              {children.map((child) => (
+              {childItems.map((child) => (
                 <SortableNavItem
                   key={child.id}
                   item={child}
+                  childItems={[]}
                   onEdit={onEdit}
                   onDelete={onDelete}
                   onToggleVisibility={onToggleVisibility}
@@ -473,7 +474,7 @@ export default function NavigationManagementPage() {
                 <SortableNavItem
                   key={item.id}
                   item={item}
-                  children={getChildren(item.id)}
+                  childItems={getChildren(item.id)}
                   onEdit={handleEdit}
                   onDelete={handleDelete}
                   onToggleVisibility={handleToggleVisibility}

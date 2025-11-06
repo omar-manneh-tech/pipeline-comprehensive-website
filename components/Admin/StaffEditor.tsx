@@ -51,7 +51,7 @@ export function StaffEditor({ staffId }: StaffEditorProps) {
   const fetchStaff = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.get<{ success: boolean; data: any }>(
+      const response = await apiClient.get<{ success: boolean; data: Record<string, unknown> }>(
         `/admin/staff/${staffId}`
       );
 
@@ -165,16 +165,23 @@ export function StaffEditor({ staffId }: StaffEditorProps) {
       }
 
       router.push("/admin/staff");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("[Save Error]", error);
-      if (error.response?.data?.details) {
-        const fieldErrors: Record<string, string> = {};
-        error.response.data.details.forEach((issue: any) => {
+      if (error && typeof error === 'object' && 'response' in error) {
+        const errorResponse = error as { response?: { data?: { details?: Array<{ path: string[]; message: string }>; error?: string } } };
+        if (errorResponse.response?.data?.details) {
+          const fieldErrors: Record<string, string> = {};
+          errorResponse.response.data.details.forEach((issue: { path: string[]; message: string }) => {
           fieldErrors[issue.path[0]] = issue.message;
         });
         setErrors(fieldErrors);
+      } else if (errorResponse.response?.data?.error) {
+        alert(errorResponse.response.data.error);
       } else {
-        alert(error.response?.data?.error || "Failed to save staff member");
+        alert("Failed to save staff member");
+      }
+      } else {
+        alert("Failed to save staff member");
       }
     } finally {
       setSaving(false);

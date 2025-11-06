@@ -61,10 +61,10 @@ export default function AdminDashboardPage() {
       // In the future, we can create a dedicated /api/admin/dashboard/stats endpoint
       
       const [blogRes, staffRes, galleryRes, newsRes] = await Promise.allSettled([
-        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/blog"),
-        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/staff"),
-        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/gallery"),
-        apiClient.get<{ success: boolean; data: any[]; pagination?: { total: number } }>("/admin/news"),
+        apiClient.get<{ success: boolean; data: Array<Record<string, unknown>>; pagination?: { total: number } }>("/admin/blog"),
+        apiClient.get<{ success: boolean; data: Array<Record<string, unknown>>; pagination?: { total: number } }>("/admin/staff"),
+        apiClient.get<{ success: boolean; data: Array<Record<string, unknown>>; pagination?: { total: number } }>("/admin/gallery"),
+        apiClient.get<{ success: boolean; data: Array<Record<string, unknown>>; pagination?: { total: number } }>("/admin/news"),
       ]);
 
       const blogData = blogRes.status === "fulfilled" ? blogRes.value : { data: [], pagination: { total: 0 } };
@@ -77,10 +77,10 @@ export default function AdminDashboardPage() {
       const galleryItems = Array.isArray(galleryData.data) ? galleryData.data : [];
       const newsEvents = Array.isArray(newsData.data) ? newsData.data : [];
 
-      const publishedBlogs = blogPosts.filter((p: { published: boolean }) => p.published);
-      const publishedStaff = staffMembers.filter((s: { published: boolean }) => s.published);
-      const publishedGallery = galleryItems.filter((g: { published: boolean }) => g.published);
-      const publishedNews = newsEvents.filter((n: { published: boolean }) => n.published);
+      const publishedBlogs = blogPosts.filter((p: Record<string, unknown>) => p.published === true);
+      const publishedStaff = staffMembers.filter((s: Record<string, unknown>) => s.published === true);
+      const publishedGallery = galleryItems.filter((g: Record<string, unknown>) => g.published === true);
+      const publishedNews = newsEvents.filter((n: Record<string, unknown>) => n.published === true);
 
       // Get upcoming events (events with eventDate in the future)
       const now = new Date();

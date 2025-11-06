@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const page = searchParams.get("page");
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
     if (page) where.page = page;
 
     const seoSettings = await prisma.pageSEO.findMany({

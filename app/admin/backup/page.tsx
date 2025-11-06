@@ -59,7 +59,7 @@ export default function BackupRestorePage() {
 
     try {
       setBackingUp(true);
-      const response = await apiClient.post<{ success: boolean; message: string; data: any }>(
+      const response = await apiClient.post<{ success: boolean; message: string; data: { backupPath?: string } }>(
         "/admin/backup"
       );
 
@@ -227,7 +227,7 @@ export default function BackupRestorePage() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">Creating Backups</h3>
             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-              <li>Click "Create Backup" to create a timestamped backup of the database</li>
+              <li>Click &quot;Create Backup&quot; to create a timestamped backup of the database</li>
               <li>Backups are stored in the <code className="bg-gray-100 px-1 rounded">backups/</code> directory</li>
               <li>Backups are created automatically before database migrations</li>
             </ul>
@@ -235,7 +235,7 @@ export default function BackupRestorePage() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">Restoring Backups</h3>
             <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-              <li>Select a backup from the list and click "Restore"</li>
+              <li>Select a backup from the list and click &quot;Restore&quot;</li>
               <li>A backup of the current database will be created automatically before restore</li>
               <li>Restore will overwrite the current database with the selected backup</li>
               <li>Always test restores in a development environment first</li>

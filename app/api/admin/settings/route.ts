@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get("category");
     const key = searchParams.get("key");
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
     if (category) where.category = category;
     if (key) where.key = key;
 
@@ -221,7 +221,7 @@ export async function PUT(request: NextRequest) {
           adminId: user.userId,
           action: "bulk_update",
           resource: "SiteSetting",
-          before: JSON.stringify(body.map((item: any) => ({ key: item.key, value: "previous" }))),
+          before: JSON.stringify(body.map((item: { key: string; value: unknown }) => ({ key: item.key, value: "previous" }))),
           after: JSON.stringify(updates),
           ipAddress: getClientIp(request),
           userAgent: getUserAgent(request),

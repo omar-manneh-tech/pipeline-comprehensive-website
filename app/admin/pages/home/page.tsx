@@ -46,7 +46,7 @@ interface PageContent {
   id: string;
   page: string;
   section: string;
-  content: any; // JSON parsed content
+  content: Record<string, unknown>; // JSON parsed content
   order: number;
   visible: boolean;
   published: boolean;
@@ -59,7 +59,7 @@ interface HomePageSection {
   key: string;
   label: string;
   description: string;
-  defaultContent: any;
+  defaultContent: Record<string, unknown>;
   icon?: React.ReactNode;
 }
 
@@ -299,7 +299,7 @@ export default function HomePageManagement() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [editingSection, setEditingSection] = useState<HomePageSection | null>(null);
-  const [formData, setFormData] = useState<any>(null);
+  const [formData, setFormData] = useState<Record<string, unknown> | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),

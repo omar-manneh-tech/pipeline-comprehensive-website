@@ -52,7 +52,7 @@ export function BlogEditor({ postId }: BlogEditorProps) {
   const fetchPost = async () => {
     try {
       setLoading(true);
-      const response = await apiClient.get<{ success: boolean; data: any }>(
+      const response = await apiClient.get<{ success: boolean; data: Record<string, unknown> }>(
         `/admin/blog/${postId}`
       );
 
@@ -173,11 +173,11 @@ export function BlogEditor({ postId }: BlogEditorProps) {
         published: publish,
       };
 
-      let response: { success: boolean; message?: string; data?: any };
+      let response: { success: boolean; message?: string; data?: Record<string, unknown> };
       if (isNew) {
-        response = await apiClient.post<{ success: boolean; message?: string; data?: any }>("/admin/blog", payload);
+        response = await apiClient.post<{ success: boolean; message?: string; data?: Record<string, unknown> }>("/admin/blog", payload);
       } else {
-        response = await apiClient.put<{ success: boolean; message?: string; data?: any }>(`/admin/blog/${postId}`, payload);
+        response = await apiClient.put<{ success: boolean; message?: string; data?: Record<string, unknown> }>(`/admin/blog/${postId}`, payload);
       }
 
       if (response.success) {
@@ -185,17 +185,22 @@ export function BlogEditor({ postId }: BlogEditorProps) {
       } else {
         alert(response.message || "Failed to save blog post");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("[Save Error]", error);
-      if (error.response?.data?.details) {
-        const details = error.response.data.details;
-        const newErrors: Record<string, string> = {};
-        details.forEach((detail: any) => {
-          newErrors[detail.path[0]] = detail.message;
-        });
-        setErrors(newErrors);
+      if (error && typeof error === 'object' && 'response' in error) {
+        const errorResponse = error as { response?: { data?: { details?: Array<{ path: string[]; message: string }> } }; message?: string };
+        if (errorResponse.response?.data?.details) {
+          const details = errorResponse.response.data.details;
+          const newErrors: Record<string, string> = {};
+          details.forEach((detail: { path: string[]; message: string }) => {
+            newErrors[detail.path[0]] = detail.message;
+          });
+          setErrors(newErrors);
+        } else {
+          alert(errorResponse.message || "Failed to save blog post");
+        }
       } else {
-        alert(error.message || "Failed to save blog post");
+        alert("Failed to save blog post");
       }
     } finally {
       setSaving(false);
@@ -288,7 +293,7 @@ export function BlogEditor({ postId }: BlogEditorProps) {
                   <p className="mt-1 text-sm text-red-600">{errors.slug}</p>
                 )}
                 <p className="mt-1 text-xs text-gray-500">
-                  URL-friendly version of the title (e.g., "my-blog-post")
+                  URL-friendly version of the title (e.g., &quot;my-blog-post&quot;)
                 </p>
               </div>
 

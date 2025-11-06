@@ -11,8 +11,8 @@ export interface AuditLogData {
   action: string; // "create", "update", "delete", "publish", "unpublish", etc.
   resource: string; // "PageContent", "MediaAsset", "NavigationItem", etc.
   resourceId?: string;
-  before?: any; // Previous state (for updates)
-  after?: any; // New state (for creates/updates)
+  before?: Record<string, unknown>; // Previous state (for updates)
+  after?: Record<string, unknown>; // New state (for creates/updates)
   ipAddress?: string;
   userAgent?: string;
 }
@@ -85,7 +85,7 @@ export async function getAuditLogs(options: {
   const limit = options.limit || 50;
   const skip = (page - 1) * limit;
 
-  const where: any = {};
+  const where: Record<string, unknown> = {};
   if (options.adminId) where.adminId = options.adminId;
   if (options.resource) where.resource = options.resource;
   if (options.action) where.action = options.action;

@@ -47,7 +47,7 @@ interface PageContent {
   id: string;
   page: string;
   section: string;
-  content: any;
+  content: Record<string, unknown>;
   order: number;
   visible: boolean;
   published: boolean;
@@ -60,7 +60,7 @@ interface GenericPageSection {
   key: string;
   label: string;
   description: string;
-  defaultContent: any;
+  defaultContent: Record<string, unknown>;
 }
 
 const COMMON_SECTIONS: GenericPageSection[] = [
@@ -219,7 +219,7 @@ export default function GenericPageManagement() {
     section: GenericPageSection;
     content: PageContent | null;
   } | null>(null);
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
   const [uploading, setUploading] = useState(false);
   const [customSectionKey, setCustomSectionKey] = useState("");
   const [customSectionLabel, setCustomSectionLabel] = useState("");
@@ -339,7 +339,7 @@ export default function GenericPageManagement() {
       );
 
       if (response.success) {
-        setFormData((prev: any) => ({ ...prev, [field]: response.data.url }));
+        setFormData((prev: Record<string, unknown>) => ({ ...prev, [field]: response.data.url }));
       }
     } catch (error) {
       console.error("[Upload Error]", error);
