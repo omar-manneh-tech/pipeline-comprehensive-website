@@ -634,7 +634,8 @@ export default function AboutPageManagement() {
                           />
                         </div>
                       </div>
-                    )}
+                      ) : null;
+                    })()}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer">
                         <input
