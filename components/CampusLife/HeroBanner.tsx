@@ -26,12 +26,12 @@ export function HeroBanner() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 text-center">
+      <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto px-2 sm:px-4"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
             Campus Life
@@ -44,4 +44,5 @@ export function HeroBanner() {
     </section>
   );
 }
+
 

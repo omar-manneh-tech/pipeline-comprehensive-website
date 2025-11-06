@@ -40,6 +40,14 @@ const fallbackNavLinks: NavLink[] = [
   {
     label: "About",
     href: "/about",
+    submenu: [
+      { label: "About Us", href: "/about" },
+      { label: "Campus Life", href: "/campus-life" },
+      { label: "Staff", href: "/staff" },
+      { label: "Library", href: "/library" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "News & Events", href: "/news" },
+    ],
   },
   {
     label: "Academics",
@@ -51,23 +59,20 @@ const fallbackNavLinks: NavLink[] = [
     ],
   },
   {
-    label: "Campus Life",
-    href: "/campus-life",
-    submenu: [
-      { label: "Campus Life Overview", href: "/campus-life" },
-      { label: "Staff", href: "/staff" },
-      { label: "Library", href: "/library" },
-      { label: "Gallery", href: "/gallery" },
-      { label: "News & Events", href: "/news" },
-    ],
-  },
-  {
     label: "Admissions",
     href: "/admissions",
   },
   {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
     label: "Contact",
     href: "/contact",
+  },
+  {
+    label: "Portal",
+    href: "/portal",
   },
 ];
 
@@ -147,29 +152,29 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm shadow-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between gap-2 sm:gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3" aria-label="Daddy Jobe Comprehensive School Homepage">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0" aria-label="Daddy Jobe Comprehensive School Homepage">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
-              className="relative h-16 w-16 flex-shrink-0 rounded-full overflow-hidden bg-white border-2 border-gold shadow-lg p-2"
+              className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 flex-shrink-0 rounded-full overflow-hidden bg-white border-2 border-gold shadow-lg p-1.5 sm:p-2"
             >
               <Image
                 src={siteConfig.logo}
                 alt={`${siteConfig.name} Logo`}
                 fill
                 className="object-contain"
-                sizes="64px"
+                sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, 64px"
                 priority
               />
             </motion.div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-xl md:text-2xl font-bold text-navy">
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-navy truncate">
                 {siteConfig.shortName}
               </span>
-              <span className="text-xs md:text-sm text-gray-600 font-medium">
+              <span className="text-[10px] sm:text-xs md:text-sm text-gray-600 font-medium truncate">
                 Comprehensive School
               </span>
             </div>
@@ -177,16 +182,17 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           {!loading && (
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-1 lg:gap-2">
               {navLinks
+                .filter((link) => link.href !== "/portal")
                 .map((link) => (
                   <div key={link.href} className="relative group">
                     <Link
                       href={link.href}
                       target={link.target || "_self"}
-                      className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+                      className={`px-2 md:px-3 lg:px-4 py-2 text-xs md:text-sm font-medium transition-colors relative whitespace-nowrap ${
                         isActive(link.href, link.submenu)
-                          ? "text-primary after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-primary"
+                          ? "text-primary after:absolute after:bottom-0 after:left-2 md:after:left-3 lg:after:left-4 after:right-2 md:after:right-3 lg:after:right-4 after:h-0.5 after:bg-primary"
                           : "text-gray-700 hover:text-primary"
                       }`}
                       onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
@@ -194,7 +200,7 @@ export function Navbar() {
                     >
                       {link.label}
                       {link.submenu && (
-                        <ChevronDown className="inline-block ml-1 h-4 w-4" />
+                        <ChevronDown className="inline-block ml-0.5 md:ml-1 h-3 w-3 md:h-4 md:w-4" />
                       )}
                     </Link>
 
@@ -226,6 +232,16 @@ export function Navbar() {
                     )}
                   </div>
                 ))}
+              
+              {/* Portal Button */}
+              {navLinks.find((link) => link.href === "/portal") && (
+                <Button
+                  asChild
+                  className="bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-colors"
+                >
+                  <Link href="/portal">Portal</Link>
+                </Button>
+              )}
             </div>
           )}
 
@@ -257,6 +273,7 @@ export function Navbar() {
               <div className="py-4 space-y-2">
                 {!loading &&
                   navLinks
+                    .filter((link) => link.href !== "/portal")
                     .map((link) => (
                       <div key={link.href}>
                         <div className="flex items-center justify-between">
@@ -322,6 +339,19 @@ export function Navbar() {
                         )}
                       </div>
                     ))}
+                
+                {/* Portal Button (Mobile) */}
+                {navLinks.find((link) => link.href === "/portal") && (
+                  <div className="px-4 py-2">
+                    <Button
+                      asChild
+                      className="w-full bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Link href="/portal">Portal</Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}

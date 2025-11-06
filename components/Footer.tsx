@@ -79,8 +79,8 @@ export function Footer() {
 
   return (
     <footer className="bg-navy text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-7 md:gap-8">
           {/* Brand Column */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3 group">

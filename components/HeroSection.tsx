@@ -8,7 +8,7 @@ import { ArrowRight, GraduationCap } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen min-h-[600px] max-h-[100vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-primary/65 to-navy/60 z-10" />
@@ -24,58 +24,58 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 text-center">
+      <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
-            <GraduationCap className="h-16 w-16 mx-auto text-white/90 mb-4" />
+            <GraduationCap className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 mx-auto text-white/90 mb-3 sm:mb-4" />
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg px-2">
             Empowering Future Leaders
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/95 mb-10 max-w-2xl mx-auto font-light drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto font-light drop-shadow-md px-2">
             Where excellence meets innovation in education. Join us in shaping the leaders of tomorrow.
           </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-white text-primary hover:bg-soft-blue text-lg px-8 py-6 rounded-full shadow-2xl hover:shadow-gold/20 transition-all border-2 border-gold"
-                  >
-                    <Link href="/academics" className="flex items-center gap-2 font-semibold">
-                      Explore Programs
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </Button>
-                </motion.div>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-2">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-primary hover:bg-soft-blue text-sm sm:text-base md:text-lg px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6 rounded-full shadow-2xl hover:shadow-gold/20 transition-all border-2 border-gold w-full sm:w-auto"
+              >
+                <Link href="/academics" className="flex items-center justify-center gap-2 font-semibold">
+                  Explore Programs
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Link>
+              </Button>
+            </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-lg px-8 py-6 rounded-full backdrop-blur-md shadow-xl bg-white/10"
-                  >
-                    <Link href="/contact" className="flex items-center gap-2 font-semibold">
-                      Contact Us
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </Button>
-                </motion.div>
-              </div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-sm sm:text-base md:text-lg px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6 rounded-full backdrop-blur-md shadow-xl bg-white/10 w-full sm:w-auto"
+              >
+                <Link href="/contact" className="flex items-center justify-center gap-2 font-semibold">
+                  Contact Us
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 

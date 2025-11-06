@@ -1,7 +1,7 @@
 /**
  * Search Button Component
  * Button that opens the search modal
- * Positioned in navbar
+ * Positioned in navbar with text label for clarity
  */
 
 "use client";
@@ -16,13 +16,12 @@ interface SearchButtonProps {
 export function SearchButton({ onClick }: SearchButtonProps) {
   return (
     <Button
-      variant="ghost"
-      size="icon"
       onClick={onClick}
-      className="relative"
+      className="relative bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-colors flex items-center gap-2 px-4 py-2"
       aria-label="Search"
     >
       <Search className="h-5 w-5" />
+      <span className="hidden md:inline font-medium">Search</span>
     </Button>
   );
 }
