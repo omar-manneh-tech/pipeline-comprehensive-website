@@ -528,11 +528,13 @@ export default function AboutPageManagement() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
-                    {formData.image && (
-                      <div className="mb-4">
-                        <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
-                          <Image
-                            src={typeof formData.image === "string" ? formData.image : ""}
+                    {(() => {
+                      const imageUrl = typeof formData.image === "string" ? formData.image : null;
+                      return imageUrl ? (
+                        <div className="mb-4">
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
+                            <Image
+                              src={imageUrl}
                             alt="History"
                             fill
                             className="object-cover"
@@ -540,7 +542,8 @@ export default function AboutPageManagement() {
                           />
                         </div>
                       </div>
-                    )}
+                      ) : null;
+                    })()}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer">
                         <input
@@ -617,11 +620,13 @@ export default function AboutPageManagement() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
-                    {formData.image && (
-                      <div className="mb-4">
-                        <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
-                          <Image
-                            src={typeof formData.image === "string" ? formData.image : ""}
+                    {(() => {
+                      const imageUrl = typeof formData.image === "string" ? formData.image : null;
+                      return imageUrl ? (
+                        <div className="mb-4">
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
+                            <Image
+                              src={imageUrl}
                             alt="Mission & Vision"
                             fill
                             className="object-cover"
