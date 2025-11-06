@@ -429,7 +429,7 @@ export default function AboutPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Hero title"
                     />
@@ -439,7 +439,7 @@ export default function AboutPageManagement() {
                       Description <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      value={formData.description || ""}
+                      value={(typeof formData.description === "string" ? formData.description : "") || ""}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Hero description"
                       rows={3}
@@ -448,11 +448,13 @@ export default function AboutPageManagement() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Image</label>
-                    {formData.image && (
-                      <div className="mb-4">
-                        <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
-                          <Image
-                            src={formData.image}
+                    {(() => {
+                      const imageUrl = typeof formData.image === "string" ? formData.image : null;
+                      return imageUrl ? (
+                        <div className="mb-4">
+                          <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
+                            <Image
+                              src={imageUrl}
                             alt="Hero banner"
                             fill
                             className="object-cover"
@@ -460,7 +462,8 @@ export default function AboutPageManagement() {
                           />
                         </div>
                       </div>
-                    )}
+                      ) : null;
+                    })()}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer">
                         <input
@@ -479,12 +482,12 @@ export default function AboutPageManagement() {
                           ) : (
                             <>
                               <Upload className="h-4 w-4 mr-2" />
-                              {formData.image ? "Change Image" : "Upload Image"}
+                              {typeof formData.image === "string" && formData.image ? "Change Image" : "Upload Image"}
                             </>
                           )}
                         </Button>
                       </label>
-                      {formData.image && (
+                      {typeof formData.image === "string" && formData.image && (
                         <Button
                           type="button"
                           variant="outline"
@@ -506,7 +509,7 @@ export default function AboutPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
@@ -516,7 +519,7 @@ export default function AboutPageManagement() {
                       Content <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      value={formData.content || ""}
+                      value={(typeof formData.content === "string" ? formData.content : "") || ""}
                       onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                       placeholder="History content..."
                       rows={8}
@@ -529,7 +532,7 @@ export default function AboutPageManagement() {
                       <div className="mb-4">
                         <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
                           <Image
-                            src={formData.image}
+                            src={typeof formData.image === "string" ? formData.image : ""}
                             alt="History"
                             fill
                             className="object-cover"
@@ -556,12 +559,12 @@ export default function AboutPageManagement() {
                           ) : (
                             <>
                               <Upload className="h-4 w-4 mr-2" />
-                              {formData.image ? "Change Image" : "Upload Image"}
+                              {typeof formData.image === "string" && formData.image ? "Change Image" : "Upload Image"}
                             </>
                           )}
                         </Button>
                       </label>
-                      {formData.image && (
+                      {typeof formData.image === "string" && formData.image && (
                         <Button
                           type="button"
                           variant="outline"
@@ -583,7 +586,7 @@ export default function AboutPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
@@ -593,7 +596,7 @@ export default function AboutPageManagement() {
                       Mission <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      value={formData.mission || ""}
+                      value={(typeof formData.mission === "string" ? formData.mission : "") || ""}
                       onChange={(e) => setFormData({ ...formData, mission: e.target.value })}
                       placeholder="Mission statement..."
                       rows={4}
@@ -605,7 +608,7 @@ export default function AboutPageManagement() {
                       Vision <span className="text-red-500">*</span>
                     </label>
                     <textarea
-                      value={formData.vision || ""}
+                      value={(typeof formData.vision === "string" ? formData.vision : "") || ""}
                       onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
                       placeholder="Vision statement..."
                       rows={4}
@@ -618,7 +621,7 @@ export default function AboutPageManagement() {
                       <div className="mb-4">
                         <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-gray-200">
                           <Image
-                            src={formData.image}
+                            src={typeof formData.image === "string" ? formData.image : ""}
                             alt="Mission & Vision"
                             fill
                             className="object-cover"
@@ -645,12 +648,12 @@ export default function AboutPageManagement() {
                           ) : (
                             <>
                               <Upload className="h-4 w-4 mr-2" />
-                              {formData.image ? "Change Image" : "Upload Image"}
+                              {typeof formData.image === "string" && formData.image ? "Change Image" : "Upload Image"}
                             </>
                           )}
                         </Button>
                       </label>
-                      {formData.image && (
+                      {typeof formData.image === "string" && formData.image && (
                         <Button
                           type="button"
                           variant="outline"
@@ -673,7 +676,7 @@ export default function AboutPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
