@@ -470,7 +470,8 @@ export default function AdmissionsPageManagement() {
                           />
                         </div>
                       </div>
-                    )}
+                      ) : null;
+                    })()}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer">
                         <input
@@ -516,7 +517,7 @@ export default function AdmissionsPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
