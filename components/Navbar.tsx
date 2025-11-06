@@ -148,6 +148,24 @@ export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [navLinks, setNavLinks] = useState<NavLink[]>(fallbackNavLinks);
   const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    return () => {
+      setSearchOpen(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (searchOpen) {
+      document.body.classList.add("search-active");
+    } else {
+      document.body.classList.remove("search-active");
+    }
+
+    return () => {
+      document.body.classList.remove("search-active");
+    };
+  }, [searchOpen]);
 
   useEffect(() => {
     // Fetch navigation from CMS API
@@ -320,8 +338,12 @@ export function Navbar() {
           )}
 
           {/* Search & Mobile Menu Button */}
-          <div className="flex items-center gap-2">
-            <SearchButton onClick={() => setSearchOpen(true)} />
+          <div className="flex items-center gap-2 relative">
+            <SearchButton
+              onClick={() => {
+                setSearchOpen(true);
+              }}
+            />
             <Button
               variant="ghost"
               size="icon"
@@ -441,7 +463,12 @@ export function Navbar() {
       </div>
 
       {/* Search Modal */}
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => {
+          setSearchOpen(false);
+        }}
+      />
     </nav>
   );
 }

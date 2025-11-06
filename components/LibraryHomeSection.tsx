@@ -164,10 +164,10 @@ export function LibraryHomeSection() {
                 <Button
                   asChild
                   variant="outline"
-                  className="group/button w-auto border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-xs sm:text-sm md:text-base px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full backdrop-blur-md shadow-xl bg-primary transition-all duration-300"
+                  className="group/button w-auto border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-sm sm:text-base md:text-lg px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6 rounded-full backdrop-blur-md shadow-xl bg-primary transition-all duration-300"
                 >
-                  <Link href="/library" className="flex items-center justify-center gap-1.5 sm:gap-2 font-semibold">
-                    <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover/button:translate-x-1 transition-transform" />
+                  <Link href="/library" className="flex items-center justify-center gap-2 font-semibold">
+                    <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 group-hover/button:translate-x-1 transition-transform" />
                     Explore Library
                   </Link>
                 </Button>

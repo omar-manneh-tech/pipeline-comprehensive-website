@@ -10,10 +10,10 @@ import Image from "next/image";
 
 export function HeroBanner() {
   return (
-    <section className="relative h-[50vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[50vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] flex items-center justify-center overflow-hidden banner-section">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10 banner-overlay" />
         <Image
           src="/images/gallery/science_fair_day.png"
           alt="Blog - Insights and Stories"
@@ -33,11 +33,11 @@ export function HeroBanner() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto px-2 sm:px-4"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg banner-text">
             Blog
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-white/95 mb-3 sm:mb-4 max-w-2xl mx-auto font-light drop-shadow-md px-2">
-            Insights, Stories, and Educational Resources
+          <p className="text-base sm:text-lg md:text-xl mb-3 sm:mb-4 text-white/95 max-w-2xl mx-auto drop-shadow-md px-2 banner-text">
+            Insights, stories, and updates from Daddy Jobe Comprehensive School
           </p>
         </motion.div>
       </div>

@@ -80,7 +80,7 @@ export function Footer() {
   return (
     <footer className="bg-navy text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-7 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7 md:gap-8">
           {/* Brand Column */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3 group">
@@ -208,38 +208,37 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Search Section */}
-          <div>
+          {/* Search & Contact */}
+          <div className="flex flex-col gap-8">
             <FooterSearch />
-          </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-sm mb-4">Contact Us</h3>
-            <ul className="space-y-3 text-sm text-gray-300">
-              <li className="flex items-start gap-2">
-                <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                <span>{siteConfig.links.address}</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-5 w-5 text-gold flex-shrink-0" />
-                <a
-                  href={`mailto:${siteConfig.links.email}`}
-                  className="hover:text-gold transition-colors"
-                >
-                  {siteConfig.links.email}
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-5 w-5 text-gold flex-shrink-0" />
-                <a
-                  href={`tel:${siteConfig.links.phone}`}
-                  className="hover:text-gold transition-colors"
-                >
-                  {siteConfig.links.phone}
-                </a>
-              </li>
-            </ul>
+            <div>
+              <h3 className="font-semibold text-sm mb-4">Contact Us</h3>
+              <ul className="space-y-3 text-sm text-gray-300">
+                <li className="flex items-start gap-2">
+                  <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
+                  <span>{siteConfig.links.address}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="h-5 w-5 text-gold flex-shrink-0" />
+                  <a
+                    href={`mailto:${siteConfig.links.email}`}
+                    className="hover:text-gold transition-colors"
+                  >
+                    {siteConfig.links.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Phone className="h-5 w-5 text-gold flex-shrink-0" />
+                  <a
+                    href={`tel:${siteConfig.links.phone}`}
+                    className="hover:text-gold transition-colors"
+                  >
+                    {siteConfig.links.phone}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 

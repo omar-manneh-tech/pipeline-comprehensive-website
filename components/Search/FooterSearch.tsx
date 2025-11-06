@@ -97,14 +97,14 @@ export function FooterSearch() {
   };
 
   return (
-    <div className="relative" ref={searchRef}>
-      <div className="space-y-3">
+    <div className="relative w-full" ref={searchRef}>
+      <div className="space-y-3 w-full">
         <h3 className="font-semibold text-sm mb-4">Search Our Website</h3>
         
         {/* Search Input */}
-        <div className="relative">
+        <div className="relative w-full max-w-full">
           <div
-            className={`relative flex items-center gap-3 bg-white/10 backdrop-blur-sm border-2 rounded-lg px-4 py-3 transition-all duration-300 ${
+            className={`relative flex items-center gap-3 bg-white/10 backdrop-blur-sm border-2 rounded-lg px-6 py-2 transition-all duration-300 w-full max-w-full ${
               isFocused
                 ? "border-gold shadow-lg shadow-gold/20 bg-white/15"
                 : "border-white/20 hover:border-white/30"
@@ -126,7 +126,7 @@ export function FooterSearch() {
                 setTimeout(() => setIsFocused(false), 200);
               }}
               placeholder="Search pages, programs, content..."
-              className="flex-1 bg-transparent outline-none text-white placeholder-gray-300 text-sm"
+              className="flex-1 bg-transparent outline-none text-white placeholder-gray-300 text-sm min-w-0"
             />
             {query && (
               <button

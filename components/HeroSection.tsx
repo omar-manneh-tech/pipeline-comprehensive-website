@@ -8,10 +8,13 @@ import { ArrowRight, GraduationCap } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[100vh] flex items-center justify-center overflow-hidden">
+    <section
+      id="hero-section"
+      className="relative h-screen min-h-[600px] max-h-[100vh] flex items-center justify-center overflow-hidden"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10 hero-overlay" />
         <Image
           src="/images/hero/hero-main.png"
           alt="Daddy Jobe Comprehensive School - Empowering Future Leaders"
@@ -40,11 +43,11 @@ export function HeroSection() {
             <GraduationCap className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 mx-auto text-white/90 mb-3 sm:mb-4" />
           </motion.div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg px-2">
+          <h1 className="hero-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg px-2">
             Empowering Future Leaders
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto font-light drop-shadow-md px-2">
+          <p className="hero-text text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto font-light drop-shadow-md px-2">
             Where excellence meets innovation in education. Join us in shaping the leaders of tomorrow.
           </p>
 
