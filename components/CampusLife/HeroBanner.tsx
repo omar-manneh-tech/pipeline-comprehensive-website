@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export function HeroBanner() {
   return (
-    <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[50vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-primary/80 to-navy/70 z-10" />
@@ -33,10 +33,10 @@ export function HeroBanner() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto px-2 sm:px-4"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
             Campus Life
           </h1>
-          <p className="text-xl md:text-2xl text-white/95 mb-6 max-w-2xl mx-auto font-light drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-xl text-white/95 mb-3 sm:mb-4 max-w-2xl mx-auto font-light drop-shadow-md px-2">
             A Vibrant Community Where Learning Meets Life
           </p>
         </motion.div>
