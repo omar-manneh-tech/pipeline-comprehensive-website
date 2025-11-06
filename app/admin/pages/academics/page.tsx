@@ -551,7 +551,7 @@ export default function AcademicsPageManagement() {
                       Title <span className="text-red-500">*</span>
                     </label>
                     <Input
-                      value={formData.title || ""}
+                      value={(typeof formData.title === "string" ? formData.title : "") || ""}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                       placeholder="Section title"
                     />
