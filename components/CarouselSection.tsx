@@ -94,7 +94,7 @@ export function CarouselSection({ events: propEvents = schoolEvents }: CarouselS
           <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-2xl">
             {events.map((event, index) => (
               <motion.div
-                key={('id' in event ? event.id : undefined) || index}
+                key={('id' in event && (typeof event.id === 'string' || typeof event.id === 'number') ? event.id : index)}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: index === currentIndex ? 1 : 0,

@@ -72,7 +72,7 @@ interface CountUpCardProps {
 
 function CountUpCard({ tile, index }: CountUpCardProps) {
   // Get icon component dynamically
-  const IconComponent = (LucideIcons as Record<string, React.ComponentType<{ className?: string }>>)[tile.icon] || LucideIcons.Users;
+  const IconComponent = (LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[tile.icon] || LucideIcons.Users;
 
   const { formattedCount, ref } = useCountUp({
     end: tile.number,

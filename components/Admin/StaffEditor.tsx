@@ -58,19 +58,19 @@ export function StaffEditor({ staffId }: StaffEditorProps) {
       if (response.success) {
         const staff = response.data;
         setFormData({
-          name: staff.name,
-          role: staff.role,
-          department: staff.department || "",
-          position: staff.position,
-          bio: staff.bio,
-          image: staff.image || "",
-          email: staff.email || "",
-          phone: staff.phone || "",
+          name: typeof staff.name === "string" ? staff.name : "",
+          role: typeof staff.role === "string" ? staff.role : "Faculty",
+          department: typeof staff.department === "string" ? staff.department : "",
+          position: typeof staff.position === "string" ? staff.position : "",
+          bio: typeof staff.bio === "string" ? staff.bio : "",
+          image: typeof staff.image === "string" ? staff.image : "",
+          email: typeof staff.email === "string" ? staff.email : "",
+          phone: typeof staff.phone === "string" ? staff.phone : "",
           qualifications: Array.isArray(staff.qualifications)
             ? staff.qualifications
             : [],
-          experience: staff.experience || undefined,
-          published: staff.published || false,
+          experience: typeof staff.experience === "number" ? staff.experience : undefined,
+          published: typeof staff.published === "boolean" ? staff.published : false,
         });
       }
     } catch (error) {
