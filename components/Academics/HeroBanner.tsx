@@ -36,10 +36,10 @@ export function HeroBanner() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
             Academics
           </h1>
-          <p className="text-lg md:text-xl text-white/95 mb-3 max-w-2xl mx-auto font-light drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-xl text-white/95 mb-2 sm:mb-3 max-w-2xl mx-auto font-light drop-shadow-md px-2">
             Excellence in Senior Secondary Education
           </p>
-          <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto drop-shadow-md px-2">
             Preparing students for WASSCE exams and university admission through Science, Commerce, and Arts programs
           </p>
         </motion.div>

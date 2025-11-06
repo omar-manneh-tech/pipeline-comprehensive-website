@@ -31,9 +31,9 @@ export function HeroBanner() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto px-2 sm:px-4 px-2 sm:px-4"
+          className="max-w-4xl mx-auto px-2 sm:px-4"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-3 sm:mb-4 leading-tight drop-shadow-lg">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
             About Us
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-white/95 mb-3 sm:mb-4 max-w-2xl mx-auto font-light drop-shadow-md px-2">

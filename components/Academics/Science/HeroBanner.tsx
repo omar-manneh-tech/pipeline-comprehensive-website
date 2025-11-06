@@ -36,10 +36,10 @@ export function HeroBanner() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
             Science Program
           </h1>
-          <p className="text-lg md:text-xl text-white/95 mb-3 max-w-2xl mx-auto font-light drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-xl text-white/95 mb-2 sm:mb-3 max-w-2xl mx-auto font-light drop-shadow-md px-2">
             Preparing Future Scientists, Engineers, and Healthcare Professionals
           </p>
-          <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-sm sm:text-base text-white/90 max-w-2xl mx-auto drop-shadow-md px-2">
             A comprehensive curriculum designed to excel in WASSCE and prepare for university-level science programs
           </p>
         </motion.div>
