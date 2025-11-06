@@ -59,9 +59,9 @@ export function BlogEditor({ postId }: BlogEditorProps) {
       if (response.success) {
         const post = response.data;
         setFormData({
-          slug: post.slug,
-          title: post.title,
-          excerpt: post.excerpt,
+          slug: typeof post.slug === "string" ? post.slug : "",
+          title: typeof post.title === "string" ? post.title : "",
+          excerpt: typeof post.excerpt === "string" ? post.excerpt : "",
           content: post.content,
           image: post.image,
           category: post.category,
