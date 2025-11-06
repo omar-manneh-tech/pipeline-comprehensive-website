@@ -11,7 +11,7 @@ export function HeroSection() {
     <section className="relative h-screen min-h-[600px] max-h-[100vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-primary/65 to-navy/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10" />
         <Image
           src="/images/hero/hero-main.png"
           alt="Daddy Jobe Comprehensive School - Empowering Future Leaders"

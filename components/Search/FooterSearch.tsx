@@ -99,7 +99,7 @@ export function FooterSearch() {
   return (
     <div className="relative" ref={searchRef}>
       <div className="space-y-3">
-        <h3 className="font-semibold text-lg mb-4">Search Our Website</h3>
+        <h3 className="font-semibold text-sm mb-4">Search Our Website</h3>
         
         {/* Search Input */}
         <div className="relative">

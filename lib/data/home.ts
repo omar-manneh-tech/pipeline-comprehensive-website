@@ -96,22 +96,17 @@ export const testimonials: Testimonial[] = [
 export const studentActivities: Activity[] = [
   {
     title: "Sports & Athletics",
-    description: "Competitive sports and physical excellence",
+    description: "Our students excel in competitive sports and physical activities, building teamwork, discipline, and resilience. From track and field to football, basketball, and volleyball, we celebrate athletic excellence and sportsmanship. Regular training sessions, inter-school competitions, and annual sports day events provide opportunities for students to showcase their talents and develop leadership skills.",
     image: "/images/gallery/sport_day.png",
   },
   {
-    title: "Science Fair",
-    description: "Innovation and scientific discovery",
-    image: "/images/gallery/science_fair_day.png",
-  },
-  {
     title: "Cultural Celebrations",
-    description: "Embracing diversity and tradition",
+    description: "We embrace the rich diversity of our community through vibrant cultural celebrations and festivals. Students participate in traditional dances, music performances, art exhibitions, and cultural showcases that honor our heritage. These events foster unity, respect, and appreciation for different cultures while creating lasting memories and strengthening our school community bonds.",
     image: "/images/gallery/cultural_day.png",
   },
   {
     title: "Graduation Day",
-    description: "Celebrating achievements and milestones",
+    description: "Graduation Day is a momentous occasion where we celebrate the achievements and milestones of our graduating students. This special ceremony honors years of hard work, dedication, and growth. Families, teachers, and students come together to recognize academic excellence, personal development, and the bright futures ahead. It's a day filled with pride, joy, and inspiration for the entire school community.",
     image: "/images/gallery/graduation_day.png",
   },
 ];

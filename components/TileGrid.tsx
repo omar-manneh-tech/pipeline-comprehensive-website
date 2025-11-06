@@ -88,7 +88,7 @@ function CountUpCard({ tile, index }: CountUpCardProps) {
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -8, scale: 1.02 }}
     >
-      <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-gold group">
+      <Card className="h-full hover:shadow-lg transition-all duration-300 border-2 border-gold/50 bg-white/10 backdrop-blur-md group">
         <CardContent className="p-6 text-center">
           <div className={`w-16 h-16 mx-auto mb-4 ${tile.bgColor} rounded-full shadow-lg flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
             <IconComponent className={`h-8 w-8 ${tile.color} transition-transform duration-500 group-hover:rotate-[360deg]`} />
@@ -97,14 +97,14 @@ function CountUpCard({ tile, index }: CountUpCardProps) {
             ref={ref}
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.1 }}
-            className="text-4xl font-bold text-gray-900 mb-2"
+            className="text-4xl font-bold text-white mb-2 drop-shadow-lg"
           >
             {formattedCount}
           </motion.div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+          <h3 className="text-xl font-semibold text-white mb-2 drop-shadow-md">
             {tile.title}
           </h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-white/90 drop-shadow-md">
             {tile.description}
           </p>
         </CardContent>
@@ -163,12 +163,20 @@ export function TileGrid() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
             At a Glance
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover what makes Daddy Jobe Comprehensive School a leader in education
-          </p>
+          <div className="max-w-4xl mx-auto space-y-4 text-white/95 drop-shadow-md">
+            <p className="text-lg md:text-xl leading-relaxed">
+              Discover what makes Daddy Jobe Comprehensive School a leader in education. Our commitment to excellence is reflected in every number, every achievement, and every student success story.
+            </p>
+            <p className="text-base md:text-lg leading-relaxed">
+              From our diverse student body to our dedicated educators, from our extensive library resources to our outstanding academic performance — these statistics represent more than just numbers. They represent years of dedication, innovation, and unwavering commitment to nurturing the next generation of leaders, thinkers, and change-makers.
+            </p>
+            <p className="text-base md:text-lg leading-relaxed font-medium">
+              Join us in celebrating excellence in education, where every student matters, every achievement counts, and every dream is within reach.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">

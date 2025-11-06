@@ -13,7 +13,7 @@ export function HeroBanner() {
     <section className="relative h-[50vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-primary/80 to-navy/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10" />
         <Image
           src="/images/gallery/sports_day.jpg"
           alt="Campus Life at Daddy Jobe Comprehensive School"

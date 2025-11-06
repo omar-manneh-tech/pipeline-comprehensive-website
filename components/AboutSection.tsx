@@ -38,20 +38,22 @@ export function AboutSection() {
                 Students can choose from three specialized programs: <strong>Science</strong>, <strong>Commerce</strong>, or <strong>Arts</strong>, each designed to align with their career aspirations and academic interests.
               </p>
             </div>
-            <motion.div
-              variants={hoverScale}
-            >
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white border-2 border-gold hover:border-gold/80 mt-6"
+            <div className="flex justify-center mt-6">
+              <motion.div
+                variants={hoverScale}
               >
-                <Link href="/about" className="flex items-center gap-2 font-semibold">
-                  Learn More About Our Journey
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-            </motion.div>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="group/button w-auto border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-xs sm:text-sm md:text-base px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full backdrop-blur-md shadow-xl bg-primary transition-all duration-300"
+                >
+                  <Link href="/about" className="flex items-center justify-center gap-1.5 sm:gap-2 font-semibold">
+                    Learn More About Our Journey
+                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover/button:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Image - Right */}

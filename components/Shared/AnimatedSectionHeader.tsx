@@ -34,7 +34,7 @@ export function AnimatedSectionHeader({
       className={`text-center mb-12 ${className}`}
     >
       <h2
-        className={`text-3xl md:text-4xl font-bold text-navy mb-4 ${titleClassName}`}
+        className={`text-3xl md:text-4xl font-bold mb-4 ${titleClassName || "text-navy"}`}
       >
         {title}
       </h2>

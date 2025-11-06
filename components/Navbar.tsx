@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Home, Info, GraduationCap, FileText, BookOpen, Phone, LogIn, Building, Users, Library, Images as ImageIcon, Newspaper, FlaskConical, Briefcase, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { SearchButton } from "@/components/Search/SearchButton";
@@ -30,6 +30,70 @@ interface NavLink {
   target?: string;
   visible?: boolean;
 }
+
+// Function to get icon for each menu item
+const getMenuIcon = (label: string, size: "sm" | "md" = "md") => {
+  const iconSize = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
+  const iconProps = { className: `${iconSize} inline-block mr-1.5 flex-shrink-0` };
+  switch (label.toLowerCase()) {
+    case "home":
+      return <Home {...iconProps} />;
+    case "about":
+      return <Info {...iconProps} />;
+    case "academics":
+      return <GraduationCap {...iconProps} />;
+    case "admissions":
+      return <FileText {...iconProps} />;
+    case "blog":
+      return <BookOpen {...iconProps} />;
+    case "contact":
+      return <Phone {...iconProps} />;
+    case "portal":
+      return <LogIn {...iconProps} />;
+    default:
+      return null;
+  }
+};
+
+// Function to get icon for submenu items
+const getSubmenuIcon = (label: string, size: "sm" | "md" = "md") => {
+  const iconSize = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
+  const iconProps = { className: `${iconSize} inline-block mr-2 flex-shrink-0` };
+  const lowerLabel = label.toLowerCase();
+  
+  // About submenu items
+  if (lowerLabel.includes("about us") || lowerLabel === "about us") {
+    return <Info {...iconProps} />;
+  }
+  if (lowerLabel.includes("campus life") || lowerLabel === "campus life") {
+    return <Building {...iconProps} />;
+  }
+  if (lowerLabel.includes("staff") || lowerLabel === "staff") {
+    return <Users {...iconProps} />;
+  }
+  if (lowerLabel.includes("library") || lowerLabel === "library") {
+    return <Library {...iconProps} />;
+  }
+  if (lowerLabel.includes("gallery") || lowerLabel === "gallery") {
+    return <ImageIcon {...iconProps} />;
+  }
+  if (lowerLabel.includes("news") || lowerLabel.includes("events")) {
+    return <Newspaper {...iconProps} />;
+  }
+  
+  // Academics submenu items
+  if (lowerLabel.includes("science")) {
+    return <FlaskConical {...iconProps} />;
+  }
+  if (lowerLabel.includes("commerce")) {
+    return <Briefcase {...iconProps} />;
+  }
+  if (lowerLabel.includes("arts")) {
+    return <Palette {...iconProps} />;
+  }
+  
+  return null;
+};
 
 // Fallback navigation links (used if API fails)
 const fallbackNavLinks: NavLink[] = [
@@ -151,7 +215,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-sm shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/10 backdrop-blur-md shadow-xl">
       <div className="container mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex h-16 sm:h-18 md:h-20 items-center justify-between gap-2 sm:gap-4">
           {/* Logo */}
@@ -161,20 +225,22 @@ export function Navbar() {
               transition={{ type: "spring", stiffness: 400 }}
               className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 flex-shrink-0 rounded-full overflow-hidden bg-white border-2 border-gold shadow-lg p-1.5 sm:p-2"
             >
-              <Image
-                src={siteConfig.logo}
-                alt={`${siteConfig.name} Logo`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, 64px"
-                priority
-              />
+              {siteConfig.logo && (
+                <Image
+                  src={siteConfig.logo}
+                  alt={`${siteConfig.name} Logo`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, 64px"
+                  priority
+                />
+              )}
             </motion.div>
             <div className="flex flex-col leading-tight min-w-0">
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-navy truncate">
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white truncate">
                 {siteConfig.shortName}
               </span>
-              <span className="text-[10px] sm:text-xs md:text-sm text-gray-600 font-medium truncate">
+              <span className="text-[10px] sm:text-xs md:text-sm text-white/90 font-medium truncate">
                 Comprehensive School
               </span>
             </div>
@@ -190,17 +256,18 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       target={link.target || "_self"}
-                      className={`px-2 md:px-3 lg:px-4 py-2 text-xs md:text-sm font-medium transition-colors relative whitespace-nowrap ${
+                      className={`px-2 md:px-3 lg:px-4 py-2 text-xs md:text-sm font-medium transition-all duration-300 relative whitespace-nowrap flex items-center hover:scale-110 ${
                         isActive(link.href, link.submenu)
-                          ? "text-primary after:absolute after:bottom-0 after:left-2 md:after:left-3 lg:after:left-4 after:right-2 md:after:right-3 lg:after:right-4 after:h-0.5 after:bg-primary"
-                          : "text-gray-700 hover:text-primary"
+                          ? "text-gold after:absolute after:bottom-0 after:left-2 md:after:left-3 lg:after:left-4 after:right-2 md:after:right-3 lg:after:right-4 after:h-0.5 after:bg-gold"
+                          : "text-white hover:text-gold"
                       }`}
                       onMouseEnter={() => link.submenu && setOpenSubmenu(link.label)}
                       onMouseLeave={() => setOpenSubmenu(null)}
                     >
-                      {link.label}
+                      {getMenuIcon(link.label, "md")}
+                      <span>{link.label}</span>
                       {link.submenu && (
-                        <ChevronDown className="inline-block ml-0.5 md:ml-1 h-3 w-3 md:h-4 md:w-4" />
+                        <ChevronDown className="inline-block ml-0.5 md:ml-1 h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:rotate-180" />
                       )}
                     </Link>
 
@@ -213,19 +280,23 @@ export function Navbar() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                            className="absolute top-full left-0 mt-2 w-56 bg-white/10 backdrop-blur-md rounded-lg shadow-xl border border-white/20 py-2 z-50"
                             onMouseEnter={() => setOpenSubmenu(link.label)}
                             onMouseLeave={() => setOpenSubmenu(null)}
                           >
-                            {link.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors"
-                              >
-                                {subItem.label}
-                              </Link>
-                            ))}
+                            {link.submenu.map((subItem) => {
+                              const icon = getSubmenuIcon(subItem.label, "md");
+                              return (
+                                <Link
+                                  key={subItem.href}
+                                  href={subItem.href}
+                                  className="flex items-center px-4 py-2 text-sm text-white hover:bg-white/20 hover:text-gold transition-all duration-300 hover:scale-105"
+                                >
+                                  {icon || null}
+                                  <span>{subItem.label}</span>
+                                </Link>
+                              );
+                            })}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -237,9 +308,12 @@ export function Navbar() {
               {navLinks.find((link) => link.href === "/portal") && (
                 <Button
                   asChild
-                  className="bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-colors"
+                  className="bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-all duration-300 hover:scale-110 flex items-center gap-2"
                 >
-                  <Link href="/portal">Portal</Link>
+                  <Link href="/portal" className="flex items-center gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Portal
+                  </Link>
                 </Button>
               )}
             </div>
@@ -251,7 +325,7 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-white hover:text-gold hover:bg-white/10"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -268,7 +342,7 @@ export function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden border-t"
+              className="md:hidden overflow-hidden border-t border-white/20 bg-white/10 backdrop-blur-md"
             >
               <div className="py-4 space-y-2">
                 {!loading &&
@@ -280,10 +354,10 @@ export function Navbar() {
                           <Link
                             href={link.href}
                             target={link.target || "_self"}
-                            className={`block px-4 py-2 text-sm font-medium ${
+                            className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
                               isActive(link.href, link.submenu)
-                                ? "text-primary"
-                                : "text-gray-700"
+                                ? "text-gold"
+                                : "text-white"
                             }`}
                             onClick={() => {
                               if (!link.submenu) {
@@ -291,13 +365,14 @@ export function Navbar() {
                               }
                             }}
                           >
-                            {link.label}
+                            {getMenuIcon(link.label, "sm")}
+                            <span>{link.label}</span>
                           </Link>
                           {link.submenu && (
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-8 w-8"
+                              className="h-8 w-8 text-white hover:text-gold hover:bg-white/10"
                               onClick={() =>
                                 setMobileSubmenuOpen(
                                   mobileSubmenuOpen === link.label ? null : link.label
@@ -322,16 +397,20 @@ export function Navbar() {
                                 className="overflow-hidden"
                               >
                                 <div className="pl-8 py-2 space-y-1">
-                                  {link.submenu.map((subItem) => (
-                                    <Link
-                                      key={subItem.href}
-                                      href={subItem.href}
-                                      className="block px-4 py-2 text-sm text-gray-600 hover:text-primary transition-colors"
-                                      onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                      {subItem.label}
-                                    </Link>
-                                  ))}
+                                  {link.submenu.map((subItem) => {
+                                    const icon = getSubmenuIcon(subItem.label, "sm");
+                                    return (
+                                      <Link
+                                        key={subItem.href}
+                                        href={subItem.href}
+                                        className="flex items-center px-4 py-2 text-sm text-white/90 hover:text-gold transition-all duration-300 hover:scale-105"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                      >
+                                        {icon || null}
+                                        <span>{subItem.label}</span>
+                                      </Link>
+                                    );
+                                  })}
                                 </div>
                               </motion.div>
                             )}
@@ -345,10 +424,13 @@ export function Navbar() {
                   <div className="px-4 py-2">
                     <Button
                       asChild
-                      className="w-full bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-colors"
+                      className="w-full bg-primary hover:bg-gold text-white border-2 border-gold hover:border-gold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <Link href="/portal">Portal</Link>
+                      <Link href="/portal" className="flex items-center gap-2">
+                        <LogIn className="h-4 w-4" />
+                        Portal
+                      </Link>
                     </Button>
                   </div>
                 )}

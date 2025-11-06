@@ -150,7 +150,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">
+            <h3 className="font-semibold text-sm mb-4">
               {quickLinksSection?.title || "Quick Links"}
             </h3>
             <ul className="space-y-2">
@@ -180,7 +180,7 @@ export function Footer() {
 
           {/* Programs */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">
+            <h3 className="font-semibold text-sm mb-4">
               {programsSection?.title || "Programs"}
             </h3>
             <ul className="space-y-2">
@@ -215,7 +215,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
+            <h3 className="font-semibold text-sm mb-4">Contact Us</h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />

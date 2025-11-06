@@ -89,15 +89,19 @@ export function LibraryHomeSection() {
             transition={transitions.default}
             className="relative h-[500px] md:h-[600px] rounded-lg overflow-hidden shadow-2xl order-1"
           >
-            <Image
-              src="/images/library/library-interior.jpg"
-              alt="Daddy Jobe Comprehensive School Library - Modern Learning Space with Books and Study Areas"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              quality={90}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/library/library-interior.jpg"
+                alt="Daddy Jobe Comprehensive School Library - Modern Learning Space with Books and Study Areas"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={90}
+                priority
+                unoptimized={true}
+              />
+            </div>
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
           </motion.div>
 
           {/* Text Content - Right (Desktop) / Below (Mobile) */}
@@ -150,23 +154,25 @@ export function LibraryHomeSection() {
               </ul>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportConfig}
-              transition={transitions.default}
-            >
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white border-2 border-gold hover:border-gold/80 mt-6"
+            <div className="flex justify-center mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewportConfig}
+                transition={transitions.default}
               >
-                <Link href="/library" className="flex items-center gap-2 font-semibold">
-                  <BookOpen className="h-5 w-5" />
-                  📖 Explore Library
-                </Link>
-              </Button>
-            </motion.div>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="group/button w-auto border-2 border-gold text-white hover:bg-white hover:text-primary hover:border-gold text-xs sm:text-sm md:text-base px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full backdrop-blur-md shadow-xl bg-primary transition-all duration-300"
+                >
+                  <Link href="/library" className="flex items-center justify-center gap-1.5 sm:gap-2 font-semibold">
+                    <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover/button:translate-x-1 transition-transform" />
+                    Explore Library
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

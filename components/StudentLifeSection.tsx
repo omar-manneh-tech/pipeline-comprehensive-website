@@ -21,7 +21,7 @@ const studentLifeDescription = (
     <p>
       Through clubs and societies, they discover new passions. Through service projects, they learn empathy. And through every experience, they grow into confident, responsible young adults ready to shape the future.
     </p>
-    <p className="font-medium text-navy">
+    <p className="font-medium text-gray-200">
       The school&apos;s inclusive environment ensures that every learner — regardless of background or interest — finds a place to belong, contribute, and excel.
     </p>
   </>
@@ -33,14 +33,15 @@ export function StudentLifeSection({ activities = studentActivities }: StudentLi
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Life at Daddy Jobe"
+          titleClassName="bg-gradient-to-r from-white via-gold to-white bg-clip-text text-transparent drop-shadow-lg font-extrabold"
           description={
-            <div className="max-w-4xl mx-auto space-y-4 text-gray-700 leading-relaxed">
+            <div className="max-w-4xl mx-auto space-y-4 text-gray-200 leading-relaxed">
               {studentLifeDescription}
             </div>
           }
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {activities.map((activity, index) => (
             <motion.div
               key={activity.title}
@@ -51,21 +52,26 @@ export function StudentLifeSection({ activities = studentActivities }: StudentLi
               variants={hoverLift}
               className="group"
             >
-              <div className="relative h-[300px] rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer">
+              <div className="relative h-[400px] md:h-[450px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer">
                 <Image
                   src={activity.image}
                   alt={activity.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   quality={90}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold mb-2 drop-shadow-lg">
+                <div className="absolute inset-0" style={{
+                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.70) 100%)'
+                }}>
+                  <div className="absolute inset-0 border-t border-white/20" style={{ top: '50%' }} />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-black/70" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 drop-shadow-lg">
                     {activity.title}
                   </h3>
-                  <p className="text-sm text-white/90 drop-shadow-md">
+                  <p className="text-base md:text-lg text-white/95 drop-shadow-md leading-relaxed line-clamp-4">
                     {activity.description}
                   </p>
                 </div>

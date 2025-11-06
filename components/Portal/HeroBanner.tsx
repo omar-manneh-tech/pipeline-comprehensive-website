@@ -13,7 +13,7 @@ export function HeroBanner() {
     <section className="relative h-[50vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/75 via-primary/65 to-navy/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-primary/75 to-navy/80 z-10" />
         <Image
           src="/images/academics/science_lab.png"
           alt="School Portal - Digital Access"
