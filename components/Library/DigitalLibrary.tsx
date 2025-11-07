@@ -76,11 +76,23 @@ export function DigitalLibrary() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Digital Library System"
-          description="Bringing the entire library experience to your fingertips"
+          description={
+            <div className="space-y-3 text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              <p>
+                Bringing the entire library experience to your fingertips means more than just digital access. Our platform empowers students to research, collaborate, and immerse themselves in knowledge anytime, anywhere.
+              </p>
+              <p>
+                With intuitive search tools, personalized recommendations, and seamless reservation features, every learner can curate resources that fit their pace, interests, and academic goals.
+              </p>
+              <p>
+                From e-books and scholarly journals to multimedia archives, the Daddy Jobe digital library transforms curiosity into discovery, making deep learning possible even beyond the shelves.
+              </p>
+            </div>
+          }
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -94,17 +106,17 @@ export function DigitalLibrary() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.15 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
-                  <CardContent className="p-6 text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className={`${feature.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-8 w-8 ${feature.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                <Card className="h-full bg-white border-none transition-all duration-300 group">
+                  <CardContent className="p-6 text-center space-y-4">
+                    <div className="flex justify-center">
+                      <div className="p-4 rounded-full border-2 border-blue-500/80 bg-transparent transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Icon className="h-8 w-8 text-blue-600 transition-colors duration-500 group-hover:text-gold" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-navy mb-3">
+                    <h3 className="text-xl font-bold text-navy">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-700 text-sm">
                       {feature.description}
                     </p>
                   </CardContent>

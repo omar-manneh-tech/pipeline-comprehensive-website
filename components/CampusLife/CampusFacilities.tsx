@@ -84,7 +84,19 @@ export function CampusFacilities() {
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Campus Facilities"
-          description="Modern facilities designed to support learning, growth, and student well-being"
+          description={
+            <div className="space-y-4 text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              <p>
+                Modern facilities designed to support learning, growth, and student well-being create an environment where every learner feels inspired to reach their potential.
+              </p>
+              <p>
+                From technology-enabled classrooms and collaborative study lounges to serene outdoor spaces, Daddy Jobe’s infrastructure is purpose-built to encourage curiosity, creativity, and community.
+              </p>
+              <p>
+                Comprehensive safety measures, dedicated staff, and thoughtfully designed spaces ensure students thrive academically while enjoying every moment of their campus experience.
+              </p>
+            </div>
+          }
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
@@ -98,11 +110,11 @@ export function CampusFacilities() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
+                <Card className="h-full border-none hover:shadow-lg transition-all group">
                   <CardContent className="p-6">
                     <div className="flex justify-center mb-4">
-                      <div className={`${facility.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-8 w-8 ${facility.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                      <div className="p-4 rounded-full border-2 border-navy/80 bg-transparent shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Icon className="h-8 w-8 text-navy transition-transform duration-500 group-hover:rotate-[360deg]" />
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-navy mb-3 text-center">

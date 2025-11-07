@@ -82,6 +82,9 @@ const getSubmenuIcon = (label: string, size: "sm" | "md" = "md") => {
   }
   
   // Academics submenu items
+  if (lowerLabel.includes("academy")) {
+    return <GraduationCap {...iconProps} />;
+  }
   if (lowerLabel.includes("science")) {
     return <FlaskConical {...iconProps} />;
   }
@@ -117,6 +120,7 @@ const fallbackNavLinks: NavLink[] = [
     label: "Academics",
     href: "/academics",
     submenu: [
+      { label: "Academy", href: "/academics" },
       { label: "Science Program", href: "/academics/science" },
       { label: "Commerce Program", href: "/academics/commerce" },
       { label: "Arts Program", href: "/academics/arts" },

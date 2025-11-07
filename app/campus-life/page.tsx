@@ -3,9 +3,7 @@
  * Comprehensive information about campus life at Daddy Jobe Comprehensive School
  */
 
-import { HeroBanner } from "@/components/CampusLife/HeroBanner";
 import { CampusOverview } from "@/components/CampusLife/CampusOverview";
-import { StudentActivities } from "@/components/CampusLife/StudentActivities";
 import { ClubsAndSocieties } from "@/components/CampusLife/ClubsAndSocieties";
 import { SportsAndAthletics } from "@/components/CampusLife/SportsAndAthletics";
 import { CampusFacilities } from "@/components/CampusLife/CampusFacilities";
@@ -21,9 +19,7 @@ export const revalidate = 3600;
 export default function CampusLifePage() {
   return (
     <>
-      <HeroBanner />
       <CampusOverview />
-      <StudentActivities />
       <ClubsAndSocieties />
       <SportsAndAthletics />
       <CampusFacilities />

@@ -7,6 +7,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import campusLifeImage from "@/public/images/campus life/adolescent-life-9898439_640.jpg";
 import { Users, Heart, Sparkles, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
@@ -61,7 +62,7 @@ export function CampusOverview() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/gallery/cultural_day.jpg"
+              src={campusLifeImage}
               alt="Campus Life at Daddy Jobe Comprehensive School"
               fill
               className="object-cover"
@@ -116,11 +117,11 @@ export function CampusOverview() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
+                <Card className="h-full border-none hover:shadow-lg transition-all group">
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-4">
-                      <div className={`${highlight.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-8 w-8 ${highlight.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                    <div className="p-4 rounded-full border-2 border-navy/80 bg-transparent shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                      <Icon className="h-8 w-8 text-navy transition-transform duration-500 group-hover:rotate-[360deg]" />
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-navy mb-3">

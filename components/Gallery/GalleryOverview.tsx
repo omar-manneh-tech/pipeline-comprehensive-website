@@ -15,29 +15,21 @@ const overviewPoints = [
     icon: Camera,
     title: "School Events",
     description: "Graduations, assemblies, and special ceremonies",
-    iconBg: "bg-gradient-to-br from-blue-500 to-blue-700",
-    iconColor: "text-white",
   },
   {
     icon: ImageIcon,
     title: "Student Activities",
     description: "Sports, clubs, debates, and cultural celebrations",
-    iconBg: "bg-gradient-to-br from-green-500 to-green-700",
-    iconColor: "text-white",
   },
   {
     icon: Smile,
     title: "Campus Life",
     description: "Daily life, learning moments, and student achievements",
-    iconBg: "bg-gradient-to-br from-purple-500 to-purple-700",
-    iconColor: "text-white",
   },
   {
     icon: Award,
     title: "Achievements",
     description: "Awards, recognitions, and outstanding accomplishments",
-    iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600",
-    iconColor: "text-white",
   },
 ];
 
@@ -79,10 +71,10 @@ export function GalleryOverview() {
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="border-2 border-gold rounded-lg p-6 text-center hover:shadow-lg transition-all h-full">
+                <div className="h-full rounded-2xl border-none bg-white shadow-none p-6 text-center transition-all group hover:bg-blue-50/60">
                   <div className="flex justify-center mb-4">
-                    <div className={`${point.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                      <Icon className={`h-8 w-8 ${point.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                    <div className="p-4 rounded-full border-2 border-blue-500/80 bg-transparent transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-105">
+                      <Icon className="h-8 w-8 text-navy transition-colors duration-500 group-hover:text-gold" />
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-navy mb-2">

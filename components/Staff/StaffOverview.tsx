@@ -7,6 +7,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import staffImage from "@/public/images/staff/staff.png";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
 import { transitions, viewportConfig } from "@/lib/animations/constants";
 
@@ -53,7 +54,7 @@ export function StaffOverview() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/about/students_in_class.jpg"
+              src={staffImage}
               alt="Daddy Jobe Comprehensive School - Dedicated Teachers"
               fill
               className="object-cover"

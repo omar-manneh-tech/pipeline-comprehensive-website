@@ -11,6 +11,7 @@ import { Trophy, Target, Users2, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeader } from "@/components/Shared/SectionHeader";
 import { transitions, viewportConfig } from "@/lib/animations/constants";
+import sportsDayImage from "@/public/images/campus life/sports-day.jpeg";
 
 const sports = [
   {
@@ -18,32 +19,24 @@ const sports = [
     title: "Competitive Sports",
     description:
       "Participate in inter-school competitions including football, basketball, volleyball, athletics, and track events.",
-    iconBg: "bg-blue-500",
-    iconColor: "text-white",
   },
   {
     icon: Target,
     title: "Physical Fitness",
     description:
       "Regular physical education classes and fitness programs that promote health, wellness, and active lifestyles.",
-    iconBg: "bg-green-500",
-    iconColor: "text-white",
   },
   {
     icon: Users2,
     title: "Team Sports",
     description:
       "Build teamwork, leadership, and sportsmanship through football, basketball, volleyball, and other team activities.",
-    iconBg: "bg-purple-500",
-    iconColor: "text-white",
   },
   {
     icon: Award,
     title: "Athletic Excellence",
     description:
       "Recognize and celebrate athletic achievements through awards, trophies, and school sports day competitions.",
-    iconBg: "bg-gold",
-    iconColor: "text-white",
   },
 ];
 
@@ -60,10 +53,10 @@ export function SportsAndAthletics() {
             transition={transitions.default}
             className="space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-6">
               Sports & Athletics
             </h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-white/80 leading-relaxed">
               <p>
                 At Daddy Jobe, we believe that physical activity is essential for holistic development. Our sports programs promote physical fitness, teamwork, discipline, and healthy competition.
               </p>
@@ -85,7 +78,7 @@ export function SportsAndAthletics() {
             className="relative h-[500px] rounded-lg overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/gallery/sports_day.jpg"
+              src={sportsDayImage}
               alt="Sports and Athletics at Daddy Jobe Comprehensive School"
               fill
               className="object-cover"
@@ -99,7 +92,21 @@ export function SportsAndAthletics() {
         {/* Sports Features */}
         <SectionHeader
           title="Athletic Programs"
-          description="Discover the sports programs that build champions on and off the field"
+          description={
+            <div className="space-y-3 text-white/80 max-w-3xl mx-auto leading-relaxed">
+              <p>
+                Discover the sports programs that build champions on and off the field. Our athletics journey combines skill development, disciplined training, and the joy of representing the Daddy Jobe spirit with pride.
+              </p>
+              <p>
+                Whether you are a seasoned athlete or just starting out, our coaches nurture your strengths, encourage resilience, and foster camaraderie so every student gains confidence and leadership in motion.
+              </p>
+              <p>
+                From morning drills to interhouse festivals and inter-school contests, students are supported by top-tier facilities and a community that cheers every milestone and celebrates every victory together.
+              </p>
+            </div>
+          }
+          titleClassName="text-white drop-shadow-lg"
+          descriptionClassName="text-white/80"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -113,17 +120,17 @@ export function SportsAndAthletics() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
-                  <CardContent className="p-6 text-center">
+                <Card className="h-full bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 transition-all duration-300 group shadow-[0_18px_45px_rgba(15,23,42,0.18)] hover:shadow-[0_28px_65px_rgba(255,255,255,0.25)]">
+                  <CardContent className="p-6 text-center space-y-4">
                     <div className="flex justify-center mb-4">
-                      <div className={`${sport.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-8 w-8 ${sport.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                      <div className="p-4 rounded-full bg-white/20 border border-white/40 text-white shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Icon className="h-8 w-8 text-white transition-colors duration-500 group-hover:text-gold" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-navy mb-3">
+                    <h3 className="text-xl font-bold text-white drop-shadow-sm">
                       {sport.title}
                     </h3>
-                    <p className="text-gray-700 leading-relaxed text-sm">
+                    <p className="text-white/80 leading-relaxed text-sm">
                       {sport.description}
                     </p>
                   </CardContent>
