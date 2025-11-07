@@ -17,30 +17,24 @@ const leadershipInfo = [
     title: "Administrative Leadership",
     description:
       "Our administrative team is dedicated to ensuring smooth operations and creating an environment conducive to learning and growth.",
-    iconBg: "bg-gradient-to-br from-indigo-500 to-indigo-700",
-    iconColor: "text-white",
   },
   {
     icon: BookOpen,
     title: "Academic Excellence",
     description:
       "Led by experienced educators, our academic programs are designed to challenge students while providing the support they need to succeed.",
-    iconBg: "bg-gradient-to-br from-red-500 to-red-700",
-    iconColor: "text-white",
   },
   {
     icon: Users,
     title: "Student Support",
     description:
       "Our guidance and counseling department works closely with students to help them navigate their academic journey and prepare for their future.",
-    iconBg: "bg-gradient-to-br from-teal-500 to-teal-700",
-    iconColor: "text-white",
   },
 ];
 
 export function Leadership() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Leadership & Excellence"
@@ -58,11 +52,11 @@ export function Leadership() {
                 viewport={viewportConfig}
                 transition={{ ...transitions.default, delay: index * 0.1 }}
               >
-                <Card className="h-full border-2 border-gold hover:shadow-lg transition-all group">
+                <Card className="h-full border-none bg-transparent shadow-none transition-none group">
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-4">
-                      <div className={`${item.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-8 w-8 ${item.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                      <div className="p-4 rounded-full border-2 border-blue-400/70 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Icon className="h-8 w-8 text-navy transition-transform duration-500 group-hover:rotate-[360deg]" />
                       </div>
                     </div>
                     <h3 className="text-xl font-bold text-navy mb-3">
@@ -86,7 +80,7 @@ export function Leadership() {
           transition={{ ...transitions.default, delay: 0.3 }}
           className="max-w-4xl mx-auto mt-12"
         >
-          <Card className="border-2 border-gold">
+          <Card className="border-none bg-transparent shadow-none">
             <CardContent className="p-8 text-center">
               <h3 className="text-2xl font-bold text-navy mb-4">
                 Join Our Community

@@ -6,7 +6,6 @@
 import { HeroBanner } from "@/components/About/HeroBanner";
 import { SchoolHistory } from "@/components/About/SchoolHistory";
 import { MissionVision } from "@/components/About/MissionVision";
-import { Achievements } from "@/components/About/Achievements";
 import { Leadership } from "@/components/About/Leadership";
 
 export const metadata = {
@@ -23,7 +22,6 @@ export default function AboutPage() {
       <HeroBanner />
       <SchoolHistory />
       <MissionVision />
-      <Achievements />
       <Leadership />
     </>
   );

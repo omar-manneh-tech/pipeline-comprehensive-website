@@ -223,14 +223,14 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={transitions.default}
-            className="fixed top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl mx-4 z-50"
+            className="fixed top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl mx-4 z-50 pointer-events-none"
           >
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden text-white">
+            <div className="bg-blue-950/60 backdrop-blur-2xl rounded-2xl shadow-2xl border border-blue-300/20 overflow-hidden text-white pointer-events-auto">
               {/* Header with Gradient */}
-              <div className="bg-gradient-to-r from-white/20 via-white/10 to-white/20 px-6 py-4">
+              <div className="bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-blue-900/80 px-6 py-4">
                 <div className="flex items-center gap-4">
-                  <div className="p-2 bg-white/15 rounded-lg backdrop-blur-sm">
-                    <Search className="h-6 w-6 text-white" />
+                  <div className="p-2 bg-blue-600/40 rounded-lg backdrop-blur-sm">
+                    <Search className="h-6 w-6 text-white/90" />
                   </div>
                   <div className="flex-1 relative">
                     <input
@@ -239,7 +239,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       placeholder="Search anything... (pages, programs, content, events)"
-                      className="w-full bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg text-white placeholder-white/70 text-base border border-white/30 focus:border-gold focus:outline-none transition-all"
+                      className="w-full bg-blue-900/40 backdrop-blur-sm px-4 py-3 rounded-lg text-white placeholder-white/70 text-base border border-blue-300/30 focus:border-gold focus:outline-none transition-all"
                     />
                     {isLoading && (
                       <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -249,7 +249,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-2 hover:bg-white/25 rounded-lg transition-colors flex-shrink-0"
+                    className="p-2 hover:bg-blue-700/40 rounded-lg transition-colors flex-shrink-0"
                     aria-label="Close search"
                   >
                     <X className="h-6 w-6 text-white" />
