@@ -54,7 +54,7 @@ function CountUpCard({ stat, Icon }: { stat: typeof excellenceStats[0]; Icon: Re
   const { count, ref } = useCountUp({ end: stat.number, duration: 2000 });
   
   return (
-    <div ref={ref} className="border-2 border-gold rounded-lg p-6 text-center hover:shadow-lg transition-all h-full group">
+    <div ref={ref} className="rounded-lg p-6 text-center hover:shadow-lg transition-all h-full group bg-white">
       <div className="flex justify-center mb-4">
         <div className={`${stat.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
           <Icon className={`h-8 w-8 ${stat.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />

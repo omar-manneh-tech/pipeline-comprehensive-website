@@ -48,11 +48,17 @@ const facilities = [
 
 export function AcademicFacilities() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-navy/95">
       <div className="container mx-auto px-4">
         <SectionHeader
           title="Academic Facilities & Resources"
-          description="State-of-the-art facilities supporting effective learning"
+          description={
+            <p className="text-lg text-white/85 max-w-3xl mx-auto drop-shadow-md">
+              State-of-the-art environments where curiosity meets innovation. Each space is intentionally designed to enhance discovery, collaboration, and hands-on mastery across every discipline.
+            </p>
+          }
+          titleClassName="text-white"
+          descriptionClassName=""
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -67,7 +73,7 @@ export function AcademicFacilities() {
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="border-2 border-gold rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all h-full">
+                <article className="relative h-full overflow-hidden rounded-2xl bg-white/10 backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-blue-500/20 border border-white/15">
                   <div className="relative h-48 overflow-hidden">
                     <Image
                       src={facility.image}
@@ -77,22 +83,27 @@ export function AcademicFacilities() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                     <div className="absolute top-4 right-4">
-                      <div className={`${facility.iconBg} p-3 rounded-lg shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                        <Icon className={`h-6 w-6 ${facility.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                      <div className="p-3 rounded-full border-2 border-blue-300/70 bg-black/30 backdrop-blur-md transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                        <Icon className="h-6 w-6 text-white transition-transform duration-500 group-hover:rotate-[360deg]" />
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-navy mb-2">
+                  <div className="p-6 space-y-3">
+                    <h3 className="text-2xl font-semibold text-white drop-shadow-lg">
                       {facility.title}
                     </h3>
-                    <p className="text-gray-700 leading-relaxed">
+                    <p className="text-white/80 leading-relaxed">
                       {facility.description}
                     </p>
+                    <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-white/70 text-sm">
+                      <Globe className="h-4 w-4" />
+                      <span>Accessible daily with supervised support and guided sessions.</span>
+                    </div>
                   </div>
-                </div>
+                  <div className="absolute inset-0 pointer-events-none rounded-2xl" />
+                </article>
               </motion.div>
             );
           })}

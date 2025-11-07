@@ -110,10 +110,10 @@ export function AcademicsOverview() {
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="border-2 border-gold rounded-lg p-6 text-center hover:shadow-lg transition-all h-full">
+                <div className="rounded-lg p-6 text-center hover:shadow-lg shadow-md transition-all h-full bg-white">
                   <div className="flex justify-center mb-4">
-                    <div className={`${stat.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                      <Icon className={`h-8 w-8 ${stat.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                    <div className="p-4 rounded-full border-2 border-blue-400/80 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
+                      <Icon className="h-8 w-8 text-navy transition-transform duration-500 group-hover:rotate-[360deg]" />
                     </div>
                   </div>
                   <div className="text-4xl font-bold text-gold mb-2">

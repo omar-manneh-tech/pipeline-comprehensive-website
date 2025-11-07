@@ -8,7 +8,6 @@ import { AcademicsOverview } from "@/components/Academics/AcademicsOverview";
 import { AcademicPrograms } from "@/components/Academics/AcademicPrograms";
 import { AcademicFacilities } from "@/components/Academics/AcademicFacilities";
 import { WASSCEPreparation } from "@/components/Academics/WASSCEPreparation";
-import { AcademicExcellence } from "@/components/Academics/AcademicExcellence";
 
 export const metadata = {
   title: "Academics",
@@ -26,7 +25,6 @@ export default function AcademicsPage() {
       <AcademicPrograms />
       <AcademicFacilities />
       <WASSCEPreparation />
-      <AcademicExcellence />
     </>
   );
 }

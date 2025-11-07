@@ -79,10 +79,10 @@ export function WASSCEPreparation() {
                 transition={{ ...transitions.default, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="border-2 border-gold rounded-lg p-6 text-center hover:shadow-lg transition-all h-full">
+                <div className="rounded-xl p-8 text-center hover:shadow-[0_20px_45px_rgba(59,130,246,0.25)] transition-all h-full min-h-[320px] bg-transparent">
                   <div className="flex justify-center mb-4">
-                    <div className={`${step.iconBg} p-4 rounded-full shadow-lg transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110`}>
-                      <Icon className={`h-8 w-8 ${step.iconColor} transition-transform duration-500 group-hover:rotate-[360deg]`} />
+                    <div className="p-4 rounded-full transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110 border-2 border-blue-400/80">
+                      <Icon className="h-8 w-8 text-navy transition-transform duration-500 group-hover:rotate-[360deg]" />
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-navy mb-2">
