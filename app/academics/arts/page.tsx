@@ -5,11 +5,7 @@
 
 import { HeroBanner } from "@/components/Academics/Arts/HeroBanner";
 import { ProgramOverview } from "@/components/Academics/Arts/ProgramOverview";
-import { CoreSubjects } from "@/components/Academics/Arts/CoreSubjects";
-import { ElectiveSubjects } from "@/components/Academics/Arts/ElectiveSubjects";
-import { CareerPaths } from "@/components/Academics/Arts/CareerPaths";
-import { ArtsFacilities } from "@/components/Academics/Arts/ArtsFacilities";
-import { ProgramRequirements } from "@/components/Academics/Arts/ProgramRequirements";
+import { ArtsTabs } from "@/components/Academics/Arts/ArtsTabs";
 
 export const metadata = {
   title: "Arts Program",
@@ -21,11 +17,7 @@ export default function ArtsProgramPage() {
     <>
       <HeroBanner />
       <ProgramOverview />
-      <CoreSubjects />
-      <ElectiveSubjects />
-      <CareerPaths />
-      <ArtsFacilities />
-      <ProgramRequirements />
+      <ArtsTabs />
     </>
   );
 }

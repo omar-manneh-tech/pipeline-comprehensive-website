@@ -5,11 +5,7 @@
 
 import { HeroBanner } from "@/components/Academics/Science/HeroBanner";
 import { ProgramOverview } from "@/components/Academics/Science/ProgramOverview";
-import { CoreSubjects } from "@/components/Academics/Science/CoreSubjects";
-import { ElectiveSubjects } from "@/components/Academics/Science/ElectiveSubjects";
-import { CareerPaths } from "@/components/Academics/Science/CareerPaths";
-import { ScienceFacilities } from "@/components/Academics/Science/ScienceFacilities";
-import { ProgramRequirements } from "@/components/Academics/Science/ProgramRequirements";
+import { ScienceTabs } from "@/components/Academics/Science/ScienceTabs";
 
 export const metadata = {
   title: "Science Program",
@@ -21,11 +17,7 @@ export default function ScienceProgramPage() {
     <>
       <HeroBanner />
       <ProgramOverview />
-      <CoreSubjects />
-      <ElectiveSubjects />
-      <CareerPaths />
-      <ScienceFacilities />
-      <ProgramRequirements />
+      <ScienceTabs />
     </>
   );
 }

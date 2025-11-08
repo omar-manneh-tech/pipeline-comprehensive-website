@@ -5,10 +5,7 @@
 
 import { HeroBanner } from "@/components/Admissions/HeroBanner";
 import { AdmissionProcess } from "@/components/Admissions/AdmissionProcess";
-import { Requirements } from "@/components/Admissions/Requirements";
-import { ImportantDates } from "@/components/Admissions/ImportantDates";
-import { HowToApply } from "@/components/Admissions/HowToApply";
-import { ContactAdmissions } from "@/components/Admissions/ContactAdmissions";
+import { AdmissionsInfoTabs } from "@/components/Admissions/AdmissionsInfoTabs";
 
 export const metadata = {
   title: "Admissions",
@@ -23,10 +20,7 @@ export default function AdmissionsPage() {
     <>
       <HeroBanner />
       <AdmissionProcess />
-      <Requirements />
-      <ImportantDates />
-      <HowToApply />
-      <ContactAdmissions />
+      <AdmissionsInfoTabs />
     </>
   );
 }

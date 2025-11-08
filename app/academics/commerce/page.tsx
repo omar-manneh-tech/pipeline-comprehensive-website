@@ -5,11 +5,7 @@
 
 import { HeroBanner } from "@/components/Academics/Commerce/HeroBanner";
 import { ProgramOverview } from "@/components/Academics/Commerce/ProgramOverview";
-import { CoreSubjects } from "@/components/Academics/Commerce/CoreSubjects";
-import { ElectiveSubjects } from "@/components/Academics/Commerce/ElectiveSubjects";
-import { CareerPaths } from "@/components/Academics/Commerce/CareerPaths";
-import { CommerceFacilities } from "@/components/Academics/Commerce/CommerceFacilities";
-import { ProgramRequirements } from "@/components/Academics/Commerce/ProgramRequirements";
+import { CommerceTabs } from "@/components/Academics/Commerce/CommerceTabs";
 
 export const metadata = {
   title: "Commerce Program",
@@ -21,11 +17,7 @@ export default function CommerceProgramPage() {
     <>
       <HeroBanner />
       <ProgramOverview />
-      <CoreSubjects />
-      <ElectiveSubjects />
-      <CareerPaths />
-      <CommerceFacilities />
-      <ProgramRequirements />
+      <CommerceTabs />
     </>
   );
 }
